@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CV Risk + Chest Pain — USMLE/Exam Printable Guide</title>
+<style>
+@page { size: letter; margin: 0.62in; }
+@media print {
+  .no-print { display:none !important; }
+  .pb { page-break-before: always; }
+  body { background:#fff !important; margin:0 !important; }
+  .page { max-width:100% !important; margin:0 !important; box-shadow:none !important; padding:0 !important; }
+}
+@media screen {
+  body { background:#efefef; }
+  .page { max-width: 820px; margin: 0 auto; padding: 30px 40px 50px; background:#fff; box-shadow: 0 2px 18px rgba(0,0,0,.12); }
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family: Georgia, serif; font-size: 10.3pt; line-height: 1.52; color:#1a1a1a; }
+.print-bar {
+  position: sticky; top:0; z-index:100;
+  background:#3C3489; color:#fff; padding:9px 18px;
+  display:flex; align-items:center; justify-content:space-between;
+  font-family: Arial, sans-serif; font-size: 12px;
+}
+.print-bar button {
+  background:#fff; color:#3C3489; border:none; padding:6px 16px; border-radius:6px;
+  font-size:12px; font-weight:700; cursor:pointer;
+}
+.cover { border-bottom:2.5px solid #3C3489; padding-bottom:16px; margin-bottom:18px; }
+.tag {
+  display:inline-block; background:#EEEDFE; color:#3C3489; border:1px solid #534AB7;
+  border-radius:20px; padding:3px 12px; font-family: Arial, sans-serif; font-size:9pt; font-weight:700;
+  margin-bottom:10px;
+}
+h1 { font-size:20pt; margin-bottom:4px; }
+h2 { font-size:12pt; font-weight:400; color:#444; margin-bottom:4px; }
+.meta { font-size:9pt; color:#777; font-family:Arial, sans-serif; }
+.drugs {
+  background:#f7f7f7; border-radius:5px; padding:9px 13px; font-family:Arial, sans-serif;
+  font-size:9pt; margin-top:10px; line-height:1.6;
+}
+.sec {
+  background:#3C3489; color:#fff; padding:7px 12px; border-radius:5px; font-family:Arial, sans-serif;
+  font-size:11pt; font-weight:700; margin:20px 0 10px;
+}
+.card {
+  border:0.75px solid #d8d8d8; border-radius:7px; padding:11px 14px; margin-bottom:9px;
+  break-inside: avoid;
+}
+.card-title { font-family:Arial, sans-serif; font-size:11pt; font-weight:700; margin-bottom:4px; display:inline; }
+.badge {
+  display:inline-block; background:#EEEDFE; color:#3C3489; border:0.75px solid #AFA9EC;
+  border-radius:20px; padding:1px 9px; font-family:Arial, sans-serif; font-size:8.5pt; font-weight:700;
+  margin-right:5px; vertical-align:middle;
+}
+.lbl {
+  font-family:Arial, sans-serif; font-size:7.5pt; font-weight:700; color:#888;
+  text-transform:uppercase; letter-spacing:.05em; margin:6px 0 2px;
+}
+.obj {
+  border-left:2.5px solid #AFA9EC; padding-left:8px; font-size:9.5pt; color:#555;
+  font-style:italic; margin:4px 0 6px; font-family:Arial, sans-serif;
+}
+p { font-size:10pt; margin-bottom:3px; line-height:1.5; }
+.box { border-radius:5px; padding:7px 10px; margin:5px 0; break-inside:avoid; }
+.coral { background:#FAECE7; border-left:2.5px solid #993C1D; }
+.teal  { background:#E1F5EE; border-left:2.5px solid #0F6E56; }
+.green { background:#EAF3DE; border-left:2.5px solid #3B6D11; }
+.amber { background:#FAEEDA; border-left:2.5px solid #854F0B; }
+.blue  { background:#EAF2FD; border-left:2.5px solid #255EA9; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:6px 0; }
+ul { padding-left:16px; margin:3px 0; }
+li { font-size:9.5pt; margin-bottom:2px; line-height:1.45; }
+table { width:100%; border-collapse:collapse; margin:8px 0; font-size:8.5pt; font-family:Arial, sans-serif; }
+th { background:#3C3489; color:#fff; padding:5px 7px; text-align:left; font-size:8.5pt; }
+td { padding:4px 7px; border-bottom:0.75px solid #eee; vertical-align:top; font-size:8.5pt; }
+tr:nth-child(even) td { background:#fafafa; }
+pre {
+  background:#f5f5f5; border:0.75px solid #e0e0e0; border-radius:5px; padding:10px;
+  font-size:8.2pt; font-family:'Courier New', monospace; white-space:pre-wrap; line-height:1.55;
+  break-inside:avoid; margin:6px 0;
+}
+.stem { background:#f9f9f9; border:0.75px solid #ddd; border-radius:5px; padding:10px; font-size:10pt; line-height:1.6; margin:6px 0; }
+.q { font-weight:700; font-size:10.5pt; margin:6px 0 4px; font-family:Arial, sans-serif; }
+.choice { display:flex; gap:7px; padding:3px 7px; border-radius:3px; margin-bottom:2px; font-size:10pt; }
+.choice-ltr { font-weight:700; min-width:16px; color:#555; flex-shrink:0; }
+.correct { background:#EAF3DE; }
+.correct .choice-ltr { color:#27500A; }
+hr { border:none; border-top:0.75px solid #ddd; margin:18px 0; }
+.small { font-size:8.7pt; color:#666; }
+</style>
+</head>
+<body>
+<div class="print-bar no-print">
+  <span>To save as PDF: click the button or press <strong>Cmd+P</strong> / <strong>Ctrl+P</strong> → destination: <strong>Save as PDF</strong> → enable <strong>Background graphics</strong>.</span>
+  <button onclick="window.print()">🖨 Print / Save as PDF</button>
+</div>
+
+<div class="page">
+
+<div class="cover">
+  <div class="tag">High-Yield Exam Tool</div>
+  <h1>CV Risk / Risk Reduction + Chest Pain</h1>
+  <h2>Consolidated printable review for two Friday classes (~10 questions each)</h2>
+  <div class="meta">Built for next-step questions, guideline-style decision making, and rapid pre-exam review</div>
+  <div class="drugs"><strong style="color:#3C3489">Heavy exam emphasis:</strong> initial ACS testing · serial ECG/troponin logic · HEART/TIMI use · STEMI/NSTEMI/unstable angina distinctions · 4 statin benefit groups · ASCVD risk categories · CAC use when statin decision is uncertain · baseline and follow-up statin labs · when to add ezetimibe / PCSK9</div>
+</div>
+
+<div class="sec">🎯 Section 1 — Exam-Day Master Rules</div>
+
+<div class="card">
+  <span class="badge">Highest Yield</span><span class="card-title">The “answer first” rules most likely to show up</span>
+  <div class="two">
+    <div class="box blue">
+      <div class="lbl">Chest pain rules</div>
+      <ul>
+        <li><strong>Most important initial test in suspected ACS = ECG</strong></li>
+        <li><strong>ECG should be done within 10 minutes</strong></li>
+        <li>A normal ECG does <strong>not</strong> exclude ACS</li>
+        <li>If suspicion remains, <strong>repeat the ECG</strong> and obtain serial troponins</li>
+        <li>Troponin takes about <strong>4 hours</strong> to begin rising</li>
+        <li>Risk scores are for <strong>risk stratification, not diagnosis</strong></li>
+      </ul>
+    </div>
+    <div class="box green">
+      <div class="lbl">CV risk rules</div>
+      <ul>
+        <li><strong>4 statin benefit groups</strong> are the backbone</li>
+        <li>If primary prevention decision is uncertain, think <strong>CAC</strong></li>
+        <li><strong>CAC = 0</strong> can support withholding/delaying statin in selected patients</li>
+        <li>Check <strong>repeat lipid panel 4–12 weeks</strong> after starting or changing statin</li>
+        <li><strong>Do not routinely check CK or LFTs</strong> unless symptoms / liver disease</li>
+        <li>Post-MI / ASCVD patient not at goal → consider <strong>ezetimibe</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="sec">🫀 Section 2 — Chest Pain / ACS</div>
+
+<div class="card">
+  <span class="badge">Initial Triage</span><span class="card-title">Approach to acute chest pain</span>
+  <div class="obj">Think broadly first, but ACS must be identified and triaged quickly because missed ACS has high short-term risk.</div>
+  <div class="two">
+    <div>
+      <div class="lbl">Classic ACS history</div>
+      <ul>
+        <li>Abrupt onset</li>
+        <li>Pressure / squeezing / burning</li>
+        <li>Diffuse central or left chest discomfort</li>
+        <li>Can radiate to left arm or jaw</li>
+        <li>Often persistent, not just a pinpoint fleeting pain</li>
+        <li>Can be provoked by exertion / stress</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">What lowers ACS probability</div>
+      <ul>
+        <li>Pinpoint pain</li>
+        <li>Sharp fleeting pain</li>
+        <li>Clearly pleuritic/positional only</li>
+        <li>Right-sided tearing pain suggests alternative dx</li>
+        <li>Normal exam does not rule it out</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box amber"><div class="lbl">Pearl</div><p>Most acute chest pain visits do <strong>not</strong> end up being ACS, but the test-taking priority is recognizing the one that <strong>is</strong>.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Most Important Initial Test</span><span class="card-title">ECG first, fast, and repeat when needed</span>
+  <div class="two">
+    <div>
+      <div class="lbl">Board answer</div>
+      <p><strong>The most important initial diagnostic test in suspected ACS is the ECG.</strong></p>
+      <ul>
+        <li>Perform within <strong>10 minutes</strong> of arrival</li>
+        <li>Used to rapidly triage STEMI vs non-ST-elevation ACS</li>
+        <li>ST elevation or new LBBB raises concern for STEMI</li>
+        <li>NSTE-ACS may show ST depression, T-wave inversion, or no changes</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">Common trap</div>
+      <ul>
+        <li>Normal ECG does <strong>not</strong> exclude ACS</li>
+        <li>If symptoms continue or suspicion remains high, <strong>repeat the ECG</strong></li>
+        <li>Troponin is extremely important, but it is <strong>not</strong> the first test to answer the initial triage question</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box coral"><div class="lbl">Likely exam framing</div><p>“Patient presents with acute chest pain and concern for MI — what is the most important initial test?” → <strong>ECG</strong>, not troponin.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Serial Testing Logic</span><span class="card-title">Repeat ECG or troponin after 30 minutes?</span>
+  <div class="obj">This is exactly the kind of question that shows up because it tests whether you understand what changes fast and what changes slowly.</div>
+  <div class="two">
+    <div class="box blue">
+      <div class="lbl">If you only get one answer</div>
+      <p><strong>Repeat the ECG</strong> if ongoing concern and only 30 minutes have passed.</p>
+      <p class="small">Reason: ECG changes can evolve quickly, while troponin usually takes a few hours to rise.</p>
+    </div>
+    <div class="box green">
+      <div class="lbl">Troponin timing</div>
+      <ul>
+        <li>Troponin is the gold-standard biomarker for myocardial necrosis</li>
+        <li>Begins to rise after about <strong>4 hours</strong></li>
+        <li>Stays elevated for several days</li>
+        <li>Use <strong>serial troponins</strong>, but not just 30 minutes later expecting a meaningful early rise</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box coral"><div class="lbl">Take-home answer</div><p>At <strong>30 minutes</strong>, if the question forces a choice, the better repeat test is the <strong>ECG</strong>, not troponin.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Diagnosis Framework</span><span class="card-title">STEMI vs NSTEMI vs Unstable Angina</span>
+  <table>
+    <tr><th>Condition</th><th>Underlying vessel problem</th><th>Cell death?</th><th>ECG</th><th>Troponin</th></tr>
+    <tr><td>STEMI</td><td>Complete occlusion after plaque rupture/thrombus</td><td>Yes</td><td>ST elevation (or STEMI equivalent)</td><td>Positive</td></tr>
+    <tr><td>NSTEMI</td><td>Partial occlusion after plaque rupture/thrombus</td><td>Yes</td><td>ST depression / T-wave inversion / nonspecific / normal</td><td>Positive</td></tr>
+    <tr><td>Unstable angina</td><td>Plaque rupture/thrombus without infarction</td><td>No</td><td>May be normal or ischemic changes</td><td>Negative</td></tr>
+    <tr><td>Stable angina</td><td>Fixed stenosis without acute rupture</td><td>No</td><td>Often normal at rest</td><td>Negative</td></tr>
+  </table>
+  <div class="box amber"><div class="lbl">Distinguishing pearl</div><p><strong>NSTEMI and unstable angina can look similar clinically</strong> — troponin is what separates them.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Biomarkers</span><span class="card-title">Troponin vs older biomarkers</span>
+  <div class="two">
+    <div>
+      <div class="lbl">What matters now</div>
+      <ul>
+        <li><strong>Troponin = most sensitive and specific marker for MI</strong></li>
+        <li>High-sensitivity troponin is commonly used</li>
+        <li>It tells you there is myocardial necrosis</li>
+        <li>It does <strong>not</strong> by itself tell you the exact cause of cardiac injury</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">What is less useful</div>
+      <ul>
+        <li>Myoglobin rises earlier but is <strong>not specific</strong></li>
+        <li>CK/CK-MB is largely not used for primary ACS diagnosis in this lecture context</li>
+        <li>The exam is more likely to want <strong>troponin</strong></li>
+      </ul>
+    </div>
+  </div>
+  <div class="box teal"><div class="lbl">If you see → think</div><p>“Most sensitive and specific marker for MI” → <strong>troponin</strong>.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Risk Scores</span><span class="card-title">HEART / TIMI / GRACE — what they are really for</span>
+  <div class="two">
+    <div>
+      <div class="lbl">Correct use</div>
+      <ul>
+        <li>Risk stratify</li>
+        <li>Estimate short-term risk of complications / major adverse cardiac events</li>
+        <li>Help determine admission vs follow-up vs invasive strategy</li>
+        <li>HEART score is useful when diagnosis remains uncertain</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">Incorrect use</div>
+      <ul>
+        <li>Not the primary diagnostic test</li>
+        <li>Not intended to independently diagnose MI</li>
+        <li>Not a substitute for ECG + troponin + clinical judgment</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box coral"><div class="lbl">Common trap</div><p>Risk scores are <strong>not</strong> for making the initial diagnosis of ACS. They are for <strong>risk stratification</strong>.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Management Pathway</span><span class="card-title">PCI / thrombolytics / ischemia-guided strategy</span>
+  <table>
+    <tr><th>Scenario</th><th>Likely next step</th><th>Exam pearl</th></tr>
+    <tr><td>STEMI</td><td>Immediate reperfusion, usually PCI</td><td>Cardiac cath immediately</td></tr>
+    <tr><td>STEMI when PCI unavailable and within window</td><td>Consider thrombolysis</td><td>Door-to-needle goal ≤ 30 min</td></tr>
+    <tr><td>NSTE-ACS low-risk, symptom-free, normal troponin</td><td>Ischemia-guided strategy may be used</td><td>Not every patient goes directly to cath</td></tr>
+    <tr><td>Intermediate/high-risk NSTE-ACS</td><td>Urgent invasive evaluation</td><td>Cath urgently, not necessarily “STEMI immediate”</td></tr>
+  </table>
+  <div class="box amber"><div class="lbl">Important distinction</div><p><strong>Thrombolytics are contraindicated in NSTE-ACS</strong> in this lecture framework.</p></div>
+</div>
+
+<div class="pb"></div>
+<div class="sec">📉 Section 3 — CV Risk / Risk Reduction</div>
+
+<div class="card">
+  <span class="badge">Foundation</span><span class="card-title">Primary vs secondary vs tertiary prevention</span>
+  <div class="two">
+    <div>
+      <div class="lbl">Definitions</div>
+      <ul>
+        <li><strong>Primary prevention:</strong> prevent disease/risk factor before it starts</li>
+        <li><strong>Secondary prevention:</strong> identify disease early and treat</li>
+        <li><strong>Tertiary prevention:</strong> prevent complications in those with disease</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">How lecture uses this</div>
+      <ul>
+        <li>Established ASCVD/statin therapy is treated as secondary prevention</li>
+        <li>Lecture notes mention AHA can lump secondary + tertiary together in practice</li>
+        <li>Exam likely tests whether patient already has clinical ASCVD</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <span class="badge">Key Take-Home</span><span class="card-title">The 4 statin benefit groups</span>
+  <div class="obj">This is the most likely backbone question set for the CV Risk class.</div>
+  <table>
+    <tr><th>Group</th><th>What to remember</th><th>Usual takeaway</th></tr>
+    <tr><td>Clinical ASCVD</td><td>Secondary prevention</td><td>High-intensity or maximally tolerated statin</td></tr>
+    <tr><td>LDL-C ≥190 mg/dL</td><td>Severe primary hypercholesterolemia</td><td>High-intensity statin without calculating 10-year risk</td></tr>
+    <tr><td>Diabetes age 40–75 with LDL ≥70</td><td>No need to calculate 10-year risk to start</td><td>Moderate-intensity; consider high-intensity if higher risk</td></tr>
+    <tr><td>Age 40–75, no diabetes, LDL 70–189, elevated 10-year ASCVD risk</td><td>Pooled Cohort Equation category drives decision</td><td>Moderate-intensity if risk discussion favors therapy</td></tr>
+  </table>
+  <div class="box teal"><div class="lbl">If you see → think</div><p>Question stem asks “Who clearly should be on a statin according to ACC/AHA?” → start by checking whether they fit one of the <strong>4 statin benefit groups</strong>.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Risk Categories</span><span class="card-title">10-year ASCVD risk categories</span>
+  <table>
+    <tr><th>Category</th><th>10-year risk</th><th>Typical approach</th></tr>
+    <tr><td>Low</td><td>&lt;5%</td><td>Lifestyle emphasis</td></tr>
+    <tr><td>Borderline</td><td>5% to &lt;7.5%</td><td>Risk-enhancing factors may favor statin</td></tr>
+    <tr><td>Intermediate</td><td>≥7.5% to &lt;20%</td><td>Moderate-intensity statin often considered; CAC if uncertain</td></tr>
+    <tr><td>High</td><td>≥20%</td><td>Aggressive LDL lowering; aim ≥50% LDL reduction</td></tr>
+  </table>
+  <div class="box blue"><div class="lbl">Risk calculator factors</div><p>Age, smoking, BP, cholesterol, diabetes, and other major traditional risk factors are central to ASCVD risk calculation. Lecture notes also emphasize race and treatment for HTN in the pooled cohort equation framework.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Frequently Tested</span><span class="card-title">What to do when statin decision is uncertain → CAC</span>
+  <div class="two">
+    <div>
+      <div class="lbl">When CAC is useful</div>
+      <ul>
+        <li>Primary prevention patient age 40–75</li>
+        <li>No diabetes</li>
+        <li>LDL roughly 70–189</li>
+        <li>10-year ASCVD risk borderline/intermediate</li>
+        <li>Uncertain statin decision or patient hesitant about starting/restarting statin</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">How to interpret</div>
+      <ul>
+        <li><strong>CAC = 0:</strong> can withhold/delay statin in selected patients</li>
+        <li><strong>CAC 1–99:</strong> favors statin, especially if age &gt;55</li>
+        <li><strong>CAC ≥100 or ≥75th percentile:</strong> statin indicated</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box coral"><div class="lbl">Classic exam version</div><p>Older patient with prior hyperlipidemia, no ASCVD/diabetes, hesitant to restart medication, and the question asks the <strong>next step</strong> under ACC/AHA → if the decision is uncertain, order a <strong>coronary artery calcium (CAC) scan</strong>.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Your Example</span><span class="card-title">Statin-hesitant 63-year-old woman — next step?</span>
+  <div class="stem">A 63-year-old woman has had high cholesterol in the past and previously took a statin but does not want to restart medication. She has no known coronary artery disease, no diabetes, and no other major risk factors given. According to ACC/AHA-style lipid guidance, what is the best next step?</div>
+  <div class="choice"><span class="choice-ltr">A.</span><span>Order an EKG</span></div>
+  <div class="choice correct"><span class="choice-ltr">B ✓</span><span>Order a coronary artery calcium scan</span></div>
+  <div class="choice"><span class="choice-ltr">C.</span><span>Order an Lp(a) level</span></div>
+  <div class="choice"><span class="choice-ltr">D.</span><span>Order a lipid profile</span></div>
+  <div class="box green"><div class="lbl">Why B is best</div><p>When the decision about statin therapy is <strong>uncertain</strong> or the patient is hesitant, the guideline supports using <strong>CAC</strong> to clarify risk and guide whether to start or restart statin therapy.</p></div>
+  <div class="box amber"><div class="lbl">Why not the others?</div><p>EKG does not answer lipid-treatment uncertainty. Lp(a) is a risk-enhancing factor if measured, but CAC is the more direct “decision remains uncertain” test. A lipid profile is important generally, but in this style of question the tested next step is usually <strong>CAC</strong>.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Before Starting Statin</span><span class="card-title">Baseline labs / workup</span>
+  <div class="two">
+    <div>
+      <div class="lbl">Check before starting</div>
+      <ul>
+        <li><strong>Lipid panel</strong></li>
+        <li><strong>ALT</strong> or hepatic/liver panel</li>
+        <li><strong>HbA1c or fasting glucose</strong> to identify/confirm diabetes</li>
+        <li>Consider <strong>secondary causes of hyperlipidemia</strong></li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">Secondary causes to think about</div>
+      <ul>
+        <li>Medications</li>
+        <li>Smoking status</li>
+        <li>Family history</li>
+        <li>Very high triglycerides / other clinical context suggesting another driver</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <span class="badge">Monitoring</span><span class="card-title">What do you check after starting a statin?</span>
+  <div class="obj">This is another very likely exam question because it looks deceptively simple.</div>
+  <table>
+    <tr><th>What to monitor</th><th>When</th><th>Important exam note</th></tr>
+    <tr><td>Repeat lipid panel</td><td>4–12 weeks after statin initiation or dose adjustment, then every 3–12 months as needed</td><td>Main routine follow-up test</td></tr>
+    <tr><td>ALT / liver testing</td><td>Only if liver disease or significant side effects</td><td>Not routine serial testing for everyone</td></tr>
+    <tr><td>CK / CPK</td><td>Only if muscle pain / myalgias</td><td>Not routine</td></tr>
+    <tr><td>Glucose / HbA1c</td><td>Helpful baseline assessment if indicated</td><td>Question-specific; not the routine “extra test” at statin follow-up</td></tr>
+  </table>
+  <div class="box coral"><div class="lbl">Likely answer style</div><p>If asked, “In addition to a lipid panel at follow-up, should ACC/AHA routine monitoring include CK, LFTs, CRP, glucose, etc.?” the best answer is usually <strong>no additional routine tests</strong>, unless there are symptoms or liver disease.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Your Example</span><span class="card-title">6-month statin follow-up question</span>
+  <div class="stem">In addition to a lipid panel after starting a statin, should routine follow-up include CK for muscle damage, LFTs, CRP, blood sugar testing, or no additional tests?</div>
+  <div class="choice"><span class="choice-ltr">A.</span><span>Creatine kinase for muscle damage</span></div>
+  <div class="choice"><span class="choice-ltr">B.</span><span>Liver function test</span></div>
+  <div class="choice"><span class="choice-ltr">C.</span><span>CRP for cardiac risk</span></div>
+  <div class="choice"><span class="choice-ltr">D.</span><span>Blood sugar testing for diabetes</span></div>
+  <div class="choice correct"><span class="choice-ltr">E ✓</span><span>No additional routine tests</span></div>
+  <div class="box green"><div class="lbl">Why E is best</div><p>Routine follow-up focuses on whether LDL falls appropriately. <strong>CK is only for muscle symptoms</strong>; <strong>liver testing only if liver disease/significant side effects</strong>. CRP is not routine monitoring. Glucose/HbA1c may be part of baseline risk assessment, but not the routine add-on follow-up answer here.</p></div>
+</div>
+
+<div class="card">
+  <span class="badge">Intensity + Add-ons</span><span class="card-title">High-intensity statins and what happens when LDL stays high</span>
+  <div class="two">
+    <div>
+      <div class="lbl">Intensity pearl</div>
+      <ul>
+        <li><strong>Atorvastatin and rosuvastatin</strong> are the key high-intensity statins to know</li>
+        <li>High-intensity therapy should reduce LDL by <strong>≥50%</strong></li>
+        <li>If 10-year risk is ≥20%, target at least a 50% LDL reduction</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">When to add ezetimibe / PCSK9</div>
+      <ul>
+        <li>Clinical ASCVD and LDL still <strong>≥70</strong> on maximally tolerated statin → consider <strong>ezetimibe</strong></li>
+        <li>Very high-risk ASCVD and LDL still <strong>≥70</strong> on statin + ezetimibe → consider <strong>PCSK9 inhibitor</strong></li>
+        <li>LDL ≥190 and still <strong>≥100</strong> on statin → ezetimibe is reasonable</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <span class="badge">Secondary Prevention</span><span class="card-title">Post-MI / clinical ASCVD patients</span>
+  <div class="box blue">
+    <div class="lbl">What to remember</div>
+    <ul>
+      <li>Clinical ASCVD includes ACS, MI, stable/unstable angina, revascularization, stroke/TIA, PAD of atherosclerotic origin</li>
+      <li>These patients belong in the <strong>clinical ASCVD statin benefit group</strong></li>
+      <li>Use <strong>high-intensity or maximally tolerated statin</strong></li>
+      <li>Lecture notes specifically emphasize post-MI goal thinking of <strong>LDL ≤70</strong>; if still above 70 on maximal statin, consider <strong>ezetimibe</strong></li>
+      <li>If statin intolerance develops: switch statin, lower dose, or consider ezetimibe depending on context</li>
+    </ul>
+  </div>
+</div>
+
+<div class="pb"></div>
+<div class="sec">⚡ Section 4 — Rapid Comparison Tables</div>
+
+<div class="card">
+  <span class="badge">Chest Pain</span><span class="card-title">Fast compare table</span>
+  <table>
+    <tr><th>Question stem asks...</th><th>Best answer direction</th></tr>
+    <tr><td>Most important initial test in suspected ACS</td><td><strong>ECG</strong></td></tr>
+    <tr><td>Best biomarker for MI</td><td><strong>Troponin</strong></td></tr>
+    <tr><td>30 minutes later, what to repeat?</td><td><strong>ECG</strong> more helpful than troponin that early</td></tr>
+    <tr><td>Risk score use</td><td><strong>Risk stratify</strong>, not diagnose</td></tr>
+    <tr><td>Complete occlusion + ST elevation</td><td><strong>STEMI</strong></td></tr>
+    <tr><td>Partial occlusion + troponin rise</td><td><strong>NSTEMI</strong></td></tr>
+    <tr><td>Plaque rupture without cell death</td><td><strong>Unstable angina</strong></td></tr>
+    <tr><td>Thrombolytics question in NSTE-ACS</td><td><strong>Contraindicated</strong></td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <span class="badge">CV Risk</span><span class="card-title">Fast compare table</span>
+  <table>
+    <tr><th>Question stem asks...</th><th>Best answer direction</th></tr>
+    <tr><td>Who should clearly be on statin?</td><td>Check the <strong>4 statin benefit groups</strong></td></tr>
+    <tr><td>Uncertain primary-prevention statin decision</td><td><strong>CAC scan</strong></td></tr>
+    <tr><td>CAC = 0</td><td>Can delay/withhold statin in selected patients</td></tr>
+    <tr><td>CAC 1–99</td><td>Favors statin, especially age &gt;55</td></tr>
+    <tr><td>CAC ≥100 or ≥75th percentile</td><td>Statin indicated</td></tr>
+    <tr><td>Routine follow-up after starting statin</td><td><strong>Repeat lipid panel</strong> at 4–12 weeks</td></tr>
+    <tr><td>Routine CK/LFT monitoring?</td><td><strong>No</strong>, only symptom- or disease-driven</td></tr>
+    <tr><td>ASCVD patient on max statin, LDL still ≥70</td><td><strong>Add ezetimibe</strong></td></tr>
+  </table>
+</div>
+
+<div class="sec">❓ Section 5 — Exam-Style Practice Questions</div>
+
+<div class="card">
+  <div class="card-title">Question 1 — Most important initial test in ACS concern</div>
+  <div class="stem">A 58-year-old man presents with acute substernal chest pressure radiating to the left arm. He is diaphoretic and nauseated. Which is the most important initial diagnostic test?</div>
+  <div class="choice"><span class="choice-ltr">A.</span><span>Troponin</span></div>
+  <div class="choice correct"><span class="choice-ltr">B ✓</span><span>ECG</span></div>
+  <div class="choice"><span class="choice-ltr">C.</span><span>Chest CT</span></div>
+  <div class="choice"><span class="choice-ltr">D.</span><span>Stress test</span></div>
+  <div class="choice"><span class="choice-ltr">E.</span><span>HEART score</span></div>
+  <div class="box green"><div class="lbl">Why</div><p>ECG is the fastest way to determine whether the patient is having a STEMI and to guide immediate reperfusion decisions.</p></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Question 2 — Repeat ECG or troponin at 30 minutes?</div>
+  <div class="stem">A patient presents 15 minutes after onset of chest pain. Initial ECG is nondiagnostic, initial troponin is normal, and symptoms continue 30 minutes later. Which is the better repeat test at that time?</div>
+  <div class="choice correct"><span class="choice-ltr">A ✓</span><span>Repeat ECG</span></div>
+  <div class="choice"><span class="choice-ltr">B.</span><span>Repeat troponin</span></div>
+  <div class="choice"><span class="choice-ltr">C.</span><span>CK-MB</span></div>
+  <div class="choice"><span class="choice-ltr">D.</span><span>Myoglobin</span></div>
+  <div class="choice"><span class="choice-ltr">E.</span><span>HEART score only</span></div>
+  <div class="box green"><div class="lbl">Why</div><p>ECG changes may evolve rapidly; troponin often requires hours to rise.</p></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Question 3 — Statin-hesitant patient</div>
+  <div class="stem">A 63-year-old woman has prior hyperlipidemia and previously stopped a statin. She has no known ASCVD, no diabetes, and no other major risk factors provided. She is hesitant to restart medication. According to ACC/AHA-style lipid guidance, what is the best next step if the decision is uncertain?</div>
+  <div class="choice"><span class="choice-ltr">A.</span><span>EKG</span></div>
+  <div class="choice correct"><span class="choice-ltr">B ✓</span><span>Coronary artery calcium scan</span></div>
+  <div class="choice"><span class="choice-ltr">C.</span><span>Lp(a) level</span></div>
+  <div class="choice"><span class="choice-ltr">D.</span><span>Lipid panel only</span></div>
+  <div class="choice"><span class="choice-ltr">E.</span><span>Stress echocardiogram</span></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Question 4 — Follow-up after adding a statin</div>
+  <div class="stem">A patient is started on a statin. At follow-up, in addition to a lipid panel, which additional test is recommended routinely in an asymptomatic patient?</div>
+  <div class="choice"><span class="choice-ltr">A.</span><span>CK</span></div>
+  <div class="choice"><span class="choice-ltr">B.</span><span>LFTs</span></div>
+  <div class="choice"><span class="choice-ltr">C.</span><span>CRP</span></div>
+  <div class="choice"><span class="choice-ltr">D.</span><span>HbA1c</span></div>
+  <div class="choice correct"><span class="choice-ltr">E ✓</span><span>No additional routine tests</span></div>
+  <div class="box green"><div class="lbl">Why</div><p>Routine follow-up is lipid-focused; CK and liver tests are symptom- or disease-driven.</p></div>
+</div>
+
+<div class="sec">🔥 Section 6 — Last-Minute Cram Sheet</div>
+
+<div class="card">
+<pre>CHEST PAIN
+- Most important initial test in suspected ACS = ECG
+- ECG should be done within 10 minutes
+- Normal ECG does NOT rule out ACS
+- Troponin = gold-standard biomarker for myocardial necrosis
+- Troponin takes ~4 hours to rise
+- Repeat ECG if symptoms continue and early ECG is nondiagnostic
+- STEMI = complete occlusion
+- NSTEMI = partial occlusion + positive troponin
+- Unstable angina = no myocardial cell death, no troponin rise
+- Risk scores stratify risk; they do NOT make the diagnosis
+- STEMI -> immediate cath / reperfusion
+- Thrombolytics: for STEMI when indicated; contraindicated in NSTE-ACS
+
+CV RISK / RISK REDUCTION
+- Know the 4 statin benefit groups cold
+- Clinical ASCVD -> high-intensity or maximally tolerated statin
+- LDL ≥190 -> high-intensity statin, no 10-year risk needed
+- Diabetes age 40-75 with LDL ≥70 -> statin
+- Primary prevention age 40-75, LDL 70-189, risk elevated -> discuss statin
+- If statin decision uncertain -> CAC
+- CAC 0 -> may defer statin in selected patients
+- CAC 1-99 -> favors statin, especially age >55
+- CAC ≥100 or ≥75th percentile -> statin indicated
+- Baseline before statin: lipid panel, ALT, HbA1c/fasting glucose, consider secondary causes
+- Follow-up lipid panel: 4–12 weeks after starting/changing statin
+- Routine CK or LFT monitoring? No, unless symptoms/liver disease
+- Clinical ASCVD + LDL still ≥70 on max statin -> add ezetimibe</pre>
+</div>
+
+<hr>
+<p class="small" style="text-align:center;">Printable review for CV Risk / Risk Reduction + Chest Pain</p>
+
+</div>
+</body>
+</html>

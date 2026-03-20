@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardio Path — MI Timeline & Complications</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c0a;
+    --surface: #121512;
+    --surface2: #1a1e1a;
+    --border: #252a25;
+    --text: #e8ede8;
+    --muted: #6b7a6b;
+    --red: #ff4444;
+    --orange: #ff8c00;
+    --yellow: #ffc700;
+    --green: #44cc77;
+    --blue: #4499ff;
+    --purple: #aa77ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+  header { padding: 28px 36px 20px; border-bottom: 1px solid var(--border); }
+  header h1 { font-size: 22px; font-weight: 700; color: var(--red); }
+  header p { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+  .tabs {
+    display: flex; border-bottom: 1px solid var(--border); padding: 0 36px;
+  }
+  .tab {
+    padding: 14px 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+    cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent;
+    margin-bottom: -1px; transition: all 0.15s; background: none; border-left: none;
+    border-right: none; border-top: none;
+  }
+  .tab.active { color: var(--red); border-bottom-color: var(--red); }
+
+  .content { padding: 32px 36px; }
+
+  /* TIMELINE VIEW */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, var(--red), var(--yellow), var(--green));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative; margin-bottom: 24px; cursor: pointer;
+  }
+  .tl-dot {
+    position: absolute; left: -31px; top: 16px;
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid var(--bg); transition: all 0.2s;
+  }
+  .tl-item:hover .tl-dot { transform: scale(1.4); }
+  .tl-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px; transition: all 0.2s;
+  }
+  .tl-item:hover .tl-card { border-color: var(--muted); }
+  .tl-card.open { border-color: var(--muted); background: var(--surface2); }
+  .tl-time { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+  .tl-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .tl-sub { font-size: 13px; color: var(--muted); }
+  .tl-detail {
+    display: none; margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid var(--border); font-size: 13px; line-height: 1.7;
+  }
+  .tl-item.open .tl-detail { display: block; }
+
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+  .detail-box { background: var(--bg); border-radius: 8px; padding: 12px; }
+  .detail-box h4 { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .detail-box p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .danger-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 4px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 8px;
+  }
+
+  /* COMPLICATION QUIZ */
+  .comp-quiz { max-width: 700px; }
+  .cq-progress { display: flex; gap: 4px; margin-bottom: 24px; }
+  .cq-dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+  .cq-dot.done { background: var(--green); }
+  .cq-dot.current { background: var(--red); }
+
+  .cq-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px; margin-bottom: 16px;
+  }
+  .cq-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 12px; }
+  .cq-scenario { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 8px; }
+  .cq-timing {
+    display: inline-block; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700;
+    padding: 4px 12px; border-radius: 4px; margin-bottom: 20px;
+  }
+  .cq-question { font-size: 15px; color: var(--muted); margin-bottom: 18px; }
+  .cq-opts { display: flex; flex-direction: column; gap: 10px; }
+  .cq-opt {
+    padding: 13px 16px; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; font-size: 14px; cursor: pointer; text-align: left;
+    transition: all 0.15s; font-family: 'Space Grotesk', sans-serif; color: var(--text);
+  }
+  .cq-opt:hover { border-color: var(--blue); color: var(--blue); }
+  .cq-opt.correct { border-color: var(--green); background: rgba(68,204,119,0.1); color: var(--green); }
+  .cq-opt.wrong { border-color: var(--red); background: rgba(255,68,68,0.1); color: var(--red); }
+  .cq-opt.show-ans { border-color: var(--green); background: rgba(68,204,119,0.1); color: var(--green); }
+  .cq-feedback {
+    display: none; padding: 14px; border-radius: 8px; font-size: 13px;
+    line-height: 1.6; margin-top: 12px;
+  }
+  .cq-feedback.show { display: block; }
+  .cq-feedback.ok { background: rgba(68,204,119,0.1); border-left: 3px solid var(--green); }
+  .cq-feedback.no { background: rgba(255,68,68,0.1); border-left: 3px solid var(--red); }
+  .cq-next {
+    display: none; margin-top: 14px; padding: 11px 24px; background: var(--red);
+    color: white; border: none; border-radius: 8px; cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px;
+  }
+  .cq-next.show { display: block; }
+
+  /* BIOMARKERS */
+  .bm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .bm-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .bm-name { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .bm-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .bm-row:last-of-type { border-bottom: none; }
+  .bm-val { color: var(--text); font-weight: 500; }
+  .bm-key { font-size: 12px; padding: 3px 8px; border-radius: 4px; margin-top: 10px; }
+
+  .artery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .artery-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+  .artery-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .artery-leads { font-family: 'Space Mono', monospace; font-size: 13px; margin-bottom: 8px; }
+  .artery-notes { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  .cq-card { animation: fadeIn 0.25s ease; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>MI Timeline & Complications</h1>
+  <p>Master the histology timeline, post-MI complication windows, biomarkers, and coronary anatomy</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="setTab('timeline', this)">Histology Timeline</button>
+  <button class="tab" onclick="setTab('compquiz', this)">Complication Quiz</button>
+  <button class="tab" onclick="setTab('biomarkers', this)">Biomarkers & Arteries</button>
+</div>
+
+<div class="content">
+
+  <!-- TIMELINE -->
+  <div id="tab-timeline">
+    <p style="color:var(--muted);font-size:13px;margin-bottom:28px">Click each time point to expand the full histological and gross pathology details. The 3–7 day window is the most tested.</p>
+    <div class="timeline">
+
+      <div class="tl-item" onclick="toggleTL(this)">
+        <div class="tl-dot" style="background:var(--muted)"></div>
+        <div class="tl-card">
+          <div class="tl-time" style="color:var(--muted)">0 – 4 HOURS</div>
+          <div class="tl-title">Early / No Changes</div>
+          <div class="tl-sub">Normal or near-normal on light microscopy</div>
+          <div class="tl-detail">
+            <div class="detail-grid">
+              <div class="detail-box"><h4 style="color:var(--muted)">HISTOLOGY</h4><p>Wavy myofibers (early EM finding). Edema begins. Coagulative necrosis just starting.</p></div>
+              <div class="detail-box"><h4 style="color:var(--muted)">GROSS</h4><p>No gross change visible. Heart appears normal to eye.</p></div>
+            </div>
+            <div class="detail-box" style="margin-bottom:10px"><h4 style="color:var(--muted)">BIOMARKERS</h4><p>Troponin starts rising ~3–4 hours after onset. CK-MB rises 4–6 hours. Nothing may be elevated at 0–4h.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item" onclick="toggleTL(this)">
+        <div class="tl-dot" style="background:var(--orange)"></div>
+        <div class="tl-card">
+          <div class="tl-time" style="color:var(--orange)">4 – 24 HOURS</div>
+          <div class="tl-title">Coagulative Necrosis Begins</div>
+          <div class="tl-sub">Neutrophils start; arrhythmia risk highest ⚡</div>
+          <div class="tl-detail">
+            <div class="danger-badge" style="background:rgba(255,140,0,0.15);color:var(--orange)">⚡ HIGHEST ARRHYTHMIA RISK</div>
+            <div class="detail-grid">
+              <div class="detail-box"><h4 style="color:var(--orange)">HISTOLOGY</h4><p>Coagulative necrosis: proteins denature → cell outlines preserved (ghosting). Neutrophil margination begins. Karyolysis/pyknosis starting.</p></div>
+              <div class="detail-box"><h4 style="color:var(--orange)">GROSS</h4><p>Dark mottling begins. Heart muscle appears darker/dusky in affected area.</p></div>
+            </div>
+            <div class="detail-box"><h4 style="color:var(--orange)">CLINICAL KEY</h4><p>Most common early cause of death = <strong>ventricular fibrillation</strong>. EARLY = ELECTRICAL. Troponin peaks at 24–48h.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item" onclick="toggleTL(this)">
+        <div class="tl-dot" style="background:var(--yellow)"></div>
+        <div class="tl-card">
+          <div class="tl-time" style="color:var(--yellow)">1 – 3 DAYS</div>
+          <div class="tl-title">Neutrophil Infiltration (Peak)</div>
+          <div class="tl-sub">N for Neutrophils</div>
+          <div class="tl-detail">
+            <div class="detail-grid">
+              <div class="detail-box"><h4 style="color:var(--yellow)">HISTOLOGY</h4><p><strong>Neutrophils dominate</strong>. Loss of nuclei and striations from necrotic myocytes. Ongoing coagulative necrosis.</p></div>
+              <div class="detail-box"><h4 style="color:var(--yellow)">GROSS</h4><p>Mottled yellow-tan center beginning to form. Hyperemic (red) border from inflammatory response at margins.</p></div>
+            </div>
+            <div class="detail-box"><h4 style="color:var(--yellow)">EXAM NOTE</h4><p>Early rupture possible but not peak risk. Fibrinous pericarditis can appear (transmural infarct → pericardial inflammation).</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item" onclick="toggleTL(this)">
+        <div class="tl-dot" style="background:var(--red)"></div>
+        <div class="tl-card">
+          <div class="tl-time" style="color:var(--red)">3 – 7 DAYS ★ MOST TESTED</div>
+          <div class="tl-title">Macrophage Infiltration — MAX Rupture Risk</div>
+          <div class="tl-sub">M for Macrophages. Yellow-tan softening + red border.</div>
+          <div class="tl-detail">
+            <div class="danger-badge" style="background:rgba(255,68,68,0.15);color:var(--red)">⚠️ HIGHEST STRUCTURAL RUPTURE RISK</div>
+            <div class="detail-grid">
+              <div class="detail-box"><h4 style="color:var(--red)">HISTOLOGY</h4><p><strong>Macrophages dominate</strong>. Phagocytosis of necrotic debris. Macrophages release MMPs → digest dead tissue. Wall at maximum weakness.</p></div>
+              <div class="detail-box"><h4 style="color:var(--red)">GROSS</h4><p><strong>Soft yellow-tan center + bright red hyperemic border</strong>. Classic NBME gross appearance question.</p></div>
+            </div>
+            <div class="detail-box" style="margin-bottom:10px"><h4 style="color:var(--red)">COMPLICATIONS AT THIS WINDOW</h4>
+              <p>• <strong>Free wall rupture</strong> → hemopericardium → cardiac tamponade → sudden death<br>
+              • <strong>Papillary muscle rupture</strong> → acute severe MR → flash pulmonary edema<br>
+              • <strong>Septal rupture</strong> → acute VSD → new LLSB holosystolic murmur<br>
+              All occur because macrophages digest dead tissue <em>before</em> scar has formed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item" onclick="toggleTL(this)">
+        <div class="tl-dot" style="background:var(--blue)"></div>
+        <div class="tl-card">
+          <div class="tl-time" style="color:var(--blue)">7 – 14 DAYS</div>
+          <div class="tl-title">Granulation Tissue Forms</div>
+          <div class="tl-sub">Healing begins. Neovascularization.</div>
+          <div class="tl-detail">
+            <div class="detail-grid">
+              <div class="detail-box"><h4 style="color:var(--blue)">HISTOLOGY</h4><p>Granulation tissue at margins. Fibroblasts + new capillaries (neovascularization). Inflammation subsiding.</p></div>
+              <div class="detail-box"><h4 style="color:var(--blue)">GROSS</h4><p>Red-gray depressed infarct borders. Yellow-tan center persisting but firmness returning.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item" onclick="toggleTL(this)">
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-card">
+          <div class="tl-time" style="color:var(--green)">2 + WEEKS → MONTHS</div>
+          <div class="tl-title">Dense Collagenous Scar (Complete Healing)</div>
+          <div class="tl-sub">Gray-white firm scar. Ventricular aneurysm risk.</div>
+          <div class="tl-detail">
+            <div class="detail-grid">
+              <div class="detail-box"><h4 style="color:var(--green)">HISTOLOGY</h4><p>Dense collagen replaces necrotic tissue. Scar is stronger than granulation tissue but less compliant than normal myocardium.</p></div>
+              <div class="detail-box"><h4 style="color:var(--green)">GROSS</h4><p><strong>Gray-white firm scar</strong>. Depressed compared to surrounding myocardium.</p></div>
+            </div>
+            <div class="detail-box"><h4 style="color:var(--green)">LATE COMPLICATIONS</h4><p>Ventricular aneurysm (scarred wall balloons outward → persistent ST elevation + mural thrombus risk → embolic stroke). Dressler syndrome (2–10 weeks: autoimmune pericarditis).</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLICATION QUIZ -->
+  <div id="tab-compquiz" style="display:none">
+    <div class="comp-quiz">
+      <div class="cq-progress" id="cq-progress"></div>
+      <div id="cq-container"></div>
+    </div>
+  </div>
+
+  <!-- BIOMARKERS & ARTERIES -->
+  <div id="tab-biomarkers" style="display:none">
+    <h2 style="font-size:15px;font-family:'Space Mono',monospace;letter-spacing:0.06em;color:var(--muted);margin-bottom:20px">CARDIAC BIOMARKERS</h2>
+    <div class="bm-grid">
+      <div class="bm-card" style="border-color:rgba(255,140,0,0.4)">
+        <div class="bm-name" style="color:var(--orange)">TROPONIN I / T</div>
+        <div class="bm-row"><span style="color:var(--muted)">Rise</span><span class="bm-val">3–4 hours</span></div>
+        <div class="bm-row"><span style="color:var(--muted)">Peak</span><span class="bm-val">24–48 hours</span></div>
+        <div class="bm-row"><span style="color:var(--muted)">Duration</span><span class="bm-val">7–10 days elevated</span></div>
+        <div class="bm-row"><span style="color:var(--muted)">Specificity</span><span class="bm-val">HIGHEST (cardiac-specific)</span></div>
+        <div class="bm-key" style="background:rgba(255,140,0,0.15);color:var(--orange)">★ Best test for ACUTE MI</div>
+      </div>
+      <div class="bm-card" style="border-color:rgba(68,153,255,0.4)">
+        <div class="bm-name" style="color:var(--blue)">CK-MB</div>
+        <div class="bm-row"><span style="color:var(--muted)">Rise</span><span class="bm-val">4–6 hours</span></div>
+        <div class="bm-row"><span style="color:var(--muted)">Peak</span><span class="bm-val">~24 hours</span></div>
+        <div class="bm-row"><span style="color:var(--muted)">Duration</span><span class="bm-val">Returns to normal in ~2 days</span></div>
+        <div class="bm-row"><span style="color:var(--muted)">Key use</span><span class="bm-val">Detects RE-infarction</span></div>
+        <div class="bm-key" style="background:rgba(68,153,255,0.15);color:var(--blue)">★ Best for detecting REINFARCTION</div>
+      </div>
+      <div class="bm-card">
+        <div class="bm-name" style="color:var(--muted)">MYOGLOBIN</div>
+        <div class="bm-row"><span style="color:var(--muted)">Rise</span><span class="bm-val">1–2 hours (earliest)</span></div>
+        <div class="bm-row"><span style="color:var(--muted)">Peak</span><span class="bm-val">4–8 hours</span></div>
+        <div class="bm-row"><span style="color:var(--muted)">Specificity</span><span class="bm-val">LOW (non-cardiac)</span></div>
+        <div class="bm-key" style="background:var(--border);color:var(--muted)">Early but not cardiac-specific</div>
+      </div>
+    </div>
+
+    <h2 style="font-size:15px;font-family:'Space Mono',monospace;letter-spacing:0.06em;color:var(--muted);margin-bottom:20px;margin-top:32px">CORONARY ARTERY TERRITORIES</h2>
+    <div class="artery-grid">
+      <div class="artery-card" style="border-color:rgba(255,68,68,0.4)">
+        <div class="artery-name" style="color:var(--red)">LAD</div>
+        <div class="artery-leads" style="color:var(--red)">V1 – V4</div>
+        <div class="artery-notes">Anterior wall + anterior septum. Most common culprit. "Widow-maker." LBBB risk. LV systolic failure.</div>
+      </div>
+      <div class="artery-card" style="border-color:rgba(68,204,119,0.4)">
+        <div class="artery-name" style="color:var(--green)">RCA</div>
+        <div class="artery-leads" style="color:var(--green)">II, III, aVF</div>
+        <div class="artery-notes">Inferior wall + RV. Supplies AV node (~85% of people). Inferior MI → watch for AV block. RV infarct.</div>
+      </div>
+      <div class="artery-card" style="border-color:rgba(68,153,255,0.4)">
+        <div class="artery-name" style="color:var(--blue)">LCx</div>
+        <div class="artery-leads" style="color:var(--blue)">I, aVL</div>
+        <div class="artery-notes">Lateral wall of LV. Can be "electrically silent." Lateral MI may have subtle ECG changes.</div>
+      </div>
+    </div>
+
+    <h2 style="font-size:15px;font-family:'Space Mono',monospace;letter-spacing:0.06em;color:var(--muted);margin:32px 0 20px">POST-MI COMPLICATION SUMMARY</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead>
+        <tr style="background:var(--surface2)">
+          <th style="padding:10px 14px;text-align:left;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.06em">COMPLICATION</th>
+          <th style="padding:10px 14px;text-align:left;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.06em">TIMING</th>
+          <th style="padding:10px 14px;text-align:left;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.06em">KEY CLUE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:11px 14px;font-weight:600;color:var(--red)">Arrhythmia (V-fib)</td>
+          <td style="padding:11px 14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--orange)">&lt;24 hours</td>
+          <td style="padding:11px 14px;color:var(--muted)">Most common early cause of death. EARLY = ELECTRICAL.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:11px 14px;font-weight:600">Fibrinous pericarditis</td>
+          <td style="padding:11px 14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--yellow)">1–3 days</td>
+          <td style="padding:11px 14px;color:var(--muted)">Transmural infarct → pericardial inflammation. Pleuritic pain + friction rub.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:11px 14px;font-weight:600;color:var(--red)">Free wall rupture (LV)</td>
+          <td style="padding:11px 14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--red)">3–7 days ★</td>
+          <td style="padding:11px 14px;color:var(--muted)">Cardiac tamponade → sudden death. Hemopericardium at autopsy.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:11px 14px;font-weight:600;color:var(--red)">Papillary muscle rupture</td>
+          <td style="padding:11px 14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--red)">3–7 days ★</td>
+          <td style="padding:11px 14px;color:var(--muted)">Acute MR → flash pulmonary edema. Murmur at apex → axilla.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:11px 14px;font-weight:600;color:var(--red)">Septal rupture (VSD)</td>
+          <td style="padding:11px 14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--red)">3–7 days ★</td>
+          <td style="padding:11px 14px;color:var(--muted)">New harsh holosystolic murmur at LLSB. Acute HF.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:11px 14px;font-weight:600">Mural thrombus</td>
+          <td style="padding:11px 14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--blue)">Days–weeks</td>
+          <td style="padding:11px 14px;color:var(--muted)">Stasis over akinetic LV wall → thrombus → embolic stroke.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:11px 14px;font-weight:600">Dressler syndrome</td>
+          <td style="padding:11px 14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--green)">2–10 weeks</td>
+          <td style="padding:11px 14px;color:var(--muted)">Autoimmune pericarditis. Anti-heart antibodies. Fever + pleuritic pain.</td>
+        </tr>
+        <tr>
+          <td style="padding:11px 14px;font-weight:600">Ventricular aneurysm</td>
+          <td style="padding:11px 14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--green)">Weeks–months</td>
+          <td style="padding:11px 14px;color:var(--muted)">Persistent ST elevation. HF + arrhythmias. Mural thrombus risk.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function toggleTL(item) {
+  item.classList.toggle('open');
+  item.querySelector('.tl-card').classList.toggle('open');
+}
+
+// TAB SWITCHING
+function setTab(name, btn) {
+  ['timeline','compquiz','biomarkers'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = t === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// COMPLICATION QUIZ
+const CQ = [
+  {scenario:"A patient develops crushing substernal chest pain at 2 AM. He arrives at the ED within 30 minutes. His ECG shows ST elevations in V1–V4. He is taken for urgent PCI. In the recovery unit 3 hours later, he goes into cardiac arrest.",
+   timing:"< 24 hours post-MI", timing_color:"var(--orange)",
+   q:"What is the most likely cause of his cardiac arrest?",
+   opts:["Free wall rupture → tamponade","Ventricular fibrillation (arrhythmia)","Papillary muscle rupture → acute MR","Septal rupture → VSD"],
+   ans:1, exp:"EARLY = ELECTRICAL. V-fib is the most common cause of death in the first 24 hours post-MI. Structural ruptures occur 3–7 days later when macrophages have weakened the wall."},
+
+  {scenario:"A 58-year-old man had a large anterior STEMI 5 days ago. He was doing well until this morning when he suddenly became severely hypotensive and his neck veins distended. He lost consciousness.",
+   timing:"5 days post-MI", timing_color:"var(--red)",
+   q:"What is the most likely cause of his sudden deterioration?",
+   opts:["Ventricular fibrillation","Mural thrombus → stroke","LV free wall rupture → cardiac tamponade","Dressler syndrome"],
+   ans:2, exp:"5 days = 3–7 day rupture window. Free wall rupture → hemopericardium → cardiac tamponade → JVD + hypotension + muffled sounds (Beck's triad) → sudden death."},
+
+  {scenario:"A 64-year-old woman had an inferior MI 4 days ago. Today she develops acute shortness of breath and pulmonary edema. On exam, a new holosystolic murmur is heard loudest at the apex and radiates to the left axilla.",
+   timing:"4 days post-MI", timing_color:"var(--red)",
+   q:"Which complication is most likely?",
+   opts:["Septal rupture → acute VSD","Dressler syndrome","Ventricular aneurysm","Papillary muscle rupture → acute MR"],
+   ans:3, exp:"Apex → axilla = papillary muscle rupture → acute MR. Septal rupture = LLSB murmur. Papillary muscles are most vulnerable at 3–7 days when macrophages are active."},
+
+  {scenario:"A 50-year-old man had a transmural anterior MI 4 days ago. His nurse notes a NEW harsh holosystolic murmur at the left lower sternal border. He is acutely short of breath with signs of pulmonary edema.",
+   timing:"4 days post-MI", timing_color:"var(--red)",
+   q:"What does the murmur location indicate?",
+   opts:["Papillary muscle rupture → MR","LV free wall rupture","Septal rupture → acute VSD","Tricuspid regurgitation"],
+   ans:2, exp:"LLSB holosystolic murmur = septal rupture → new VSD (left-to-right shunt). This differs from papillary rupture (apex → axilla). Both occur in the 3–7 day window."},
+
+  {scenario:"A 67-year-old man had an MI 3 weeks ago and was discharged 10 days ago. He presents with fever, pleuritic chest pain, and a pericardial friction rub. His troponin is negative.",
+   timing:"3 weeks post-MI", timing_color:"var(--green)",
+   q:"What is the most likely diagnosis?",
+   opts:["Reinfarction","Dressler syndrome","Ventricular aneurysm","PE from mural thrombus"],
+   ans:1, exp:"Dressler syndrome = autoimmune pericarditis 2–10 weeks post-MI. Anti-heart antibodies form against exposed myocardial antigens. Fever + pericarditis + normal troponin. Treat with NSAIDs."},
+
+  {scenario:"A 72-year-old man is seen at follow-up 8 weeks after a large anterior MI. ECG shows persistent ST elevation in V1–V4. Echo reveals a dyskinetic bulging region of the anterior LV wall.",
+   timing:"8 weeks post-MI", timing_color:"var(--green)",
+   q:"What complication has developed?",
+   opts:["Ongoing STEMI (re-occlusion)","Ventricular aneurysm","Dressler pericarditis","Mural thrombus embolism"],
+   ans:1, exp:"Ventricular aneurysm: scarred LV wall (fibrosis) loses contractility → paradoxical outward bulging → persistent ST elevation (not re-infarction). Risk of mural thrombus → stroke and ventricular arrhythmias."},
+
+  {scenario:"A 68-year-old woman had an anterior MI with akinesis of the anterior wall. 2 weeks later she presents with sudden left-sided weakness and facial droop.",
+   timing:"2 weeks post-MI", timing_color:"var(--blue)",
+   q:"What is the most likely mechanism of her stroke?",
+   opts:["Atrial fibrillation → cardioembolic stroke","Mural thrombus over akinetic LV wall → embolism","Free wall rupture → paradoxical embolism","Carotid artery dissection"],
+   ans:1, exp:"Mural thrombus forms over akinetic (non-moving) infarcted LV wall → stasis + endothelial injury → Virchow's triad → thrombus → embolism → stroke. Treatment: anticoagulation."},
+
+  {scenario:"A medical student is reviewing the histology of a heart from a patient who died 36 hours after an acute MI. The specimen shows early coagulative necrosis with preserved cell outlines and a prominent infiltrate.",
+   timing:"36 hours post-MI", timing_color:"var(--yellow)",
+   q:"What is the dominant inflammatory cell at this stage?",
+   opts:["Macrophages","Lymphocytes","Fibroblasts","Neutrophils"],
+   ans:3, exp:"1–3 days post-MI = NEUTROPHILS dominate. Macrophages replace neutrophils at 3–7 days. N for Neutrophils (1–3 days). M for Macrophages (3–7 days) = max rupture risk."},
+];
+
+let cqCurrent = 0, cqScore = 0, cqAnswered = false;
+
+function renderCQ() {
+  const prog = document.getElementById('cq-progress');
+  prog.innerHTML = CQ.map((_, i) =>
+    `<div class="cq-dot ${i < cqCurrent ? 'done' : i === cqCurrent ? 'current' : ''}"></div>`
+  ).join('');
+
+  if (cqCurrent >= CQ.length) {
+    document.getElementById('cq-container').innerHTML = `
+      <div style="text-align:center;padding:60px 0">
+        <div style="font-family:'Space Mono',monospace;font-size:52px;font-weight:700;color:var(--red)">${cqScore}/${CQ.length}</div>
+        <div style="font-size:18px;margin:12px 0;font-weight:600">${cqScore >= 7 ? '🎉 Excellent!' : cqScore >= 5 ? '💪 Good!' : '📖 Review the timeline!'}</div>
+        <p style="color:var(--muted);margin-bottom:28px">${Math.round(cqScore/CQ.length*100)}% correct</p>
+        <button onclick="restartCQ()" style="padding:13px 28px;background:var(--red);color:white;border:none;border-radius:8px;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px">Try Again</button>
+      </div>`;
+    return;
+  }
+
+  const q = CQ[cqCurrent];
+  cqAnswered = false;
+  document.getElementById('cq-container').innerHTML = `
+    <div class="cq-card">
+      <div class="cq-num">Scenario ${cqCurrent + 1} of ${CQ.length} · Score: ${cqScore}/${cqCurrent}</div>
+      <div class="cq-scenario">${q.scenario}</div>
+      <div class="cq-timing" style="background:${q.timing_color}22;color:${q.timing_color}">${q.timing}</div>
+      <div class="cq-question">${q.q}</div>
+      <div class="cq-opts">
+        ${q.opts.map((o, i) => `<button class="cq-opt" onclick="answerCQ(${i})">${o}</button>`).join('')}
+      </div>
+      <div class="cq-feedback" id="cq-fb"></div>
+      <button class="cq-next" id="cq-next" onclick="nextCQ()">Next Scenario →</button>
+    </div>`;
+}
+
+function answerCQ(idx) {
+  if (cqAnswered) return;
+  cqAnswered = true;
+  const q = CQ[cqCurrent];
+  const opts = document.querySelectorAll('.cq-opt');
+  opts.forEach(o => o.disabled = true);
+  opts[q.ans].classList.add('show-ans');
+  const fb = document.getElementById('cq-fb');
+  if (idx === q.ans) {
+    cqScore++;
+    opts[idx].classList.add('correct');
+    fb.className = 'cq-feedback ok show';
+    fb.innerHTML = `<strong>✓ Correct!</strong> ${q.exp}`;
+  } else {
+    opts[idx].classList.add('wrong');
+    fb.className = 'cq-feedback no show';
+    fb.innerHTML = `<strong>✗</strong> The answer is <strong>${q.opts[q.ans]}</strong>. ${q.exp}`;
+  }
+  document.getElementById('cq-next').classList.add('show');
+}
+
+function nextCQ() { cqCurrent++; renderCQ(); }
+function restartCQ() { cqCurrent = 0; cqScore = 0; renderCQ(); }
+
+renderCQ();
+</script>
+</body>
+</html>
