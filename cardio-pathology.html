@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardio Pathology — USMLE Step 1 Printable Guide</title>
+<style>
+@page { size: letter; margin: 0.6in; }
+@media print {
+  .no-print { display: none !important; }
+  .pb { page-break-before: always; }
+  body { margin: 0 !important; background: white !important; }
+  .page { max-width: 100% !important; margin: 0 !important; box-shadow: none !important; padding: 0 !important; }
+}
+@media screen {
+  body { background: #efefef; }
+  .page { max-width: 820px; margin: 0 auto; padding: 30px 38px 48px; background: white; box-shadow: 0 2px 18px rgba(0,0,0,.12); }
+}
+* { box-sizing: border-box; }
+body { font-family: Georgia, serif; font-size: 10.2pt; line-height: 1.5; color: #1a1a1a; margin: 0; }
+.print-bar {
+  position: sticky; top: 0; z-index: 10;
+  background: #3C3489; color: #fff; padding: 9px 18px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: Arial, sans-serif; font-size: 12px;
+}
+.print-bar button {
+  background: white; color: #3C3489; border: none; border-radius: 6px;
+  padding: 7px 14px; font-weight: 700; cursor: pointer;
+}
+.cover { border-bottom: 2.5px solid #3C3489; padding-bottom: 16px; margin-bottom: 16px; }
+.tag {
+  display: inline-block; background: #EEEDFE; color: #3C3489; border: 1px solid #534AB7;
+  border-radius: 999px; padding: 3px 12px; font-family: Arial, sans-serif; font-size: 9pt; font-weight: 700;
+  margin-bottom: 10px;
+}
+h1 { font-size: 22pt; margin: 0 0 4px 0; }
+h2 { font-size: 12pt; font-weight: 400; color: #444; margin: 0 0 5px 0; }
+.meta { font-size: 9pt; color: #777; font-family: Arial, sans-serif; }
+.summary-strip {
+  background: #f7f7f7; border-radius: 6px; padding: 10px 13px; margin-top: 12px;
+  font-family: Arial, sans-serif; font-size: 9pt; line-height: 1.6;
+}
+.sec {
+  background: #3C3489; color: white; padding: 8px 12px; border-radius: 6px;
+  font-family: Arial, sans-serif; font-size: 11pt; font-weight: 700; margin: 18px 0 10px;
+}
+.card {
+  border: 0.8px solid #d9d9d9; border-radius: 8px; padding: 11px 14px; margin-bottom: 10px;
+  break-inside: avoid;
+}
+.card-title { font-family: Arial, sans-serif; font-size: 11.2pt; font-weight: 700; margin-bottom: 4px; }
+.badge {
+  display: inline-block; background: #EEEDFE; color: #3C3489; border: 1px solid #AFA9EC;
+  border-radius: 999px; padding: 2px 9px; font-family: Arial, sans-serif; font-size: 8.2pt;
+  font-weight: 700; margin-right: 6px;
+}
+.lbl {
+  font-family: Arial, sans-serif; font-size: 7.5pt; font-weight: 700; color: #888;
+  text-transform: uppercase; letter-spacing: .05em; margin: 7px 0 2px;
+}
+.obj {
+  border-left: 2.5px solid #AFA9EC; padding-left: 8px; font-size: 9.5pt; color: #555;
+  font-style: italic; margin: 4px 0 6px; font-family: Arial, sans-serif;
+}
+p { margin: 3px 0; }
+ul { padding-left: 18px; margin: 4px 0; }
+li { margin-bottom: 2px; }
+.box { border-radius: 6px; padding: 8px 10px; margin: 6px 0; break-inside: avoid; }
+.coral { background: #FAECE7; border-left: 2.5px solid #993C1D; }
+.teal { background: #E1F5EE; border-left: 2.5px solid #0F6E56; }
+.green { background: #EAF3DE; border-left: 2.5px solid #3B6D11; }
+.amber { background: #FAEEDA; border-left: 2.5px solid #854F0B; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 6px 0; }
+.three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 6px 0; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 8.6pt; font-family: Arial, sans-serif; }
+th { background: #3C3489; color: white; padding: 6px 7px; text-align: left; font-size: 8.5pt; }
+td { padding: 5px 7px; border-bottom: 0.8px solid #eee; vertical-align: top; }
+tr:nth-child(even) td { background: #fafafa; }
+pre {
+  background: #f5f5f5; border: 0.8px solid #e0e0e0; border-radius: 6px; padding: 10px;
+  font-size: 8pt; font-family: "Courier New", monospace; white-space: pre-wrap; line-height: 1.5;
+  margin: 6px 0;
+}
+.footer { text-align: center; font-size: 8.3pt; color: #aaa; font-family: Arial, sans-serif; margin-top: 20px; }
+.small { font-size: 9pt; }
+hr { border: none; border-top: 0.8px solid #ddd; margin: 18px 0; }
+</style>
+</head>
+<body>
+<div class="print-bar no-print">
+  <span>To save as PDF: click the button or press <strong>Cmd+P</strong>/<strong>Ctrl+P</strong>, then choose <strong>Save as PDF</strong> and enable <strong>Background graphics</strong>.</span>
+  <button onclick="window.print()">🖨 Print / Save as PDF</button>
+</div>
+
+<div class="page">
+  <div class="cover">
+    <div class="tag">USMLE Step 1 Board Tool</div>
+    <h1>Cardio Pathology — Comprehensive Printable Review</h1>
+    <h2>Consolidated from congenital heart disease, ischemic disease, cardiomyopathies, heart failure, valvular disease, endocarditis, and pericardial pathology</h2>
+    <div class="meta">Formatted for rapid review, print-friendly study, and last-week board prep</div>
+    <div class="summary-strip">
+      <strong style="color:#3C3489">Included:</strong>
+      VSD · ASD · PDA · Tetralogy of Fallot · Transposition · Coarctation · Truncus arteriosus · TAPVR · Stable angina · Unstable angina · STEMI/NSTEMI · MI complications · Prinzmetal angina · Dilated/Hypertrophic/Restrictive cardiomyopathy · Left/Right heart failure · Aortic and mitral valve disease · Infective endocarditis · Pericarditis · Tamponade · Constrictive pericarditis
+    </div>
+  </div>
+
+  <div class="sec">🎯 Master Rapid Rules</div>
+  <div class="card">
+    <div class="three">
+      <div class="box teal"><div class="lbl">Congenital</div><p><strong>Fixed split S2 = ASD</strong><br><strong>Continuous murmur = PDA</strong><br><strong>Squatting = TOF</strong><br><strong>Immediate cyanosis = TGA</strong></p></div>
+      <div class="box amber"><div class="lbl">Ischemia/MI</div><p><strong>Exertional pain relieved by rest = stable angina</strong><br><strong>3–7 days post-MI = rupture risk</strong><br><strong>Most common early death = arrhythmia</strong></p></div>
+      <div class="box coral"><div class="lbl">Valves/HF</div><p><strong>Opening snap = MS</strong><br><strong>Holosystolic to axilla = MR</strong><br><strong>Carotid radiation = AS</strong><br><strong>Crackles = left HF</strong></p></div>
+    </div>
+  </div>
+
+  <div class="sec">❤️ Section 1 — Congenital Heart Disease</div>
+
+  <div class="card">
+    <span class="badge">Most Common</span><span class="card-title">Ventricular Septal Defect (VSD)</span>
+    <div class="obj">Classic NBME: infant with loud holosystolic murmur, heart failure symptoms, then pulmonary hypertension if untreated</div>
+    <div class="two">
+      <div>
+        <div class="lbl">Buzzwords</div>
+        <ul><li>Holosystolic murmur at left lower sternal border</li><li>Failure to thrive, tachypnea</li><li>Small defect can be louder</li><li>Most common congenital heart defect</li></ul>
+      </div>
+      <div>
+        <div class="lbl">How tested</div>
+        <ul><li>Left-to-right shunt question</li><li>Spontaneous closure in childhood</li><li>Eisenmenger development if untreated</li><li>Differentiate from MR</li></ul>
+      </div>
+    </div>
+    <div class="box green"><div class="lbl">High-yield core</div><p><strong>Presentation:</strong> infant CHF symptoms, murmur. <strong>Pathophys:</strong> LV → RV shunt increases pulmonary flow and RV volume load. <strong>Treatment:</strong> observe if small; surgical repair if large/symptomatic.</p></div>
+    <div class="box coral"><div class="lbl">Trap</div><p>Holosystolic does <em>not</em> always mean MR. VSD is at the left lower sternal border; MR radiates to the axilla.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Split S2</span><span class="card-title">Atrial Septal Defect (ASD)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Fixed split S2</li><li>Ostium secundum most common</li><li>Exercise intolerance in child</li><li>Often asymptomatic early</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>“Silent shunt” style question</li><li>Association with Down syndrome</li><li>Left-to-right shunt causing RA/RV enlargement</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Presentation:</strong> often subtle in childhood. <strong>Pathophys:</strong> L→R shunt across atria causes right-sided volume overload. <strong>Treatment:</strong> closure if significant or symptomatic.</p></div>
+    <div class="box teal"><div class="lbl">If you see → think</div><p><strong>Fixed split S2 → ASD</strong></p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Continuous</span><span class="card-title">Patent Ductus Arteriosus (PDA)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Continuous “machine-like” murmur</li><li>Bounding pulses</li><li>Wide pulse pressure</li><li>Prematurity or congenital rubella</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Indomethacin closes it</li><li>PGE keeps it open in ductal-dependent lesions</li><li>Differentiate from AR by murmur type</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> aorta → pulmonary artery shunt. <strong>Treatment:</strong> indomethacin/ibuprofen to close; prostaglandin E to keep open if needed in cyanotic lesions.</p></div>
+    <div class="box coral"><div class="lbl">Trap</div><p>Bounding pulses can also occur in aortic regurgitation. Murmur type separates them: <strong>continuous = PDA</strong>, <strong>diastolic = AR</strong>.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Cyanotic</span><span class="card-title">Tetralogy of Fallot (TOF)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Cyanotic child</li><li>Squatting relieves symptoms</li><li>Tet spells with crying/exertion</li><li>DiGeorge association</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>PROVe mnemonic</li><li>Degree of pulmonic stenosis determines severity</li><li>Right-to-left shunt lesion</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Components:</strong> Pulmonary stenosis, RV hypertrophy, Overriding aorta, VSD. <strong>Pathophys:</strong> RV outflow obstruction drives R→L shunting and cyanosis. <strong>Treatment:</strong> surgical repair.</p></div>
+    <div class="box teal"><div class="lbl">If you see → think</div><p><strong>Squatting child + cyanosis → TOF</strong></p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Birth Cyanosis</span><span class="card-title">Transposition of the Great Arteries (TGA)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Immediate cyanosis at birth</li><li>No major murmur</li><li>Maternal diabetes association</li><li>Needs mixing lesion</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Parallel rather than serial circulation</li><li>PGE used acutely</li><li>Survival requires PDA/ASD/VSD</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> aorta arises from RV and pulmonary artery from LV, producing parallel circulations. <strong>Treatment:</strong> prostaglandin E then surgical repair.</p></div>
+    <div class="box coral"><div class="lbl">Trap</div><p>TGA gives <strong>immediate</strong> cyanosis and usually not the classic squatting history of TOF.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Pulse Differential</span><span class="card-title">Coarctation of the Aorta</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Upper extremity hypertension</li><li>Weak femoral pulses</li><li>Rib notching</li><li>Turner syndrome association</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Arm-leg BP differential</li><li>Leg claudication in child/adolescent</li><li>Preductal vs postductal concept</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> aortic narrowing causes decreased distal perfusion and proximal hypertension. <strong>Treatment:</strong> surgical repair.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Outflow Tract</span><span class="card-title">Truncus Arteriosus + TAPVR</span>
+    <div class="two">
+      <div class="box amber"><div class="lbl">Truncus arteriosus</div><p><strong>Buzzwords:</strong> single great vessel, cyanosis, early heart failure, DiGeorge.<br><strong>Pathophys:</strong> failure of outflow tract septation.<br><strong>Think:</strong> <strong>one vessel = truncus</strong>.</p></div>
+      <div class="box teal"><div class="lbl">TAPVR</div><p><strong>Buzzwords:</strong> pulmonary veins drain to right atrium, cyanosis, ASD needed for survival.<br><strong>Pathophys:</strong> oxygenated blood returns to right side instead of left.<br><strong>Think:</strong> <strong>abnormal pulmonary venous drainage = TAPVR</strong>.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Congenital Heart Disease Comparison Table</div>
+    <table>
+      <tr><th>Disease</th><th>Murmur / Sound</th><th>Cyanosis</th><th>Key clue</th></tr>
+      <tr><td>VSD</td><td>Holosystolic (LLSB)</td><td>Late if Eisenmenger</td><td>Most common congenital defect</td></tr>
+      <tr><td>ASD</td><td>Fixed split S2</td><td>No early</td><td>“Silent shunt”</td></tr>
+      <tr><td>PDA</td><td>Continuous</td><td>No early</td><td>Machine-like murmur</td></tr>
+      <tr><td>TOF</td><td>Systolic murmur</td><td>Yes</td><td>Squatting relieves</td></tr>
+      <tr><td>TGA</td><td>Often none</td><td>Immediate</td><td>Needs PDA/ASD/VSD</td></tr>
+      <tr><td>Coarctation</td><td>Variable</td><td>No</td><td>Arm-leg BP differential</td></tr>
+    </table>
+  </div>
+
+  <div class="pb"></div>
+  <div class="sec">💔 Section 2 — Ischemic Heart Disease and MI</div>
+
+  <div class="card">
+    <span class="badge">High Yield</span><span class="card-title">Stable Angina vs Unstable Angina vs MI</span>
+    <table>
+      <tr><th>Condition</th><th>Trigger</th><th>Troponin</th><th>Core pathophys</th><th>Classic test clue</th></tr>
+      <tr><td>Stable angina</td><td>Exertion</td><td>No</td><td>Fixed plaque</td><td>Relieved by rest/nitro</td></tr>
+      <tr><td>Unstable angina</td><td>Rest / worsening pattern</td><td>No</td><td>Plaque rupture + nonocclusive thrombus</td><td>Normal biomarkers</td></tr>
+      <tr><td>NSTEMI</td><td>Rest</td><td>Yes</td><td>Subendocardial infarct / partial occlusion</td><td>ST depression / ↑ troponin</td></tr>
+      <tr><td>STEMI</td><td>Rest</td><td>Yes</td><td>Transmural infarct / complete occlusion</td><td>ST elevation</td></tr>
+      <tr><td>Prinzmetal</td><td>Rest</td><td>Usually no</td><td>Vasospasm</td><td>Transient ST elevation, normal coronaries</td></tr>
+    </table>
+    <div class="box coral"><div class="lbl">Trap</div><p><strong>Stable angina</strong> is predictable exertional pain relieved by rest. Once symptoms are occurring at rest or becoming more frequent, think <strong>unstable angina/NSTEMI</strong>.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Plaque Rupture</span><span class="card-title">General MI Essentials</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Crushing substernal chest pain</li><li>Radiation to jaw or left arm</li><li>Diaphoresis, nausea, dyspnea</li><li>Elevated troponin</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Most common cause = plaque rupture with thrombosis</li><li>Different arteries map to different infarcts</li><li>Complication timing is heavily tested</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> atherosclerotic plaque rupture exposes thrombogenic core → platelet aggregation → thrombus → myocardial necrosis. <strong>Treatment:</strong> urgent reperfusion for STEMI plus aspirin, nitrates when appropriate, beta-blocker, statin, anticoagulation per scenario.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Biomarkers</span><span class="card-title">Cardiac Marker Cheat Sheet</span>
+    <table>
+      <tr><th>Marker</th><th>Rise</th><th>Peak</th><th>High-yield use</th></tr>
+      <tr><td>Troponin I/T</td><td>3–4 hr</td><td>24–48 hr</td><td>Most specific and most tested</td></tr>
+      <tr><td>CK-MB</td><td>4–6 hr</td><td>~24 hr</td><td>Best for detecting reinfarction</td></tr>
+    </table>
+    <div class="box teal"><div class="lbl">If you see → think</div><p><strong>Best test for acute MI = troponin</strong><br><strong>New chest pain shortly after a prior MI = CK-MB for reinfarction</strong></p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Timeline</span><span class="card-title">MI Histology and Rupture Window</span>
+<pre>0–4 hr     : often no gross/light microscopic change
+4–24 hr    : coagulative necrosis begins
+1–3 days   : neutrophils dominate
+3–7 days   : macrophages dominate → wall weakest → rupture risk highest
+Weeks      : granulation tissue then dense fibrosis/scar</pre>
+    <div class="box coral"><div class="lbl">Most tested trap</div><p><strong>3–7 days after MI</strong> is the classic rupture window because macrophages digest dead tissue before collagen scar has formed.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Complications</span><span class="card-title">Post-MI Complication Table</span>
+    <table>
+      <tr><th>Complication</th><th>Timing</th><th>Key clue</th></tr>
+      <tr><td>Arrhythmia / ventricular fibrillation</td><td>Hours</td><td>Most common early cause of death</td></tr>
+      <tr><td>Papillary muscle rupture</td><td>2–7 days</td><td>Acute MR, pulmonary edema, new murmur</td></tr>
+      <tr><td>Free wall rupture</td><td>3–7 days</td><td>Tamponade, sudden collapse, hemopericardium</td></tr>
+      <tr><td>Ventricular septal rupture</td><td>3–7 days</td><td>New harsh holosystolic murmur</td></tr>
+      <tr><td>Dressler syndrome</td><td>Weeks</td><td>Autoimmune pericarditis after MI</td></tr>
+      <tr><td>Ventricular aneurysm</td><td>Late</td><td>Persistent ST elevation, mural thrombus risk</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <span class="badge">Coronaries</span><span class="card-title">Artery Supply Map</span>
+    <table>
+      <tr><th>Artery</th><th>Classic territory</th><th>Board pearl</th></tr>
+      <tr><td>LAD</td><td>Anterior wall + anterior septum</td><td>“Widow-maker”; anterior MI</td></tr>
+      <tr><td>RCA</td><td>Inferior wall</td><td>Inferior MI; can involve AV node</td></tr>
+      <tr><td>LCX</td><td>Lateral wall</td><td>Lateral MI</td></tr>
+    </table>
+    <div class="box amber"><div class="lbl">Pearl</div><p><strong>Anterior MI → LAD</strong>; <strong>Inferior MI → RCA</strong>.</p></div>
+  </div>
+
+  <div class="pb"></div>
+  <div class="sec">💪 Section 3 — Cardiomyopathies and Heart Failure</div>
+
+  <div class="card">
+    <span class="badge">Most Common CM</span><span class="card-title">Dilated Cardiomyopathy (DCM)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Enlarged floppy heart</li><li>Low ejection fraction</li><li>Global hypokinesis</li><li>Alcohol, coxsackie, doxorubicin, Chagas</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Most common cardiomyopathy</li><li>Systolic dysfunction question</li><li>Secondary MR/TR from dilation</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Presentation:</strong> dyspnea, edema, orthopnea, fatigue. <strong>Pathophys:</strong> ventricular dilation causes impaired contractility and reduced EF. <strong>Treatment:</strong> standard HFrEF therapy.</p></div>
+    <div class="box teal"><div class="lbl">If you see → think</div><p><strong>Alcohol + low EF + enlarged heart → DCM</strong></p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Athlete Death</span><span class="card-title">Hypertrophic Cardiomyopathy (HCM)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Young athlete collapse</li><li>Syncope with exertion</li><li>Asymmetric septal hypertrophy</li><li>Autosomal dominant sarcomere mutation</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Sudden death in athletes</li><li>Obstructive physiology from thick septum</li><li>Differentiate from aortic stenosis</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> thickened septum obstructs LV outflow and causes diastolic dysfunction. <strong>Treatment:</strong> beta-blockers (and sometimes non-DHP CCBs depending on scenario).</p></div>
+    <div class="box coral"><div class="lbl">Trap</div><p>Low EF points away from HCM and toward DCM. HCM is typically a <strong>diastolic</strong> dysfunction problem.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Stiff Ventricles</span><span class="card-title">Restrictive Cardiomyopathy (RCM)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Normal EF</li><li>Diastolic dysfunction</li><li>Amyloidosis / hemochromatosis</li><li>Impaired filling</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Heart failure with preserved EF</li><li>Differentiation from constrictive pericarditis</li><li>Infiltrative disease stem</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> noncompliant myocardium prevents ventricular filling while contractility is relatively preserved. <strong>Treatment:</strong> treat underlying cause when possible.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">HF Basics</span><span class="card-title">Left vs Right Heart Failure</span>
+    <table>
+      <tr><th>Type</th><th>Major manifestations</th><th>Classic clue</th></tr>
+      <tr><td>Left-sided HF</td><td>Pulmonary edema, orthopnea, crackles, dyspnea</td><td>“Left = lungs”</td></tr>
+      <tr><td>Right-sided HF</td><td>JVD, hepatomegaly, peripheral edema</td><td>“Right = rest of body”</td></tr>
+      <tr><td>Congestive HF</td><td>Both pulmonary and systemic congestion</td><td>Elevated BNP</td></tr>
+    </table>
+    <div class="box amber"><div class="lbl">High yield</div><p><strong>BNP</strong> is released in response to ventricular stretch and is a classic heart failure biomarker.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Cardiomyopathy Comparison Table</div>
+    <table>
+      <tr><th>Disease</th><th>EF</th><th>Main problem</th><th>Classic clue</th></tr>
+      <tr><td>Dilated</td><td>Low</td><td>Systolic failure</td><td>Alcohol / viruses / enlarged heart</td></tr>
+      <tr><td>Hypertrophic</td><td>Often normal</td><td>Diastolic dysfunction + obstruction</td><td>Young athlete sudden death</td></tr>
+      <tr><td>Restrictive</td><td>Often normal</td><td>Impaired filling</td><td>Amyloid / infiltrative disease</td></tr>
+    </table>
+  </div>
+
+  <div class="pb"></div>
+  <div class="sec">🔔 Section 4 — Valvular Disease</div>
+
+  <div class="card">
+    <span class="badge">SAD</span><span class="card-title">Aortic Stenosis (AS)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Syncope, angina, dyspnea</li><li>Crescendo-decrescendo systolic murmur</li><li>Radiates to carotids</li><li>Elderly calcification or bicuspid valve</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Exertional syncope</li><li>Pressure-overload LV hypertrophy</li><li>Differentiate from HCM</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> LV outflow obstruction creates pressure overload and concentric hypertrophy. <strong>Treatment:</strong> valve replacement for severe symptomatic disease.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Wide PP</span><span class="card-title">Aortic Regurgitation (AR)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Bounding pulses</li><li>Water-hammer pulse</li><li>Early diastolic murmur</li><li>Wide pulse pressure</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Marfan / aortic root dilation</li><li>Endocarditis cause</li><li>Differentiate from PDA</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> diastolic backflow from aorta to LV causes LV volume overload and dilation. <strong>Treatment:</strong> valve surgery when severe.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Holosystolic</span><span class="card-title">Mitral Regurgitation (MR)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Holosystolic murmur</li><li>Radiates to axilla</li><li>Pulmonary edema</li><li>Papillary muscle rupture after MI</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Post-MI complication</li><li>MVP progression</li><li>Differentiate from VSD</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> systolic backflow from LV to LA. <strong>Treatment:</strong> depends on cause/severity; surgery if severe.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Opening Snap</span><span class="card-title">Mitral Stenosis (MS)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Opening snap + diastolic rumble</li><li>Rheumatic fever history</li><li>Left atrial enlargement</li><li>Atrial fibrillation</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Most common cause = rheumatic fever</li><li>Pulmonary hypertension from LA pressure rise</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> obstructed LA emptying increases LA pressure, leading to pulmonary congestion and later pulmonary hypertension. <strong>Treatment:</strong> valve repair/replacement depending on severity.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Click</span><span class="card-title">Mitral Valve Prolapse (MVP)</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Mid-systolic click</li><li>Young woman</li><li>Palpitations/anxiety</li><li>Marfan association</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Myxomatous degeneration</li><li>Can progress to MR</li><li>Usually benign</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Pathophys:</strong> myxomatous degeneration allows leaflet billowing into LA during systole. <strong>Treatment:</strong> often none unless significant MR or symptoms.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Valve Murmur Cheat Sheet</div>
+    <table>
+      <tr><th>Disease</th><th>Murmur</th><th>One-liner</th></tr>
+      <tr><td>Aortic stenosis</td><td>Systolic crescendo-decrescendo</td><td>Radiates to carotids</td></tr>
+      <tr><td>Aortic regurgitation</td><td>Early diastolic</td><td>Wide pulse pressure</td></tr>
+      <tr><td>Mitral regurgitation</td><td>Holosystolic</td><td>Radiates to axilla</td></tr>
+      <tr><td>Mitral stenosis</td><td>Diastolic rumble + opening snap</td><td>Rheumatic fever</td></tr>
+      <tr><td>MVP</td><td>Mid-systolic click</td><td>Young female / myxomatous degeneration</td></tr>
+    </table>
+  </div>
+
+  <div class="pb"></div>
+  <div class="sec">🦠 Section 5 — Infective Endocarditis</div>
+
+  <div class="card">
+    <span class="badge">Acute vs Subacute</span><span class="card-title">Infective Endocarditis Essentials</span>
+    <table>
+      <tr><th>Type</th><th>Typical organism</th><th>Valve status</th><th>Classic clue</th></tr>
+      <tr><td>Acute endocarditis</td><td>S. aureus</td><td>Can infect normal valves</td><td>Rapid, destructive infection; IV drug use</td></tr>
+      <tr><td>Subacute endocarditis</td><td>S. viridans</td><td>Usually damaged valves</td><td>Dental work history, slower course</td></tr>
+    </table>
+    <div class="two">
+      <div class="box green"><div class="lbl">Buzzwords</div><p>Janeway lesions = painless<br>Osler nodes = painful<br>Splinter hemorrhages<br>Vegetations of fibrin + bacteria</p></div>
+      <div class="box coral"><div class="lbl">Trap</div><p>Do not confuse rheumatic fever with infective endocarditis. Rheumatic fever is <strong>immune-mediated</strong>; endocarditis is <strong>infectious vegetations</strong>.</p></div>
+    </div>
+    <div class="box teal"><div class="lbl">If you see → think</div><p><strong>IV drug use → S. aureus</strong><br><strong>Dental procedure + abnormal valve → S. viridans</strong></p></div>
+  </div>
+
+  <div class="sec">🫀 Section 6 — Pericardial Disease</div>
+
+  <div class="card">
+    <span class="badge">Positional Pain</span><span class="card-title">Acute Pericarditis</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Sharp chest pain</li><li>Worse lying down</li><li>Better leaning forward</li><li>Pericardial friction rub</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Viral cause most common</li><li>Dressler after MI</li><li>Differentiate from infarction</li></ul></div>
+    </div>
+    <div class="box green"><p><strong>Treatment:</strong> NSAIDs for many acute cases. <strong>Board pearl:</strong> positional chest pain strongly points away from MI and toward pericarditis.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Emergency</span><span class="card-title">Cardiac Tamponade</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Beck triad</li><li>Hypotension</li><li>JVD</li><li>Muffled heart sounds</li><li>Pulsus paradoxus</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Free wall rupture after MI</li><li>Acute hemodynamic collapse</li><li>Requires urgent pericardiocentesis</li></ul></div>
+    </div>
+    <div class="box coral"><div class="lbl">Trap</div><p>A patient with sudden shock and distended neck veins after recent MI should make you think <strong>tamponade from free wall rupture</strong>, not ordinary heart failure.</p></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Chronic</span><span class="card-title">Constrictive Pericarditis</span>
+    <div class="two">
+      <div><div class="lbl">Buzzwords</div><ul><li>Rigid pericardium</li><li>Chronic impaired filling</li><li>Kussmaul sign</li><li>Mimics restrictive cardiomyopathy</li></ul></div>
+      <div><div class="lbl">How tested</div><ul><li>Need to separate pericardial vs myocardial cause of filling restriction</li><li>Chronic rather than acute presentation</li></ul></div>
+    </div>
+  </div>
+
+  <div class="sec">📊 Final One-Page Comparison Tables</div>
+
+  <div class="card">
+    <div class="card-title">Most Tested “If You See X → Think Y” Table</div>
+    <table>
+      <tr><th>If you see...</th><th>Think...</th></tr>
+      <tr><td>Fixed split S2</td><td>ASD</td></tr>
+      <tr><td>Continuous machine murmur</td><td>PDA</td></tr>
+      <tr><td>Squatting relieves cyanosis</td><td>TOF</td></tr>
+      <tr><td>Immediate neonatal cyanosis</td><td>TGA</td></tr>
+      <tr><td>Exertional chest pain relieved by rest</td><td>Stable angina</td></tr>
+      <tr><td>Chest pain at rest with normal coronaries and transient ST elevation</td><td>Prinzmetal angina</td></tr>
+      <tr><td>3–7 days after MI</td><td>Rupture risk window</td></tr>
+      <tr><td>Young athlete sudden death</td><td>HCM</td></tr>
+      <tr><td>Alcohol + enlarged heart + low EF</td><td>DCM</td></tr>
+      <tr><td>Opening snap</td><td>Mitral stenosis</td></tr>
+      <tr><td>Holosystolic murmur to axilla</td><td>MR</td></tr>
+      <tr><td>Carotid radiation</td><td>Aortic stenosis</td></tr>
+      <tr><td>Positional chest pain better leaning forward</td><td>Pericarditis</td></tr>
+      <tr><td>Beck triad</td><td>Tamponade</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">NBME Trap Checklist</div>
+    <div class="two">
+      <div class="box amber">
+        <div class="lbl">Do not miss</div>
+        <ul>
+          <li>Holosystolic murmur is <strong>not always</strong> MR — could be VSD</li>
+          <li>Bounding pulses can be PDA or AR — check murmur timing</li>
+          <li>Normal EF does <strong>not</strong> mean normal heart — think diastolic dysfunction</li>
+          <li>Stable angina is <strong>not</strong> an infarction</li>
+        </ul>
+      </div>
+      <div class="box coral">
+        <div class="lbl">Classic traps</div>
+        <ul>
+          <li>Early sudden death after MI = arrhythmia; later sudden death = rupture</li>
+          <li>Positional chest pain points to pericarditis, not MI</li>
+          <li>Immediate cyanosis points more toward TGA than TOF</li>
+          <li>Rheumatic fever causes MS classically, not infective vegetations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="footer">Cardio Pathology — Printable USMLE Step 1 Review • Optimized for spaced review, print, and PDF export</div>
+</div>
+</body>
+</html>

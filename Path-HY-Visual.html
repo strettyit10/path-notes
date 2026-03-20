@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HF · Pericardial · Vascular · Vasculitis — Visual Comparisons</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c10;--surface:#13161e;--surface2:#1a1e28;--border:#252a38;
+  --text:#e8eaf0;--muted:#6b7588;
+  --hf:#4f9cf9;--peri:#a78bfa;--vasc:#f96060;--vas:#3dd68c;--amber:#f9a84f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh}
+
+header{padding:24px 36px 18px;border-bottom:1px solid var(--border)}
+header h1{font-size:20px;font-weight:700;color:var(--text)}
+header p{color:var(--muted);font-size:13px;margin-top:4px}
+
+.tabs{display:flex;border-bottom:1px solid var(--border);padding:0 36px;overflow-x:auto}
+.tab{padding:13px 20px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;
+  background:none;border-left:none;border-right:none;border-top:none;white-space:nowrap;
+  font-family:'Space Grotesk',sans-serif}
+.tab.active-hf{color:var(--hf);border-bottom-color:var(--hf)}
+.tab.active-peri{color:var(--peri);border-bottom-color:var(--peri)}
+.tab.active-vasc{color:var(--vasc);border-bottom-color:var(--vasc)}
+.tab.active-vas{color:var(--vas);border-bottom-color:var(--vas)}
+
+.content{padding:32px 36px;max-width:1060px;margin:0 auto}
+
+/* ── SHARED TABLE ──────────────────────────────── */
+.vtable{width:100%;border-collapse:collapse;margin-bottom:28px}
+.vtable th{padding:10px 14px;text-align:left;font-family:'Space Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.vtable td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top;line-height:1.5}
+.vtable tr:last-child td{border-bottom:none}
+.vtable tr:hover td{background:rgba(255,255,255,.02)}
+.vtable th:first-child,.vtable td:first-child{color:var(--text);font-weight:600;width:160px}
+
+.badge{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;
+  letter-spacing:.04em;font-family:'Space Mono',monospace}
+
+.section-label{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;
+  border-bottom:2px solid}
+
+.callout{border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:13px;line-height:1.6}
+
+/* ── HF VISUAL ──────────────────────────────────── */
+.hf-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.hf-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.hf-card h3{font-size:15px;font-weight:700;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.hf-row{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;
+  border-bottom:1px solid var(--border);font-size:13px;gap:12px}
+.hf-row:last-child{border-bottom:none}
+.hf-label{color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;min-width:80px}
+.hf-val{text-align:right;font-weight:500;line-height:1.4}
+
+.gdmt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.gdmt-card{background:var(--surface);border:1px solid;border-radius:10px;padding:14px}
+.gdmt-card h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.gdmt-card p{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* ── PERICARDIAL VISUAL ─────────────────────────── */
+.peri-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px}
+@media(max-width:700px){.peri-cols,.hf-cols,.gdmt-grid{grid-template-columns:1fr}}
+.peri-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative;overflow:hidden}
+.peri-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.peri-card.tamponade::before{background:var(--vasc)}
+.peri-card.constrictive::before{background:var(--peri)}
+.peri-card.dressler::before{background:var(--amber)}
+.peri-card.acute::before{background:var(--hf)}
+.peri-card h3{font-size:14px;font-weight:700;margin-bottom:12px}
+.peri-item{display:flex;gap:8px;margin-bottom:8px;font-size:12px;line-height:1.4}
+.peri-dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+
+/* ── VASCULAR VISUAL ────────────────────────────── */
+.aorta-svg-wrap{display:flex;justify-content:center;margin:16px 0 24px}
+.dissect-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.dissect-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.dissect-card h3{font-size:15px;font-weight:700;margin-bottom:14px}
+.dissect-badge{display:inline-block;padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;margin-bottom:12px}
+.aneurysm-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+@media(max-width:700px){.dissect-grid,.aneurysm-row{grid-template-columns:1fr}}
+.aneurysm-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.aneurysm-card h4{font-size:13px;font-weight:700;margin-bottom:8px}
+.aneurysm-card p{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* ── VASCULITIS VISUAL ──────────────────────────── */
+.vessel-tier{margin-bottom:28px}
+.vessel-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.vessel-line{flex:1;height:1px;background:var(--border)}
+.vessel-label{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;padding:4px 10px;border-radius:4px}
+.vas-cards{display:grid;gap:10px}
+.vas-cards.two{grid-template-columns:1fr 1fr}
+.vas-cards.three{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:700px){.vas-cards.two,.vas-cards.three{grid-template-columns:1fr}}
+.vas-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;position:relative}
+.vas-card h4{font-size:13px;font-weight:700;margin-bottom:4px}
+.vas-card .scenario{font-size:12px;color:var(--muted);margin-bottom:8px;line-height:1.4}
+.vas-card .clue{font-size:12px;line-height:1.4}
+.vas-anca{position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;
+  padding:2px 7px;border-radius:3px;font-family:'Space Mono',monospace}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Visual Comparisons — HF · Pericardial · Vascular · Vasculitis</h1>
+  <p>Side-by-side comparison diagrams to lock in the differentials</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active-hf" id="tab-hf" onclick="setTab('hf')">💙 Heart Failure</button>
+  <button class="tab" id="tab-peri" onclick="setTab('peri')">💜 Pericardial Disease</button>
+  <button class="tab" id="tab-vasc" onclick="setTab('vasc')">❤️ Aortic/Vascular</button>
+  <button class="tab" id="tab-vas" onclick="setTab('vas')">💚 Vasculitis</button>
+</div>
+
+<div class="content">
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- HF TAB                                          -->
+<!-- ════════════════════════════════════════════════ -->
+<div id="panel-hf">
+
+  <div class="section-label" style="color:var(--hf);border-color:var(--hf)">HFrEF vs HFpEF</div>
+  <div class="hf-cols">
+    <div class="hf-card" style="border-color:rgba(249,96,96,.3)">
+      <h3 style="color:var(--vasc)">HFrEF — Systolic Failure</h3>
+      <div class="hf-row"><span class="hf-label">EF</span><span class="hf-val"><span class="badge" style="background:rgba(249,96,96,.15);color:var(--vasc)">≤ 40%</span></span></div>
+      <div class="hf-row"><span class="hf-label">Problem</span><span class="hf-val">LV can't squeeze → ↓ stroke volume</span></div>
+      <div class="hf-row"><span class="hf-label">Causes</span><span class="hf-val">DCM, post-MI, MR, AR, alcohol, viral</span></div>
+      <div class="hf-row"><span class="hf-label">Gallop</span><span class="hf-val">S3 — dilated LV, early diastole</span></div>
+      <div class="hf-row"><span class="hf-label">Symptom</span><span class="hf-val">Crackles, orthopnea, displaced PMI</span></div>
+      <div class="hf-row"><span class="hf-label">Treatment</span><span class="hf-val">GDMT: BB + ARNI + MRA + SGLT2i</span></div>
+    </div>
+    <div class="hf-card" style="border-color:rgba(79,156,249,.3)">
+      <h3 style="color:var(--hf)">HFpEF — Diastolic Failure</h3>
+      <div class="hf-row"><span class="hf-label">EF</span><span class="hf-val"><span class="badge" style="background:rgba(61,214,140,.15);color:var(--vas)">≥ 50%</span></span></div>
+      <div class="hf-row"><span class="hf-label">Problem</span><span class="hf-val">LV too stiff to fill → ↑ filling pressures</span></div>
+      <div class="hf-row"><span class="hf-label">Causes</span><span class="hf-val">HTN, HCM, amyloid, concentric LVH</span></div>
+      <div class="hf-row"><span class="hf-label">Gallop</span><span class="hf-val">S4 — stiff LV, atrial kick, late diastole</span></div>
+      <div class="hf-row"><span class="hf-label">Symptom</span><span class="hf-val">Same congestion symptoms as HFrEF</span></div>
+      <div class="hf-row"><span class="hf-label">Treatment</span><span class="hf-val">BP/HR control; diuretics for congestion</span></div>
+    </div>
+  </div>
+
+  <div class="callout" style="background:rgba(249,168,79,.08);border-left:3px solid var(--amber)">
+    ⚠️ <strong style="color:var(--amber)">TRAP:</strong> Normal EF ≠ normal heart. HFpEF patients have full-blown HF symptoms with EF ≥50%. Diuretics relieve symptoms in <em>both</em> types but provide no mortality benefit in either.
+  </div>
+
+  <div class="section-label" style="color:var(--hf);border-color:var(--hf);margin-top:8px">GDMT — 4 Pillars for HFrEF</div>
+  <div class="gdmt-grid">
+    <div class="gdmt-card" style="border-color:rgba(79,156,249,.4)">
+      <h4 style="color:var(--hf)">Beta-Blocker</h4>
+      <p>Carvedilol · Metoprolol succinate · Bisoprolol<br><strong style="color:var(--vasc)">Only when euvolemic</strong> — never in acute decompensation</p>
+    </div>
+    <div class="gdmt-card" style="border-color:rgba(79,156,249,.4)">
+      <h4 style="color:var(--hf)">ARNI / ACEi / ARB</h4>
+      <p>Sacubitril-valsartan preferred · Blocks RAAS remodeling<br>Reduces hospitalizations and mortality</p>
+    </div>
+    <div class="gdmt-card" style="border-color:rgba(79,156,249,.4)">
+      <h4 style="color:var(--hf)">MRA (Spironolactone)</h4>
+      <p>Hold if K+ &gt;5.0 or eGFR &lt;30<br>Switch to eplerenone for gynecomastia</p>
+    </div>
+    <div class="gdmt-card" style="border-color:rgba(79,156,249,.4)">
+      <h4 style="color:var(--hf)">SGLT2 Inhibitor</h4>
+      <p>Dapagliflozin · Empagliflozin<br>Requires eGFR &gt;20–30. Also benefits CKD and T2DM</p>
+    </div>
+  </div>
+
+  <div class="vtable-wrap">
+    <div class="section-label" style="color:var(--hf);border-color:var(--hf)">Left vs Right Heart Failure</div>
+    <table class="vtable">
+      <thead><tr><th>Feature</th><th>Left HF</th><th>Right HF</th></tr></thead>
+      <tbody>
+        <tr><td>Rule</td><td>Left = Lungs</td><td>Right = Rest of body</td></tr>
+        <tr><td>Symptoms</td><td>Dyspnea, orthopnea, PND, crackles, pink frothy sputum</td><td>JVD, hepatomegaly, ascites, peripheral pitting edema</td></tr>
+        <tr><td>Most common cause of RHF</td><td colspan="2">Left-sided HF → pulmonary HTN → RV pressure overload → RHF</td></tr>
+        <tr><td>BNP</td><td colspan="2">Elevated in both — released by ventricular wall stretch</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- PERICARDIAL TAB                                 -->
+<!-- ════════════════════════════════════════════════ -->
+<div id="panel-peri" style="display:none">
+
+  <div class="section-label" style="color:var(--peri);border-color:var(--peri)">Four Pericardial Conditions — Side by Side</div>
+  <div class="peri-cols">
+    <div class="peri-card acute">
+      <h3 style="color:var(--hf)">Acute Pericarditis</h3>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--hf)"></div><div>Sharp pain, worse lying flat, better leaning forward</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--hf)"></div><div>Friction rub (3-component)</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--hf)"></div><div>ECG: diffuse ST elevation + <strong>PR depression</strong> + no reciprocal changes</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--hf)"></div><div>Most common cause: viral (Coxsackie B)</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--vas)"></div><div><strong>Rx: NSAIDs + colchicine</strong></div></div>
+    </div>
+    <div class="peri-card tamponade">
+      <h3 style="color:var(--vasc)">Cardiac Tamponade</h3>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--vasc)"></div><div><strong>Beck's Triad:</strong> Hypotension + JVD + Muffled sounds</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--vasc)"></div><div>Pulsus paradoxus &gt;10 mmHg</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--vasc)"></div><div>Electrical alternans on ECG</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--vasc)"></div><div>"Water-bottle" CXR silhouette</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--vas)"></div><div><strong>Rx: Urgent pericardiocentesis</strong></div></div>
+    </div>
+    <div class="peri-card constrictive">
+      <h3 style="color:var(--peri)">Constrictive Pericarditis</h3>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--peri)"></div><div><strong>Kussmaul sign:</strong> JVP rises with inspiration</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--peri)"></div><div>Pericardial calcification on CT/MRI</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--peri)"></div><div>"Square root sign" on cardiac cath</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--peri)"></div><div>TB, radiation, prior surgery are causes</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--vas)"></div><div><strong>Rx: Pericardiectomy (surgically curable)</strong></div></div>
+    </div>
+    <div class="peri-card dressler">
+      <h3 style="color:var(--amber)">Dressler Syndrome</h3>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--amber)"></div><div>Onset 2–10 weeks post-MI</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--amber)"></div><div>Fever + pleuritic chest pain + friction rub</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--amber)"></div><div><strong>Negative troponin</strong> (not reinfarction)</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--amber)"></div><div>Anti-heart antibodies (autoimmune)</div></div>
+      <div class="peri-item"><div class="peri-dot" style="background:var(--vas)"></div><div><strong>Rx: NSAIDs</strong></div></div>
+    </div>
+  </div>
+
+  <div class="section-label" style="color:var(--peri);border-color:var(--peri)">Constrictive Pericarditis vs Restrictive Cardiomyopathy</div>
+  <table class="vtable">
+    <thead><tr><th>Feature</th><th style="color:var(--peri)">Constrictive Pericarditis</th><th style="color:var(--hf)">Restrictive Cardiomyopathy</th></tr></thead>
+    <tbody>
+      <tr><td>Pericardium on CT/MRI</td><td><span class="badge" style="background:rgba(249,96,96,.15);color:var(--vasc)">Thickened / calcified</span></td><td><span class="badge" style="background:rgba(61,214,140,.15);color:var(--vas)">Normal</span></td></tr>
+      <tr><td>Kussmaul sign</td><td>Present (JVP ↑ with inspiration)</td><td>Variable / less reliable</td></tr>
+      <tr><td>Cath finding</td><td>"Square root sign" — all chambers equalize</td><td>Similar dip and plateau pattern</td></tr>
+      <tr><td>Treatment</td><td><strong>Pericardiectomy (surgically curable)</strong></td><td>Treat underlying cause — not surgically curable</td></tr>
+      <tr><td>Classic cause</td><td>TB, radiation, post-cardiac surgery</td><td>Amyloid, sarcoid, hemochromatosis</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="background:rgba(167,139,250,.08);border-left:3px solid var(--peri)">
+    ⚠️ <strong style="color:var(--peri)">KEY RULE:</strong> Pericardial thickening on CT → constrictive (surgically curable). Normal pericardium on CT → restrictive CMP (myocardial disease). This one imaging finding determines the diagnosis and management.
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- VASCULAR TAB                                    -->
+<!-- ════════════════════════════════════════════════ -->
+<div id="panel-vasc" style="display:none">
+
+  <div class="section-label" style="color:var(--vasc);border-color:var(--vasc)">Aortic Dissection — Type A vs Type B</div>
+  <div class="dissect-grid">
+    <div class="dissect-card" style="border-color:rgba(249,96,96,.4)">
+      <h3 style="color:var(--vasc)">Type A — Ascending Aorta</h3>
+      <div class="dissect-badge" style="background:rgba(249,96,96,.15);color:var(--vasc)">SURGICAL EMERGENCY</div>
+      <table class="vtable" style="margin:0">
+        <tr><td style="color:var(--muted);width:110px">Location</td><td>Ascending aorta (proximal to L subclavian)</td></tr>
+        <tr><td style="color:var(--muted)">Risks</td><td>Rupture into pericardium → tamponade; AR from root distortion; MI from coronary ostia involvement</td></tr>
+        <tr><td style="color:var(--muted)">Management</td><td><strong>Emergent surgical repair</strong></td></tr>
+        <tr><td style="color:var(--muted)">Causes</td><td>Chronic HTN (most common); Marfan/EDS (young patient); bicuspid AV</td></tr>
+      </table>
+    </div>
+    <div class="dissect-card" style="border-color:rgba(79,156,249,.4)">
+      <h3 style="color:var(--hf)">Type B — Descending Aorta</h3>
+      <div class="dissect-badge" style="background:rgba(79,156,249,.15);color:var(--hf)">MEDICAL MANAGEMENT</div>
+      <table class="vtable" style="margin:0">
+        <tr><td style="color:var(--muted);width:110px">Location</td><td>Descending aorta (distal to L subclavian)</td></tr>
+        <tr><td style="color:var(--muted)">Risks</td><td>Mesenteric or renal ischemia if propagates; limb ischemia</td></tr>
+        <tr><td style="color:var(--muted)">Management</td><td><strong>Labetalol</strong> — ↓ BP + ↓ HR to reduce aortic wall stress</td></tr>
+        <tr><td style="color:var(--muted)">Causes</td><td>Chronic HTN; atherosclerosis</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout" style="background:rgba(249,96,96,.07);border-left:3px solid var(--vasc)">
+    ⚠️ <strong style="color:var(--vasc)">Presentation rule:</strong> Tearing/ripping chest pain radiating to the back + arm BP differential (&gt;20 mmHg) = dissection until proven otherwise. Order CT angiography — not echo (can miss), not troponin-first workup.
+  </div>
+
+  <div class="section-label" style="color:var(--vasc);border-color:var(--vasc)">Aneurysm Comparison — Location is the Key</div>
+  <div class="aneurysm-row">
+    <div class="aneurysm-card" style="border-color:rgba(249,96,96,.4)">
+      <h4 style="color:var(--vasc)">AAA</h4>
+      <p><strong>Location:</strong> Infrarenal abdominal aorta<br><strong>Cause:</strong> Atherosclerosis<br><strong>Patient:</strong> Elderly male smoker<br><strong>Clue:</strong> Pulsatile abdominal mass<br><strong>Threshold:</strong> Repair at &gt;5 cm</p>
+    </div>
+    <div class="aneurysm-card" style="border-color:rgba(167,139,250,.4)">
+      <h4 style="color:var(--peri)">Syphilitic Aortitis</h4>
+      <p><strong>Location:</strong> Ascending aorta (always)<br><strong>Cause:</strong> Tertiary syphilis → vasa vasorum endarteritis<br><strong>Clue:</strong> "Tree-bark" intima; AR from root dilation<br><strong>Pathology:</strong> Elastic fiber destruction</p>
+    </div>
+    <div class="aneurysm-card" style="border-color:rgba(61,214,140,.4)">
+      <h4 style="color:var(--vas)">Berry Aneurysm</h4>
+      <p><strong>Location:</strong> Circle of Willis bifurcations<br><strong>Cause:</strong> Congenital media defect<br><strong>Associations:</strong> ADPKD, coarctation<br><strong>Presentation:</strong> SAH — "worst headache of life" + meningismus</p>
+    </div>
+    <div class="aneurysm-card" style="border-color:rgba(249,168,79,.4)">
+      <h4 style="color:var(--amber)">Charcot-Bouchard</h4>
+      <p><strong>Location:</strong> Deep brain arterioles (basal ganglia, thalamus)<br><strong>Cause:</strong> Chronic HTN → lipohyalinosis<br><strong>Trigger:</strong> Cocaine (acute BP spike)<br><strong>Presentation:</strong> Deep intracerebral hemorrhage</p>
+    </div>
+  </div>
+
+  <table class="vtable">
+    <thead><tr><th>Aneurysm Type</th><th>Location</th><th>Cause</th><th>Classic Clue</th></tr></thead>
+    <tbody>
+      <tr><td>AAA</td><td>Infrarenal aorta</td><td>Atherosclerosis</td><td>Elderly male smoker; repair &gt;5cm</td></tr>
+      <tr><td>Syphilitic</td><td>Ascending aorta</td><td>T. pallidum → vasa vasorum</td><td>Tree-bark intima; AR; tertiary syphilis</td></tr>
+      <tr><td>Berry (saccular)</td><td>Circle of Willis bifurcations</td><td>Congenital media defect</td><td>SAH; ADPKD association</td></tr>
+      <tr><td>Charcot-Bouchard</td><td>Deep brain arterioles</td><td>HTN → lipohyalinosis</td><td>Basal ganglia hemorrhage; cocaine</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- VASCULITIS TAB                                  -->
+<!-- ════════════════════════════════════════════════ -->
+<div id="panel-vas" style="display:none">
+
+  <div class="callout" style="background:rgba(61,214,140,.07);border-left:3px solid var(--vas)">
+    <strong style="color:var(--vas)">Framework:</strong> Vasculitis is organized by vessel size. Large → Takayasu / GCA. Medium → PAN / Kawasaki / Buerger. Small ANCA-assoc. → GPA / MPA / EGPA. Small immune complex → HSP / Cryoglobulinemia.
+  </div>
+
+  <div class="vessel-tier">
+    <div class="vessel-header">
+      <span class="vessel-label" style="background:rgba(249,96,96,.15);color:var(--vasc)">Large Vessel</span>
+      <div class="vessel-line"></div>
+    </div>
+    <div class="vas-cards two">
+      <div class="vas-card" style="border-color:rgba(249,96,96,.3)">
+        <div class="vas-anca" style="background:rgba(107,117,136,.15);color:var(--muted)">ANCA neg</div>
+        <h4 style="color:var(--vasc)">Giant Cell (Temporal) Arteritis</h4>
+        <div class="scenario">Elderly woman &gt;50 · jaw claudication · temporal tenderness · vision loss risk · PMR association</div>
+        <div class="clue">↑ ESR · Temporal artery biopsy (skip lesions) · <strong style="color:var(--vasc)">Start steroids BEFORE biopsy</strong></div>
+      </div>
+      <div class="vas-card" style="border-color:rgba(249,96,96,.3)">
+        <div class="vas-anca" style="background:rgba(107,117,136,.15);color:var(--muted)">ANCA neg</div>
+        <h4 style="color:var(--vasc)">Takayasu Arteritis</h4>
+        <div class="scenario">Young Asian woman &lt;40 · pulseless upper extremities · arm-leg BP differential · constitutional symptoms</div>
+        <div class="clue">"Pulseless disease" · Granulomatous aortic inflammation · Aortography shows narrowing</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vessel-tier">
+    <div class="vessel-header">
+      <span class="vessel-label" style="background:rgba(249,168,79,.15);color:var(--amber)">Medium Vessel</span>
+      <div class="vessel-line"></div>
+    </div>
+    <div class="vas-cards three">
+      <div class="vas-card" style="border-color:rgba(249,168,79,.3)">
+        <div class="vas-anca" style="background:rgba(249,96,96,.15);color:var(--vasc)">ANCA neg ★</div>
+        <h4 style="color:var(--amber)">Polyarteritis Nodosa</h4>
+        <div class="scenario">Middle-aged man · HTN · renal failure · GI pain · Hep B association</div>
+        <div class="clue">"String of beads" angiography · <strong>Spares pulmonary arteries and glomeruli</strong></div>
+      </div>
+      <div class="vas-card" style="border-color:rgba(249,168,79,.3)">
+        <div class="vas-anca" style="background:rgba(107,117,136,.15);color:var(--muted)">ANCA neg</div>
+        <h4 style="color:var(--amber)">Kawasaki Disease</h4>
+        <div class="scenario">Child &lt;5 · fever &gt;5 days · CRASH criteria</div>
+        <div class="clue">Coronary aneurysm risk · <strong>IVIG + aspirin</strong> · Leading acquired heart disease in children</div>
+      </div>
+      <div class="vas-card" style="border-color:rgba(249,168,79,.3)">
+        <div class="vas-anca" style="background:rgba(107,117,136,.15);color:var(--muted)">ANCA neg</div>
+        <h4 style="color:var(--amber)">Buerger Disease</h4>
+        <div class="scenario">Young male smoker · distal ulcers · Raynaud · superficial thrombophlebitis</div>
+        <div class="clue">Corkscrew collaterals on angiography · <strong style="color:var(--vasc)">STOP SMOKING = only treatment</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vessel-tier">
+    <div class="vessel-header">
+      <span class="vessel-label" style="background:rgba(79,156,249,.15);color:var(--hf)">Small Vessel — ANCA Associated</span>
+      <div class="vessel-line"></div>
+    </div>
+    <div class="vas-cards three">
+      <div class="vas-card" style="border-color:rgba(79,156,249,.3)">
+        <div class="vas-anca" style="background:rgba(79,156,249,.2);color:var(--hf)">c-ANCA (PR3)</div>
+        <h4 style="color:var(--hf)">GPA (Wegener)</h4>
+        <div class="scenario">Upper + lower respiratory + GN · saddle-nose deformity · cavitary nodules · RBC casts</div>
+        <div class="clue">Necrotizing granulomatous · Treat with cyclophosphamide + steroids</div>
+      </div>
+      <div class="vas-card" style="border-color:rgba(79,156,249,.3)">
+        <div class="vas-anca" style="background:rgba(167,139,250,.2);color:var(--peri)">p-ANCA (MPO)</div>
+        <h4 style="color:var(--hf)">MPA (Microscopic Polyangiitis)</h4>
+        <div class="scenario">Pulmonary-renal syndrome · No upper respiratory · No granulomas</div>
+        <div class="clue">Distinguishable from GPA by absence of upper respiratory/granulomas</div>
+      </div>
+      <div class="vas-card" style="border-color:rgba(79,156,249,.3)">
+        <div class="vas-anca" style="background:rgba(167,139,250,.2);color:var(--peri)">p-ANCA (MPO)</div>
+        <h4 style="color:var(--hf)">EGPA (Churg-Strauss)</h4>
+        <div class="scenario">Adult-onset asthma + eosinophilia + vasculitis</div>
+        <div class="clue"><strong>Asthma is the sentinel feature.</strong> ↑ eosinophils. Steroid-dependent asthma = warning sign.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vessel-tier">
+    <div class="vessel-header">
+      <span class="vessel-label" style="background:rgba(61,214,140,.15);color:var(--vas)">Small Vessel — Immune Complex</span>
+      <div class="vessel-line"></div>
+    </div>
+    <div class="vas-cards two">
+      <div class="vas-card" style="border-color:rgba(61,214,140,.3)">
+        <div class="vas-anca" style="background:rgba(107,117,136,.15);color:var(--muted)">ANCA neg</div>
+        <h4 style="color:var(--vas)">HSP / IgA Vasculitis</h4>
+        <div class="scenario">Child · palpable purpura on buttocks/legs · arthritis · GI pain · hematuria · follows URI</div>
+        <div class="clue">IgA mesangial deposits · Normal platelets · Most common vasculitis in children</div>
+      </div>
+      <div class="vas-card" style="border-color:rgba(61,214,140,.3)">
+        <div class="vas-anca" style="background:rgba(107,117,136,.15);color:var(--muted)">ANCA neg</div>
+        <h4 style="color:var(--vas)">Fibromuscular Dysplasia</h4>
+        <div class="scenario">Young woman · secondary HTN · renal bruit · "string of pearls" angiography</div>
+        <div class="clue">Non-inflammatory, non-atherosclerotic medial hyperplasia · RAAS → HTN · Treat with angioplasty</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" style="color:var(--vas);border-color:var(--vas);margin-top:8px">ANCA Quick Reference</div>
+  <table class="vtable">
+    <thead><tr><th>ANCA Type</th><th>Target Antigen</th><th>Disease</th><th>Memory Hook</th></tr></thead>
+    <tbody>
+      <tr><td>c-ANCA</td><td>PR3 (proteinase 3)</td><td>GPA (Wegener)</td><td><strong>c</strong>-ANCA = <strong>C</strong>ytoplasm = <strong>W</strong>egener (also starts with hard sound)</td></tr>
+      <tr><td>p-ANCA</td><td>MPO (myeloperoxidase)</td><td>MPA + EGPA (Churg-Strauss)</td><td>p-ANCA = Perinuclear = <strong>M</strong>PA + <strong>E</strong>GPA</td></tr>
+      <tr><td>ANCA negative</td><td>—</td><td>PAN · Kawasaki · Buerger · HSP · GCA · Takayasu</td><td>If the question mentions Hep B or has no ANCA = think PAN</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div><!-- /content -->
+
+<script>
+const TABS=['hf','peri','vasc','vas'];
+const TAB_CLASS={'hf':'active-hf','peri':'active-peri','vasc':'active-vasc','vas':'active-vas'};
+
+function setTab(t){
+  TABS.forEach(id=>{
+    document.getElementById('tab-'+id).className='tab';
+    document.getElementById('panel-'+id).style.display='none';
+  });
+  document.getElementById('tab-'+t).className='tab '+TAB_CLASS[t];
+  document.getElementById('panel-'+t).style.display='block';
+}
+</script>
+</body>
+</html>

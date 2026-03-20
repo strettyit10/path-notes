@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardio Path — Static Reference Chart</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@page { size: letter landscape; margin: 0.4in; }
+@media print {
+  .no-print { display: none !important; }
+  .card-wrapper { break-inside: avoid; }
+  .section-banner { break-after: avoid; }
+  body { background: white !important; padding: 0 !important; }
+}
+
+:root {
+  --bg: #f4f1ec;
+  --surface: #ffffff;
+  --border: #d8d0c6;
+  --text: #1a1714;
+  --muted: #7a7068;
+  --chd: #1b4a8a; --chd-light: #e8f0fb;
+  --isch: #8b1a1a; --isch-light: #fdecea;
+  --cm: #1a5c2d; --cm-light: #e8f5ee;
+  --hf: #4a1a8b; --hf-light: #f0ebfc;
+  --valve: #7a4800; --valve-light: #fdf3e3;
+  --peri: #1a4a5c; --peri-light: #e3f2f7;
+  --vasc: #7a2e00; --vasc-light: #fdf0e8;
+  --endo: #6b1a4a; --endo-light: #fcedf5;
+  --hy-bg: #fffde7; --hy-border: #f0c030; --hy-text: #6b4c00;
+  --trap-bg: #fff5f5; --trap-border: #e87070; --trap-text: #8b1a1a;
+  --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 14px rgba(0,0,0,0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 12px; line-height: 1.5; padding: 20px 24px 60px; }
+
+/* ── CONTROLS (screen only) ── */
+.no-print { background: var(--text); color: white; padding: 12px 24px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+.no-print h1 { font-family: 'Libre Baskerville', serif; font-size: 16px; font-weight: 700; }
+.no-print p { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+.print-btn { padding: 8px 20px; background: white; color: var(--text); border: none; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; }
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+.filter-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 11.5px; font-weight: 500; cursor: pointer; transition: all 0.12s; }
+.filter-btn.active, .filter-btn:hover { background: var(--text); color: white; border-color: var(--text); }
+.filter-label { font-size: 11px; color: var(--muted); margin-right: 4px; }
+
+/* ── PAGE HEADER ── */
+.page-header { border-bottom: 3px double var(--text); padding-bottom: 12px; margin-bottom: 20px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.page-title { font-family: 'Libre Baskerville', serif; font-size: 24px; font-weight: 700; letter-spacing: -0.3px; }
+.page-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 10.5px; align-items: center; }
+.leg-item { display: flex; align-items: center; gap: 5px; }
+.leg-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+/* ── SECTION BANNERS ── */
+.section-banner { padding: 8px 14px; margin: 22px 0 8px; border-radius: 6px; display: flex; align-items: center; gap: 10px; }
+.section-banner h2 { font-family: 'Libre Baskerville', serif; font-size: 14px; font-weight: 700; letter-spacing: 0.01em; color: white; }
+.section-banner .count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.7); margin-left: auto; }
+
+/* ── DISEASE CARDS ── */
+.card-wrapper { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; box-shadow: var(--shadow); overflow: hidden; }
+.drug-header { padding: 8px 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.drug-name { font-family: 'Libre Baskerville', serif; font-size: 15px; font-weight: 700; color: white; letter-spacing: -0.1px; }
+.drug-full { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 1px; font-style: italic; }
+.drug-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 3px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* ── CARD BODY GRID ── */
+.card-body { display: grid; grid-template-columns: 1.1fr 1fr 1fr 1.3fr; }
+@media (max-width: 900px) { .card-body { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .card-body { grid-template-columns: 1fr; } }
+
+.cell { padding: 10px 12px; border-right: 1px solid var(--border); border-top: 1px solid var(--border); vertical-align: top; }
+.cell:last-child { border-right: none; }
+.cell-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.cell-content { font-size: 11.5px; line-height: 1.55; color: var(--text); }
+
+/* Cell types */
+.cell.moa { background: #fdfaf8; }
+.cell.moa .cell-label { color: #7a3a00; }
+.cell.presentation .cell-label { color: #1a4a5c; }
+.cell.treatment { background: #fafdf8; }
+.cell.treatment .cell-label { color: #1a5c2d; }
+
+/* HY cell */
+.cell.hy { background: var(--hy-bg); border-left: 3px solid var(--hy-border); border-right: none; }
+.cell.hy .cell-label { color: var(--hy-text); font-size: 9.5px; }
+.hy-fact { display: flex; align-items: flex-start; gap: 5px; margin-bottom: 5px; font-size: 11.5px; color: var(--hy-text); }
+.hy-fact::before { content: '★'; color: var(--hy-border); flex-shrink: 0; font-size: 10px; margin-top: 1px; }
+.trap-box { margin-top: 6px; padding: 5px 8px; background: var(--trap-bg); border-left: 2px solid var(--trap-border); border-radius: 3px; font-size: 11px; color: var(--trap-text); }
+.trap-box::before { content: '⚠ TRAP: '; font-weight: 700; }
+
+/* Buzz pills */
+.buzz-row { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+.buzz { display: inline-block; background: #f0ece6; border: 1px solid #d8d0c6; color: #5a4a3a; padding: 1px 7px; border-radius: 3px; font-size: 10px; font-weight: 500; }
+
+/* ── COMPARISON TABLES ── */
+.comp-section { margin: 24px 0 10px; }
+.comp-section h3 { font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; padding-bottom: 4px; border-bottom: 2px solid var(--text); display: inline-block; }
+.comp-table { width: 100%; border-collapse: collapse; font-size: 11.5px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 12px; }
+.comp-table th { padding: 7px 11px; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: white; background: var(--text); }
+.comp-table td { padding: 7px 11px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table tr:nth-child(even) td { background: #faf8f5; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.warn { color: var(--isch); font-weight: 600; }
+.good { color: var(--cm); font-weight: 600; }
+.hy-mark { color: var(--hy-text); font-weight: 600; }
+
+/* ── IF-YOU-SEE TABLE ── */
+.ifysee { width: 100%; border-collapse: collapse; font-size: 11.5px; background: var(--hy-bg); border: 1px solid var(--hy-border); border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.ifysee th { background: var(--hy-text); color: white; padding: 7px 12px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.07em; text-transform: uppercase; }
+.ifysee td { padding: 6px 12px; border-bottom: 1px solid rgba(240,192,48,0.3); color: var(--hy-text); font-size: 11.5px; }
+.ifysee tr:last-child td { border-bottom: none; }
+.ifysee td:first-child { font-weight: 600; }
+.ifysee td:nth-child(2) { color: var(--isch); font-weight: 600; }
+
+/* ── HIDDEN ── */
+.card-section[data-cat].hidden { display: none; }
+
+/* ── PRINT BUTTON ── */
+.fixed-print { position: fixed; bottom: 20px; right: 20px; background: var(--text); color: white; border: none; border-radius: 24px; padding: 10px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+</style>
+</head>
+<body>
+
+<!-- Controls (screen only) -->
+<div class="no-print">
+  <div>
+    <h1>Cardio Pathology — Static Reference Chart</h1>
+    <p>Georgetown SOM · Cardio Exam 2 · All diseases, one page</p>
+  </div>
+  <button class="print-btn" onclick="window.print()">🖨 Print / Save PDF</button>
+</div>
+
+<div class="filter-bar no-print">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" onclick="filterCards('all',this)">All</button>
+  <button class="filter-btn" onclick="filterCards('chd',this)">Congenital HD</button>
+  <button class="filter-btn" onclick="filterCards('isch',this)">Ischemia / MI</button>
+  <button class="filter-btn" onclick="filterCards('cm',this)">Cardiomyopathy</button>
+  <button class="filter-btn" onclick="filterCards('hf',this)">Heart Failure</button>
+  <button class="filter-btn" onclick="filterCards('valve',this)">Valvular</button>
+  <button class="filter-btn" onclick="filterCards('peri',this)">Pericardial</button>
+  <button class="filter-btn" onclick="filterCards('vasc',this)">Vascular / Vasculitis</button>
+  <button class="filter-btn" onclick="filterCards('endo',this)">Endocarditis</button>
+</div>
+
+<div class="page-header">
+  <div>
+    <div class="page-title">Cardio Pathology — High-Yield Reference Chart</div>
+    <div class="page-meta">Georgetown SOM · Cardio Exam 2 · ★ = HY Testable Fact · ⚠ = Exam Trap</div>
+  </div>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--hy-bg);border:1px solid var(--hy-border)"></div> ★ HY Facts</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--trap-bg);border:1px solid var(--trap-border)"></div> ⚠ Trap</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#fdfaf8;border:1px solid #d8d0c6"></div> MOA</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#fafdf8;border:1px solid #d8d0c6"></div> Treatment</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CONGENITAL HD ═══════════════════════ -->
+<div class="card-section" data-cat="chd">
+<div class="section-banner" style="background:var(--chd)"><h2>💙 Congenital Heart Disease</h2><span class="count">6 diseases</span></div>
+
+<!-- VSD -->
+<div class="card-wrapper">
+  <div class="drug-header" style="background:var(--chd)">
+    <div><div class="drug-name">VSD — Ventricular Septal Defect</div><div class="drug-full">Most common congenital heart defect · L→R shunt → Eisenmenger if untreated</div></div>
+    <span class="drug-tag">Congenital</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ MOA / Pathophys</div><div class="cell-content">LV→RV shunt (L pressure > R) → ↑ pulmonary flow → RV volume overload. Small defect = higher velocity jet = LOUDER murmur. Eisenmenger: chronic ↑ pulmonary pressure → pulmonary HTN → R pressure exceeds L → R→L reversal → cyanosis.</div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Presentation / Buzzwords</div><div class="cell-content"><strong>Holosystolic murmur at LLSB</strong> · Failure to thrive · Tachypnea · Infant CHF<br><div class="buzz-row"><span class="buzz">LLSB holosystolic</span><span class="buzz">Most common CHD</span><span class="buzz">Eisenmenger late</span><span class="buzz">Spontaneous closure</span></div></div></div>
+    <div class="cell treatment"><div class="cell-label">💊 Treatment / ECG</div><div class="cell-content">Small: observe (often closes). Large/symptomatic: surgical/catheter repair. Eisenmenger: surgery CONTRAINDICATED. ECG: LA+LV enlargement; RVH if pulmonary HTN.</div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">Most common congenital heart defect</div>
+      <div class="hy-fact">Small VSD = louder murmur (high-velocity jet)</div>
+      <div class="hy-fact">Eisenmenger: L→R reverses → late cyanosis → surgery CONTRAINDICATED</div>
+      <div class="hy-fact">LLSB location distinguishes from MR (apex → axilla)</div>
+      <div class="trap-box">Holosystolic ≠ always MR. VSD = LLSB; MR = apex → axilla. Surgery after Eisenmenger is too late.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ASD -->
+<div class="card-wrapper">
+  <div class="drug-header" style="background:var(--chd)">
+    <div><div class="drug-name">ASD — Atrial Septal Defect</div><div class="drug-full">Ostium secundum most common · Fixed split S2 is pathognomonic</div></div>
+    <span class="drug-tag">Congenital</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ MOA / Pathophys</div><div class="cell-content">L→R atrial shunt → RA/RV volume overload → right-sided dilation. ASD equalizes atrial pressures → removes normal respiratory variation in S2 splitting → <strong>fixed split S2</strong>. Murmur = increased pulmonic flow murmur (not through defect).</div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Presentation / Buzzwords</div><div class="cell-content"><strong>Wide FIXED split S2</strong> · Exercise intolerance · Often asymptomatic in childhood · RA/RV enlargement<br><div class="buzz-row"><span class="buzz">Fixed split S2</span><span class="buzz">Down syndrome</span><span class="buzz">Silent shunt</span><span class="buzz">Ostium secundum MC</span></div></div></div>
+    <div class="cell treatment"><div class="cell-label">💊 Treatment / ECG</div><div class="cell-content">Observation if small. Closure (transcatheter/surgical) if significant. ECG: RAD, incomplete RBBB (rsR' in V1), RV enlargement.</div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">Fixed split S2 = ASD — no other condition causes this</div>
+      <div class="hy-fact">Murmur is a pulmonic FLOW murmur, not through the defect</div>
+      <div class="hy-fact">Down syndrome → endocardial cushion defect (AV canal) → ASD + VSD</div>
+      <div class="hy-fact">Paradoxical emboli: venous clot → crosses ASD → systemic embolism</div>
+      <div class="trap-box">Fixed split ≠ wide split. Fixed = same in inspiration/expiration = ASD. Wide split (no fixation) = RBBB.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PDA -->
+<div class="card-wrapper">
+  <div class="drug-header" style="background:var(--chd)">
+    <div><div class="drug-name">PDA — Patent Ductus Arteriosus</div><div class="drug-full">Continuous machine-like murmur · Indomethacin closes · PGE opens</div></div>
+    <span class="drug-tag">Congenital</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ MOA / Pathophys</div><div class="cell-content">Aorta → pulmonary artery shunt throughout cardiac cycle (systole + diastole) → <strong>continuous murmur</strong>. Aortic diastolic runoff → wide pulse pressure + bounding pulses. Indomethacin: ↓ prostaglandins → ductal smooth muscle constriction → closure.</div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Presentation / Buzzwords</div><div class="cell-content"><strong>Continuous machine-like murmur</strong> · Bounding pulses · Wide pulse pressure · Prematurity / Congenital rubella<br><div class="buzz-row"><span class="buzz">Continuous murmur</span><span class="buzz">Bounding pulses</span><span class="buzz">Prematurity</span><span class="buzz">Rubella</span><span class="buzz">Indomethacin closes</span></div></div></div>
+    <div class="cell treatment"><div class="cell-label">💊 Treatment / ECG</div><div class="cell-content">Indomethacin/ibuprofen (premature infants). Catheter ligation or surgical closure. PGE1 to KEEP OPEN in ductus-dependent lesions (TGA, critical coarctation). ECG: LV enlargement, LA enlargement.</div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">ONLY continuous (systole + diastole) murmur in common cardiology</div>
+      <div class="hy-fact">Indomethacin CLOSES; PGE1 OPENS — two opposite uses, heavily tested</div>
+      <div class="hy-fact">Wide pulse pressure = large SV (forward) + diastolic runoff (backward)</div>
+      <div class="hy-fact">Congenital rubella = classic risk factor association</div>
+      <div class="trap-box">Bounding pulses + wide pulse pressure can also occur in AR — differentiate by murmur timing: continuous = PDA; early diastolic = AR.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOF -->
+<div class="card-wrapper">
+  <div class="drug-header" style="background:#8b3a00">
+    <div><div class="drug-name">TOF — Tetralogy of Fallot</div><div class="drug-full">PROVe mnemonic · Most common cyanotic CHD · Squatting relieves</div></div>
+    <span class="drug-tag">Cyanotic</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ MOA / Pathophys</div><div class="cell-content"><strong>PROVe:</strong> Pulmonary stenosis + RV Hypertrophy + Overriding aorta + VSD. PS obstructs RV outflow → R→L shunt across VSD → deoxygenated blood enters systemic circulation → cyanosis. More PS = more R→L = more cyanosis.</div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Presentation / Buzzwords</div><div class="cell-content">Cyanotic child. <strong>Squatting relieves</strong> (↑ SVR → ↓ R→L shunt). Tet spells (crying → acute cyanosis). Boot-shaped heart CXR. DiGeorge (22q11) association.<br><div class="buzz-row"><span class="buzz">PROVe</span><span class="buzz">Squatting relieves</span><span class="buzz">Boot heart</span><span class="buzz">Tet spells</span><span class="buzz">DiGeorge</span></div></div></div>
+    <div class="cell treatment"><div class="cell-label">💊 Treatment / ECG</div><div class="cell-content">PGE1 acutely (maintains PDA). Knee-chest position for Tet spells. Surgical repair (patch VSD + relieve RVOTO). ECG: RVH, RAD, RBBB.</div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">PROVe = Pulmonary stenosis, RV hypertrophy, Overriding aorta, VSD</div>
+      <div class="hy-fact">Squatting ↑ SVR → ↓ R→L shunt → ↑ pulmonary flow → ↓ cyanosis</div>
+      <div class="hy-fact">Most common CYANOTIC congenital heart defect</div>
+      <div class="hy-fact">PS severity determines degree of cyanosis</div>
+      <div class="trap-box">TOF = progressive cyanosis (squatting, tet spells). TGA = IMMEDIATE cyanosis at birth. DiGeorge = CATCH-22: conotruncal defects + thymic aplasia + hypocalcemia.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TGA + Coarc (combined row for space) -->
+<div class="card-wrapper">
+  <div class="drug-header" style="background:#5a1a00">
+    <div><div class="drug-name">TGA — Transposition · Coarctation of the Aorta</div><div class="drug-full">TGA: immediate cyanosis, maternal DM · Coarc: arm-leg BP differential, Turner syndrome</div></div>
+    <span class="drug-tag">Cyanotic / Non-cyanotic</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ TGA MOA</div><div class="cell-content">Aorta arises from RV; PA from LV → <strong>parallel circulations</strong>. Survival requires mixing (PDA/ASD/VSD). PGE1 maintains PDA. Arterial switch operation is definitive fix. Maternal diabetes = risk factor.</div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 TGA Presentation</div><div class="cell-content"><strong>Immediate cyanosis at birth</strong>. No murmur. O2 doesn't help. Egg-on-a-string CXR (narrow mediastinum).<br><div class="buzz-row"><span class="buzz">Immediate cyanosis</span><span class="buzz">Maternal DM</span><span class="buzz">Egg-on-string CXR</span><span class="buzz">PGE1 bridge</span></div></div></div>
+    <div class="cell moa" style="background:#fdf8f0"><div class="cell-label">⚙ Coarctation MOA / Presentation</div><div class="cell-content"><strong>Aortic narrowing</strong> → upper extremity HTN + weak femoral pulses. Rib notching (intercostal collaterals). <strong>Turner syndrome (45,X)</strong> + bicuspid AV.<br><div class="buzz-row"><span class="buzz">Arm > leg BP</span><span class="buzz">Rib notching</span><span class="buzz">Turner 45,X</span><span class="buzz">Bicuspid AV</span></div></div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">TGA: O2 does NOT help — parallel circulations, not lung disease</div>
+      <div class="hy-fact">TGA: arterial switch must be done within first weeks (LV de-conditions)</div>
+      <div class="hy-fact">Coarc: arm-leg BP differential is pathognomonic — always check BOTH</div>
+      <div class="hy-fact">Coarc + Turner syndrome + bicuspid AV = classic triad</div>
+      <div class="trap-box">TGA = immediate cyanosis (birth). TOF = progressive cyanosis. TGA no murmur. Coarctation: associated with berry aneurysms of Circle of Willis.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════ ISCHEMIA / MI ═══════════════════════ -->
+<div class="card-section" data-cat="isch">
+<div class="section-banner" style="background:var(--isch)"><h2>❤️ Ischemia / MI</h2><span class="count">3 diseases + timeline</span></div>
+
+<div class="card-wrapper">
+  <div class="drug-header" style="background:var(--isch)">
+    <div><div class="drug-name">Angina Spectrum — Stable · Unstable · NSTEMI · STEMI · Prinzmetal</div><div class="drug-full">Key differentiator: troponin + ECG pattern + trigger</div></div>
+    <span class="drug-tag">Ischemia</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ MOA / Pathophys</div><div class="cell-content"><strong>Stable:</strong> Fixed plaque >70% → demand ischemia with exertion only. No rupture, no troponin.<br><strong>ACS (UA/NSTEMI/STEMI):</strong> Plaque RUPTURE → thrombosis. UA/NSTEMI = partial occlusion. STEMI = complete occlusion → transmural.<br><strong>Prinzmetal:</strong> Coronary vasospasm → transient complete occlusion → transient ST elevation. Normal coronaries on cath.</div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Presentation Comparison</div><div class="cell-content">
+      <strong>Stable:</strong> Exertional only, relieved by rest/NTG. Normal troponin. ST depression during pain.<br>
+      <strong>UA:</strong> Rest pain or crescendo. Normal troponin. Variable ECG.<br>
+      <strong>NSTEMI:</strong> Rest pain. ↑ Troponin. ST depression / T-wave changes.<br>
+      <strong>STEMI:</strong> Rest pain. ↑ Troponin. ST elevation + reciprocal changes.<br>
+      <strong>Prinzmetal:</strong> Rest pain (nocturnal). Usually normal troponin. Transient ST elevation → resolves.</div></div>
+    <div class="cell treatment"><div class="cell-label">💊 Treatment</div><div class="cell-content"><strong>Stable:</strong> SL NTG, BB (chronic), aspirin, statin.<br><strong>ACS:</strong> Aspirin + P2Y12 + anticoagulant + statin + BB + ACEi. STEMI: urgent PCI (<90min) or thrombolytics if PCI unavailable >120min.<br><strong>Prinzmetal:</strong> CCB + long-acting nitrates. <span class="warn">AVOID beta-blockers</span> (worsen vasospasm).<br>ECG: STEMI = ST elevation + RECIPROCAL changes. Pericarditis = diffuse ST + NO reciprocal + PR depression.</div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">Troponin = infarction. No troponin = ischemia only (stable/UA)</div>
+      <div class="hy-fact">Prinzmetal: normal coronaries on cath + transient ST elevation. CCB treatment. AVOID BB</div>
+      <div class="hy-fact">STEMI ECG: ST elevation + RECIPROCAL changes in opposite leads (vs pericarditis = no reciprocal)</div>
+      <div class="hy-fact">LAD = anterior (V1–V4). RCA = inferior (II,III,aVF). LCx = lateral (I, aVL)</div>
+      <div class="trap-box">Stable angina does NOT cause troponin elevation — if troponin rises, it's NSTEMI. Prinzmetal: ST elevation resolves spontaneously → not STEMI. BB avoided in Prinzmetal (vasospasm worsening).</div>
+    </div>
+  </div>
+</div>
+
+<!-- MI Timeline + Complications -->
+<div class="card-wrapper">
+  <div class="drug-header" style="background:#6b0000">
+    <div><div class="drug-name">MI Histology Timeline · Post-MI Complications · Biomarkers</div><div class="drug-full">3–7 days = MAX rupture risk (macrophages) · EARLY = electrical · LATE = structural</div></div>
+    <span class="drug-tag">MI / Path</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">🔬 Histology Timeline</div><div class="cell-content">
+      <strong>0–4h:</strong> Wavy fibers (EM only). No gross change. Coagulative necrosis starts.<br>
+      <strong>4–24h:</strong> Coagulative necrosis. Neutrophils start. Dark mottling. V-fib risk. EARLY = ELECTRICAL.<br>
+      <strong>1–3d (N=Neutrophils):</strong> Neutrophils dominate. Loss of nuclei/striations. Yellow-tan center forms.<br>
+      <strong>★ 3–7d (M=Macrophages):</strong> MAX RUPTURE RISK. Macrophages digest dead tissue before scar. Soft yellow-tan + red border.<br>
+      <strong>7–14d:</strong> Granulation tissue. Fibroblasts + neovascularization.<br>
+      <strong>2+wks:</strong> Dense collagenous scar. Gray-white firm. Aneurysm risk.
+    </div></div>
+    <div class="cell presentation"><div class="cell-label">⚡ Post-MI Complications</div><div class="cell-content">
+      <strong>< 24h:</strong> Arrhythmia (V-fib) — most common early cause of death<br>
+      <strong>1–3d:</strong> Fibrinous pericarditis (transmural only) — pleuritic pain + rub<br>
+      <strong>★ 3–7d:</strong> Free wall rupture → hemopericardium → tamponade<br>
+      <strong>★ 3–7d:</strong> Papillary muscle rupture → acute MR → apex→axilla murmur<br>
+      <strong>★ 3–7d:</strong> Septal rupture → acute VSD → LLSB murmur<br>
+      <strong>Days–wks:</strong> Mural thrombus → embolic stroke<br>
+      <strong>2–10wks:</strong> Dressler syndrome — autoimmune, negative troponin<br>
+      <strong>Weeks–months:</strong> Ventricular aneurysm — persistent ST elevation
+    </div></div>
+    <div class="cell treatment"><div class="cell-label">📊 Biomarkers + Arteries</div><div class="cell-content">
+      <strong>Troponin I/T:</strong> Rise 3–4h · Peak 24–48h · Duration 7–10d · Best: ACUTE MI (most specific)<br>
+      <strong>CK-MB:</strong> Rise 4–6h · Peak ~24h · Duration ~2d · Best: RE-INFARCTION (returns to baseline)<br>
+      <strong>Myoglobin:</strong> Rise 1–2h (earliest) · Not cardiac-specific<br><br>
+      <strong>LAD:</strong> V1–V4 (anterior) — widow-maker, LBBB risk<br>
+      <strong>RCA:</strong> II, III, aVF (inferior) — AV node, RV infarct<br>
+      <strong>LCx:</strong> I, aVL (lateral) — can be electrically silent
+    </div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">N=Neutrophils (1–3d), M=Macrophages (3–7d) = MAX rupture window mnemonic</div>
+      <div class="hy-fact">EARLY (<24h) = ELECTRICAL (V-fib). LATE (3–7d) = STRUCTURAL (ruptures)</div>
+      <div class="hy-fact">All 3 ruptures (free wall, papillary, septal) occur at 3–7d window</div>
+      <div class="hy-fact">CK-MB is BEST for reinfarction — returns to baseline in 2 days</div>
+      <div class="hy-fact">Ventricular aneurysm (late) = persistent ST elevation ≠ new infarct</div>
+      <div class="trap-box">Papillary rupture (apex→axilla MR) vs Septal rupture (LLSB VSD) — both holosystolic post-MI. Location = key differentiator. Dressler (2–10wks): negative troponin = autoimmune, not reinfarction.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════ CARDIOMYOPATHIES ═══════════════════════ -->
+<div class="card-section" data-cat="cm">
+<div class="section-banner" style="background:var(--cm)"><h2>💚 Cardiomyopathies</h2><span class="count">3 types + special CMs</span></div>
+
+<div class="card-wrapper">
+  <div class="drug-header" style="background:var(--cm)">
+    <div><div class="drug-name">DCM · HCM · RCM — Core Comparison</div><div class="drug-full">EF is the first differentiator: Low (DCM) · Normal/High (HCM) · Normal (RCM)</div></div>
+    <span class="drug-tag">Cardiomyopathy</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ MOA + Pathophys</div><div class="cell-content">
+      <strong>DCM:</strong> Myocyte damage → 4-chamber dilation → ↓ EF → systolic HF. Causes: Alcohol, Coxsackie B, Doxorubicin, Peripartum, Chagas, TTN gene mutation. "Flabby heart" >500g.<br>
+      <strong>HCM:</strong> Sarcomere mutation (MYH7/MYBPC3, autosomal dominant) → asymmetric septal hypertrophy → LVOTO + diastolic dysfunction. SAM of MV. Myofiber disarray on histo.<br>
+      <strong>RCM:</strong> Infiltration (amyloid/iron/granuloma) → ↑ wall stiffness → impaired diastolic filling. Normal EF preserved.
+    </div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Presentation + Histology</div><div class="cell-content">
+      <strong>DCM:</strong> EF ≤40%. S3 gallop. Dyspnea/edema. Histo: myocyte hypertrophy + interstitial fibrosis + ninja star nuclei (TTN).<br>
+      <strong>HCM:</strong> EF normal/HIGH. S4 gallop. Young athlete SCD. Asymmetric septal hypertrophy. Histo: <strong>myofiber disarray</strong> (pathognomonic).<br>
+      <strong>RCM:</strong> EF ≥50%. Impaired filling. Biatrial dilation. Amyloid: Congo red → apple-green birefringence. "Granular sparkling" echo.
+    </div></div>
+    <div class="cell treatment"><div class="cell-label">💊 Treatment + Dynamic Maneuver</div><div class="cell-content">
+      <strong>DCM:</strong> GDMT (BB + ARNI + MRA + SGLT2i). Diuretics.<br>
+      <strong>HCM:</strong> BB or verapamil. ICD for SCD risk. Septal myectomy/alcohol ablation if refractory. <span class="warn">AVOID nitrates, diuretics, vasodilators</span> (↓ preload → ↑ LVOTO).<br>
+      <strong>RCM:</strong> Treat underlying cause. Diuretics for congestion.<br><br>
+      <strong>Valsalva:</strong> HCM = LOUDER (↓ preload → ↑ LVOTO). All others = softer.
+    </div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">HCM murmur: ONLY murmur that gets LOUDER with Valsalva/standing</div>
+      <div class="hy-fact">Myofiber disarray = HCM pathognomonic histologic finding</div>
+      <div class="hy-fact">Congo red → apple-green birefringence = amyloid (RCM)</div>
+      <div class="hy-fact">RCM vs Constrictive pericarditis: CT pericardium = key — normal (RCM) vs thickened/calcified (constrictive)</div>
+      <div class="hy-fact">DCM: alcohol reversible if stopped early. Doxorubicin: dose-dependent, NOT reversible</div>
+      <div class="trap-box">Low EF rules out HCM — HCM has preserved/supranormal EF. Nitrates CONTRAINDICATED in HCM (↓ preload → ↑ LVOTO). Prussian blue = iron; PAS = glycogen; Congo red = amyloid.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════ HEART FAILURE ═══════════════════════ -->
+<div class="card-section" data-cat="hf">
+<div class="section-banner" style="background:var(--hf)"><h2>💜 Heart Failure</h2><span class="count">HFrEF · HFpEF · GDMT</span></div>
+
+<div class="card-wrapper">
+  <div class="drug-header" style="background:var(--hf)">
+    <div><div class="drug-name">HFrEF (Systolic) · HFpEF (Diastolic) · GDMT</div><div class="drug-full">EF ≤40% (HFrEF) vs EF ≥50% (HFpEF) · Normal EF ≠ normal heart</div></div>
+    <span class="drug-tag">Heart Failure</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ MOA + Pathophys</div><div class="cell-content">
+      <strong>HFrEF:</strong> ↓ contractility → ↓ EF → ↓ SV → RAAS/SNS activation → neurohormonal remodeling → progressive worsening. S3 gallop (blood sloshing into dilated LV).<br>
+      <strong>HFpEF:</strong> Concentric LVH (HTN) → stiff LV → cannot relax in diastole → ↑ filling pressures → pulmonary congestion DESPITE normal EF. S4 gallop (atrial kick hits stiff LV).<br>
+      <strong>Left HF = Lungs. Right HF = Rest of body.</strong>
+    </div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Presentation</div><div class="cell-content">
+      <strong>Left HF:</strong> Dyspnea, orthopnea, PND, crackles, displaced PMI, pink frothy sputum.<br>
+      <strong>Right HF:</strong> JVD, hepatomegaly, ascites, peripheral pitting edema. Most common cause = left-sided HF → pulmonary HTN → RV overload.<br>
+      <strong>BNP:</strong> Elevated in BOTH (ventricular stretch). S3 = HFrEF. S4 = HFpEF.
+    </div></div>
+    <div class="cell treatment"><div class="cell-label">💊 GDMT (HFrEF — all 4 proven)</div><div class="cell-content">
+      <strong>1. Beta-blocker:</strong> Carvedilol / Metoprolol succinate / Bisoprolol. <span class="warn">ONLY when euvolemic. NEVER in acute decompensation.</span><br>
+      <strong>2. ARNI:</strong> Sacubitril-valsartan (preferred) or ACEi/ARB. Cannot combine ARNI + ACEi.<br>
+      <strong>3. MRA:</strong> Spironolactone. <span class="warn">Hold if K+>5.0 or eGFR<30.</span><br>
+      <strong>4. SGLT2i:</strong> Dapagliflozin / Empagliflozin. Needs eGFR>20–30.<br><br>
+      <strong>HFpEF:</strong> BP/HR control. Diuretics for symptoms. SGLT2i emerging benefit. No GDMT with proven survival benefit yet.
+    </div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">All 4 GDMT pillars have PROVEN MORTALITY BENEFIT in HFrEF</div>
+      <div class="hy-fact">Normal EF ≠ normal heart — HFpEF patients have full HF symptoms with EF ≥50%</div>
+      <div class="hy-fact">S3 = dilated volume-overloaded LV (HFrEF). S4 = stiff non-compliant LV (HFpEF)</div>
+      <div class="hy-fact">Diuretics = symptom relief ONLY — no mortality benefit in either type</div>
+      <div class="hy-fact">MRA: hold if K+>5 (hyperkalemia). Switch eplerenone if gynecomastia</div>
+      <div class="trap-box">Never start beta-blockers in ACUTE decompensated HF — euvolemic first. Diuretics relieve symptoms but don't improve survival. ARNI cannot be combined with ACEi (36h washout needed — angioedema risk).</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════ VALVULAR DISEASE ═══════════════════════ -->
+<div class="card-section" data-cat="valve">
+<div class="section-banner" style="background:var(--valve)"><h2>🟡 Valvular Disease</h2><span class="count">AS · AR · MR · MS · MVP</span></div>
+
+<div class="card-wrapper">
+  <div class="drug-header" style="background:var(--valve)">
+    <div><div class="drug-name">Aortic Stenosis · Aortic Regurgitation · Mitral Regurgitation · Mitral Stenosis · MVP</div><div class="drug-full">Murmur location + radiation + LV response + dynamic maneuvers</div></div>
+    <span class="drug-tag">Valvular</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ MOA + Pathophys</div><div class="cell-content">
+      <strong>AS:</strong> Outflow obstruction → pressure overload → <em>concentric LVH</em>. SAD triad (Syncope/Angina/Dyspnea). Elderly: calcific. Young: bicuspid AV.<br>
+      <strong>AR:</strong> Diastolic backflow → volume overload → <em>eccentric LVH</em>. Wide pulse pressure. Marfan/endocarditis. Bounding pulses. de Musset sign.<br>
+      <strong>MR:</strong> Systolic backflow → LA + LV volume overload → <em>eccentric LVH</em>. Papillary rupture post-MI = acute MR.<br>
+      <strong>MS:</strong> LA outflow obstruction → ↑ LA pressure → pulmonary HTN. <em>No LVH</em> (LV protected). Rheumatic fever = classic cause.<br>
+      <strong>MVP:</strong> Myxomatous degeneration → leaflet prolapse into LA during systole.
+    </div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Murmur + Key Features</div><div class="cell-content">
+      <strong>AS:</strong> Crescendo-decrescendo systolic at <strong>RUSB → carotids</strong>. Pulsus parvus et tardus.<br>
+      <strong>AR:</strong> Early diastolic decrescendo at <strong>LSB (lean forward)</strong>. Wide pulse pressure.<br>
+      <strong>MR:</strong> Holosystolic at <strong>apex → axilla</strong>. ↑ with handgrip.<br>
+      <strong>MS:</strong> Diastolic rumble at apex + <strong>opening snap</strong>. OS closer to S2 = MORE severe.<br>
+      <strong>MVP:</strong> <strong>Mid-systolic click</strong> ± late systolic murmur. Valsalva → click EARLIER.
+    </div></div>
+    <div class="cell treatment"><div class="cell-label">💊 Treatment + Dynamic Maneuvers</div><div class="cell-content">
+      <strong>AS:</strong> SAVR/TAVR when severe + symptomatic.<br>
+      <strong>AR:</strong> Vasodilators (nifedipine). Surgery when EF<50% or LVESD>50mm.<br>
+      <strong>MR:</strong> Vasodilators (ACEi). Surgery when symptomatic or LV decompensation.<br>
+      <strong>MS:</strong> HR control (BB/CCB). PBMV if anatomy favorable. Anticoag if Afib.<br>
+      <strong>MVP:</strong> Usually none; BB for sx.<br><br>
+      <strong>Valsalva:</strong> All murmurs softer EXCEPT HCM (louder) and MVP click (earlier).<br>
+      <strong>Handgrip:</strong> MR/AR louder; HCM/AS softer.
+    </div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">AS: SAD triad. RUSB → carotids. Concentric LVH (pressure overload)</div>
+      <div class="hy-fact">AR: wide pulse pressure + bounding pulses. Early diastolic at LSB leaning forward</div>
+      <div class="hy-fact">MR: holosystolic apex → axilla. Papillary rupture at 3–7d post-MI</div>
+      <div class="hy-fact">MS: OS + diastolic rumble. OS closer to S2 = MORE severe. LA enlarges → Afib. No LVH</div>
+      <div class="hy-fact">MVP: mid-systolic click. Valsalva → click moves EARLIER (↓ LV volume → earlier prolapse)</div>
+      <div class="trap-box">AS vs HCM: both systolic ejection murmurs — AS = RUSB/carotids/no Valsalva change. HCM = LUSB/Valsalva LOUDER. MR vs VSD: both holosystolic — MR = apex→axilla; VSD = LLSB. MS: OS CLOSER to S2 = MORE severe (counterintuitive).</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════ PERICARDIAL ═══════════════════════ -->
+<div class="card-section" data-cat="peri">
+<div class="section-banner" style="background:var(--peri)"><h2>🔵 Pericardial Disease</h2><span class="count">Pericarditis · Tamponade · Constrictive · Dressler</span></div>
+
+<div class="card-wrapper">
+  <div class="drug-header" style="background:var(--peri)">
+    <div><div class="drug-name">Acute Pericarditis · Tamponade · Constrictive · Dressler Syndrome</div><div class="drug-full">Constrictive vs RCM = CT pericardium · Tamponade = Beck's triad · PR depression = pericarditis</div></div>
+    <span class="drug-tag">Pericardial</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ MOA + Pathophys</div><div class="cell-content">
+      <strong>Pericarditis:</strong> Pericardial inflammation → friction rub. ECG: diffuse ST elevation + <strong>PR depression</strong> (pathognomonic) + NO reciprocal changes. Viral (Coxsackie B) = #1 cause.<br>
+      <strong>Tamponade:</strong> Fluid accumulates → ↑ intrapericardial pressure → compresses all chambers → ↓ CO → obstructive shock. Electrical alternans (swinging heart).<br>
+      <strong>Constrictive:</strong> Fibrosis/calcification → rigid shell → impairs late diastolic filling. Diastolic equalization all chambers.<br>
+      <strong>Dressler:</strong> Autoimmune pericarditis 2–10 weeks post-MI. Anti-heart antibodies. Negative troponin.
+    </div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Presentation + Buzzwords</div><div class="cell-content">
+      <strong>Pericarditis:</strong> Sharp pleuritic pain. <strong>Worse lying, better leaning forward.</strong> Friction rub.<br>
+      <strong>Tamponade:</strong> <strong>Beck's Triad: Hypotension + JVD + Muffled heart sounds.</strong> Pulsus paradoxus >10mmHg. Water-bottle CXR.<br>
+      <strong>Constrictive:</strong> <strong>Kussmaul sign</strong> (JVP RISES with inspiration). Edema, ascites. Pericardial calcification on CT.<br>
+      <strong>Dressler:</strong> Fever + pleuritic pain + rub at 2–10 WEEKS post-MI. Negative troponin.
+    </div></div>
+    <div class="cell treatment"><div class="cell-label">💊 Treatment</div><div class="cell-content">
+      <strong>Pericarditis:</strong> NSAIDs + colchicine. No steroids for first episode.<br>
+      <strong>Tamponade:</strong> <span class="warn">Urgent pericardiocentesis.</span> IV fluids temporizing. Avoid diuretics/vasodilators (preload-dependent).<br>
+      <strong>Constrictive:</strong> <span class="good">Pericardiectomy (surgically curable).</span><br>
+      <strong>Dressler:</strong> NSAIDs (aspirin preferred post-MI). Colchicine.<br><br>
+      <strong>Constrictive vs RCM:</strong> CT pericardium thickened = constrictive (curable). Normal = RCM (not curable).
+    </div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">PR depression = pathognomonic for pericarditis (not seen in STEMI)</div>
+      <div class="hy-fact">STEMI vs pericarditis: STEMI has RECIPROCAL changes; pericarditis has diffuse ST + PR depression + NO reciprocal</div>
+      <div class="hy-fact">Beck's triad: hypotension + JVD + muffled sounds = tamponade emergency</div>
+      <div class="hy-fact">Kussmaul sign: JVP RISES with inspiration (opposite of normal) = constrictive pericarditis</div>
+      <div class="hy-fact">Dressler: 2–10 weeks post-MI, NEGATIVE troponin = autoimmune (not reinfarction)</div>
+      <div class="trap-box">JVD + hypotension post-MI → tamponade (free wall rupture), NOT HF. Do NOT give diuretics in tamponade. Steroids worsen recurrent pericarditis — avoid first episode. Constrictive is SURGICALLY CURABLE — don't miss it.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════ VASCULAR / VASCULITIS ═══════════════════════ -->
+<div class="card-section" data-cat="vasc">
+<div class="section-banner" style="background:var(--vasc)"><h2>🟠 Vascular Disease & Vasculitis</h2><span class="count">Dissection · Aneurysms · GCA · Kawasaki · PAN · GPA · Vasculitis spectrum</span></div>
+
+<div class="card-wrapper">
+  <div class="drug-header" style="background:var(--vasc)">
+    <div><div class="drug-name">Aortic Dissection · Aneurysms · Vasculitis by Vessel Size</div><div class="drug-full">Type A = surgical · Type B = labetalol · GCA = steroids before biopsy · Kawasaki = IVIG + aspirin</div></div>
+    <span class="drug-tag">Vascular</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ MOA + Vascular Diseases</div><div class="cell-content">
+      <strong>Aortic Dissection:</strong> Intimal tear → false lumen. Type A (ascending) = surgical emergency. Type B (descending) = labetalol (↓ HR + ↓ BP). Marfan/HTN = risk.<br>
+      <strong>AAA:</strong> Atherosclerosis → medial weakness. Infrarenal. Smoking/male/>65. Repair >5cm.<br>
+      <strong>Syphilitic aortitis:</strong> Vasa vasorum endarteritis → ascending aorta aneurysm → AR. Tree-bark appearance. Tertiary syphilis.<br>
+      <strong>Berry aneurysm:</strong> Circle of Willis bifurcations. ADPKD. "Worst headache of life" = subarachnoid.<br>
+      <strong>Charcot-Bouchard:</strong> Chronic HTN → deep brain microaneurysm → hemorrhage (basal ganglia).
+    </div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Vasculitis by Vessel Size</div><div class="cell-content">
+      <strong>LARGE:</strong> GCA (elderly woman >50, jaw claudication, vision loss, ↑ESR, skip lesions). Takayasu (young Asian woman, pulseless arms).<br>
+      <strong>MEDIUM:</strong> Kawasaki (child <5, CRASH, coronary aneurysm, IVIG+aspirin). PAN (HepB, ANCA neg, string of beads, spares lungs). Buerger (young male smoker, distal ulcers, stop smoking only Tx).<br>
+      <strong>SMALL (ANCA):</strong> GPA/Wegener (c-ANCA/PR3, sinuses+lungs+renal, saddle nose). MPA (p-ANCA/MPO, pulmonary-renal, no upper resp/granulomas). EGPA (p-ANCA, asthma+eosinophilia).<br>
+      <strong>SMALL (immune):</strong> HSP/IgA vasculitis (child, palpable purpura buttocks, IgA deposits, URI trigger).
+    </div></div>
+    <div class="cell treatment"><div class="cell-label">💊 Treatment + Key Tests</div><div class="cell-content">
+      <strong>Dissection Type A:</strong> Emergent surgery.<br>
+      <strong>Dissection Type B:</strong> IV labetalol (target BP<120, HR<60).<br>
+      <strong>GCA:</strong> HIGH-DOSE STEROIDS IMMEDIATELY (before biopsy). Temporal artery biopsy confirms.<br>
+      <strong>Kawasaki:</strong> IVIG + high-dose aspirin (anti-inflam) → then low-dose aspirin (antiplatelet).<br>
+      <strong>PAN:</strong> Steroids ± cyclophosphamide + antivirals if HepB+.<br>
+      <strong>GPA:</strong> Cyclophosphamide + steroids. Monitor c-ANCA for relapse.<br>
+      <strong>Buerger:</strong> STOP SMOKING — only treatment.<br>
+      <strong>Fibromuscular dysplasia:</strong> Young woman, renal HTN, string of pearls angiography.
+    </div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">GCA: start steroids BEFORE biopsy — vision loss risk too high to wait</div>
+      <div class="hy-fact">Kawasaki: #1 acquired heart disease in children. CRASH criteria. Coronary aneurysm on echo</div>
+      <div class="hy-fact">PAN: ANCA NEGATIVE + spares lungs/glomeruli + Hep B association</div>
+      <div class="hy-fact">c-ANCA (PR3) = GPA (Wegener). p-ANCA (MPO) = MPA / EGPA. Know cold.</div>
+      <div class="hy-fact">Type A dissection: can rupture into pericardium → tamponade. Labetalol ↓ dP/dt (HR + BP)</div>
+      <div class="trap-box">Do NOT use pure vasodilator alone in dissection (reflex tachycardia worsens). Labetalol first. Thrombolytics in dissection = FATAL (worsens). GCA skip lesions: biopsy must be large (>2cm). Kawasaki: aspirin OK here despite Reye risk — specific exception.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════ ENDOCARDITIS ═══════════════════════ -->
+<div class="card-section" data-cat="endo">
+<div class="section-banner" style="background:var(--endo)"><h2>🩷 Infective Endocarditis</h2><span class="count">Organism map · Skin findings · Sterile vegetations</span></div>
+
+<div class="card-wrapper">
+  <div class="drug-header" style="background:var(--endo)">
+    <div><div class="drug-name">Infective Endocarditis — Organism Map · Skin Findings · Sterile Vegetations</div><div class="drug-full">Janeway = painless · Osler = painful · S. bovis = colorectal cancer · Libman-Sacks = SLE</div></div>
+    <span class="drug-tag">Endocarditis</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa"><div class="cell-label">⚙ Organism by Context</div><div class="cell-content">
+      <strong>S. aureus:</strong> IVDU / normal valves → ACUTE, destructive, large vegetations, rapid<br>
+      <strong>S. viridans:</strong> Dental procedure / damaged valves → SUBACUTE, smaller vegetations<br>
+      <strong>S. bovis (S. gallolyticus):</strong> Any valve → <strong>COLORECTAL CANCER</strong> (always order colonoscopy)<br>
+      <strong>S. epidermidis:</strong> Prosthetic valve (early <60d) → skin contamination at surgery<br>
+      <strong>Enterococcus:</strong> GU or GI procedure → any valve<br>
+      <strong>HACEK:</strong> Fastidious gram-negatives → culture-negative IE
+    </div></div>
+    <div class="cell presentation"><div class="cell-label">🩺 Presentation + Skin Findings</div><div class="cell-content">
+      Fever + new/changed murmur + systemic signs. Duke criteria (major: positive blood cultures + echo evidence; minor: fever, risk factors, vascular phenomena).<br><br>
+      <strong>Janeway:</strong> PAINLESS macules (palms/soles) = septic microemboli<br>
+      <strong>Osler nodes:</strong> PAINFUL nodules (finger pads) = immune complex deposition<br>
+      <strong>Roth spots:</strong> Retinal hemorrhage + pale center = septic emboli to retina<br>
+      <strong>Splinter hemorrhages:</strong> Under nails = septic emboli
+    </div></div>
+    <div class="cell treatment"><div class="cell-label">💊 Treatment + Sterile Vegetations</div><div class="cell-content">
+      IV antibiotics 4–6 weeks. Surgery for: severe valve dysfunction, persistent bacteremia, perivalvular extension, large vegetation/embolic risk.<br><br>
+      <strong>Sterile vegetations (non-infectious):</strong><br>
+      • <strong>Libman-Sacks (SLE):</strong> BOTH sides of mitral valve. Sterile immune complex. LE cells.<br>
+      • <strong>NBTE (Marantic):</strong> Lines of valve closure. Malignancy/DIC/hypercoag.<br>
+      • <strong>Rheumatic HD:</strong> Small vegetations along closure (GAS → anti-M antibody → mitral)
+    </div></div>
+    <div class="cell hy"><div class="cell-label">⭐ High-Yield Facts</div>
+      <div class="hy-fact">Janeway = J = Just painless (palms/soles) = SEPTIC emboli</div>
+      <div class="hy-fact">Osler = O = Ouch = painful (finger pads) = IMMUNE COMPLEX</div>
+      <div class="hy-fact">S. bovis bacteremia = ALWAYS colonoscopy (colorectal cancer)</div>
+      <div class="hy-fact">Libman-Sacks = BOTH sides of mitral valve — unique to SLE (only sterile vegetation on both sides)</div>
+      <div class="hy-fact">Tricuspid valve IE = IV drug user (right-sided, septic pulmonary emboli)</div>
+      <div class="trap-box">Janeway vs Osler: J = painless; O = painful. S. bovis = colon cancer — never miss. Rheumatic fever (GAS) = immune-mediated valve damage (not infection). Libman-Sacks on BOTH sides = unique SLE finding. Prophylaxis only for high-risk patients + high-risk procedures.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════ IF-YOU-SEE → THINK ═══════════════════════ -->
+<div class="comp-section no-print" id="ifyseeSection">
+<h3>🎯 If You See → Think (Master Quick Reference)</h3>
+<table class="ifysee">
+  <thead><tr><th>If you see…</th><th>Think…</th><th>Key differentiator</th></tr></thead>
+  <tbody>
+    <tr><td>Fixed split S2</td><td>ASD</td><td>Pathognomonic — no other condition causes this</td></tr>
+    <tr><td>Continuous machine-like murmur</td><td>PDA</td><td>Only murmur in both systole AND diastole</td></tr>
+    <tr><td>Cyanotic child + squatting relieves</td><td>TOF</td><td>PROVe. Boot-shaped heart. DiGeorge</td></tr>
+    <tr><td>Immediate cyanosis at birth</td><td>TGA</td><td>No murmur. O2 doesn't help. Maternal DM</td></tr>
+    <tr><td>Upper HTN + weak femoral pulses</td><td>Coarctation</td><td>Turner syndrome (45,X). Rib notching</td></tr>
+    <tr><td>Exertional chest pain relieved by rest</td><td>Stable angina</td><td>Normal troponin. Fixed plaque. Predictable</td></tr>
+    <tr><td>Rest pain + transient ST elevation + normal coronaries</td><td>Prinzmetal angina</td><td>CCB treatment. AVOID beta-blockers</td></tr>
+    <tr><td>3–7 days post-MI + holosystolic murmur apex→axilla</td><td>Papillary muscle rupture → acute MR</td><td>3–7d = macrophage window = MAX rupture risk</td></tr>
+    <tr><td>3–7 days post-MI + holosystolic murmur at LLSB</td><td>Septal rupture → VSD</td><td>LLSB location distinguishes from papillary rupture</td></tr>
+    <tr><td>Persistent ST elevation weeks after MI</td><td>Ventricular aneurysm</td><td>NOT reinfarction. Negative troponin. Late scarring</td></tr>
+    <tr><td>Young athlete + SCD + systolic murmur</td><td>HCM</td><td>Valsalva makes it LOUDER. Myofiber disarray. MYH7</td></tr>
+    <tr><td>Congo red → apple-green birefringence</td><td>Amyloid (RCM)</td><td>Granular sparkling echo. Biatrial dilation</td></tr>
+    <tr><td>SAD triad + RUSB crescendo-decrescendo → carotids</td><td>Aortic stenosis</td><td>Concentric LVH. Pulsus parvus et tardus. Calcific</td></tr>
+    <tr><td>Opening snap + diastolic rumble at apex</td><td>Mitral stenosis</td><td>Rheumatic fever. OS closer to S2 = MORE severe. No LVH</td></tr>
+    <tr><td>Mid-systolic click + Valsalva → click earlier</td><td>MVP</td><td>Myxomatous degeneration. Young woman. Usually benign</td></tr>
+    <tr><td>Sharp pain better leaning forward + PR depression on ECG</td><td>Acute pericarditis</td><td>Diffuse ST elevation + NO reciprocal changes (vs STEMI)</td></tr>
+    <tr><td>Beck's triad (hypotension + JVD + muffled sounds)</td><td>Cardiac tamponade</td><td>Pulsus paradoxus >10mmHg. Electrical alternans. Pericardiocentesis</td></tr>
+    <tr><td>Kussmaul sign + pericardial calcification on CT</td><td>Constrictive pericarditis</td><td>SURGICALLY CURABLE. Normal myocardium. TB/radiation</td></tr>
+    <tr><td>Fever + pericarditis 2–10 weeks post-MI + negative troponin</td><td>Dressler syndrome</td><td>Autoimmune. Anti-heart antibodies. NSAIDs</td></tr>
+    <tr><td>Elderly woman >50 + jaw claudication + vision loss risk</td><td>Giant Cell Arteritis</td><td>START STEROIDS BEFORE BIOPSY to prevent blindness</td></tr>
+    <tr><td>Child <5 + fever >5 days + CRASH</td><td>Kawasaki disease</td><td>IVIG + aspirin. Coronary aneurysm on echo</td></tr>
+    <tr><td>HepB + HTN + ANCA negative + spares lungs</td><td>Polyarteritis Nodosa</td><td>Medium vessel. String of beads. No pulmonary involvement</td></tr>
+    <tr><td>c-ANCA (PR3) + sinuses + lungs + kidneys + saddle nose</td><td>GPA (Wegener)</td><td>Pauci-immune GN. Cyclophosphamide + steroids</td></tr>
+    <tr><td>IV drug user + fever + new murmur</td><td>S. aureus endocarditis (acute)</td><td>Tricuspid valve. Septic pulmonary emboli</td></tr>
+    <tr><td>Dental procedure + damaged valve + fever</td><td>S. viridans endocarditis (subacute)</td><td>Slower onset. Smaller vegetations. Osler nodes</td></tr>
+    <tr><td>S. bovis bacteremia</td><td>Colorectal cancer</td><td>ALWAYS order colonoscopy</td></tr>
+    <tr><td>Vegetation on BOTH sides of mitral valve</td><td>Libman-Sacks endocarditis (SLE)</td><td>Sterile. Unique to SLE. Autoimmune</td></tr>
+  </tbody>
+</table>
+</div>
+
+<button class="fixed-print no-print" onclick="window.print()">🖨 Print / PDF</button>
+
+<script>
+function filterCards(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.card-section[data-cat]').forEach(sec => {
+    if (cat === 'all' || sec.dataset.cat === cat) sec.classList.remove('hidden');
+    else sec.classList.add('hidden');
+  });
+  document.getElementById('ifyseeSection').style.display = cat === 'all' ? 'block' : 'none';
+}
+</script>
+</body>
+</html>
