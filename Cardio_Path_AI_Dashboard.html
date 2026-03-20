@@ -7,50 +7,50 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0d0f14;
-  --surface: #161920;
-  --surface2: #1e2230;
-  --border: #2a2f3d;
-  --text: #e8eaf0;
-  --muted: #7a8099;
-  --accent: #4f9cf9;
-  --red: #f96060;
-  --green: #3dd68c;
-  --amber: #f9a84f;
-  --purple: #a78bfa;
-  --pink: #f472b6;
-  /* category colors */
-  --chd: #4f9cf9;
-  --isch: #f96060;
-  --cm: #3dd68c;
-  --hf: #a78bfa;
-  --valve: #f9a84f;
-  --peri: #38bdf8;
-  --vasc: #fb923c;
-  --endo: #f472b6;
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --surface2: #e8eef5;
+  --border: #d0dae6;
+  --text: #1a2332;
+  --muted: #6b7a94;
+  --accent: #2563eb;
+  --red: #dc2626;
+  --green: #16a34a;
+  --amber: #d97706;
+  --purple: #7c3aed;
+  --pink: #db2777;
+  /* category colors — richer, saturated but readable on light */
+  --chd: #1d4ed8;
+  --isch: #b91c1c;
+  --cm: #15803d;
+  --hf: #6d28d9;
+  --valve: #b45309;
+  --peri: #0369a1;
+  --vasc: #c2410c;
+  --endo: #9d174d;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
 
 /* ── HEADER ── */
-.header { padding: 20px 28px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.header { padding: 20px 28px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; background: var(--surface); box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
 .logo { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--accent); letter-spacing: -0.3px; }
 .logo-sub { font-size: 12px; color: var(--muted); margin-top: 2px; font-family: 'DM Sans', sans-serif; }
-.header-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; background: rgba(79,156,249,0.12); border: 1px solid rgba(79,156,249,0.3); color: var(--accent); padding: 4px 10px; border-radius: 20px; }
+.header-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.25); color: var(--accent); padding: 4px 10px; border-radius: 20px; }
 
 /* ── SEARCH BAR ── */
-.search-section { padding: 20px 28px 0; }
+.search-section { padding: 20px 28px 0; background: var(--surface); border-bottom: 1px solid var(--border); padding-bottom: 16px; }
 .search-wrap { position: relative; max-width: 700px; }
-.search-input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px 14px 44px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s; }
+.search-input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px 14px 44px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
 .search-input::placeholder { color: var(--muted); }
 .search-input:focus { border-color: var(--accent); }
 .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 17px; pointer-events: none; }
 .search-hint { margin-top: 8px; font-size: 12px; color: var(--muted); }
 
 /* ── CATEGORY PILLS ── */
-.cat-bar { padding: 16px 28px 0; display: flex; gap: 8px; flex-wrap: wrap; }
-.cat-pill { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
-.cat-pill:hover { border-color: var(--accent); color: var(--accent); }
+.cat-bar { padding: 12px 28px; display: flex; gap: 8px; flex-wrap: wrap; background: var(--surface); border-bottom: 1px solid var(--border); }
+.cat-pill { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+.cat-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(37,99,235,0.05); }
 .cat-pill.active { color: #fff; }
 .cat-pill[data-cat="all"].active { background: var(--accent); border-color: var(--accent); }
 .cat-pill[data-cat="chd"].active { background: var(--chd); border-color: var(--chd); }
@@ -66,10 +66,10 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 .main { display: flex; flex: 1; overflow: hidden; }
 
 /* ── DISEASE LIST ── */
-.disease-list { width: 260px; flex-shrink: 0; border-right: 1px solid var(--border); overflow-y: auto; padding: 16px 0; }
+.disease-list { width: 260px; flex-shrink: 0; border-right: 1px solid var(--border); overflow-y: auto; padding: 16px 0; background: #f7fafd; }
 .disease-group-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; color: var(--muted); padding: 10px 18px 4px; text-transform: uppercase; }
 .disease-item { padding: 9px 18px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--muted); border-left: 3px solid transparent; transition: all 0.12s; display: flex; align-items: center; gap: 8px; }
-.disease-item:hover { background: var(--surface); color: var(--text); }
+.disease-item:hover { background: var(--surface2); color: var(--text); }
 .disease-item.active { background: var(--surface); color: var(--text); }
 .disease-item .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 .disease-item[data-cat="chd"] { --c: var(--chd); }
@@ -81,7 +81,7 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 .disease-item[data-cat="vasc"] { --c: var(--vasc); }
 .disease-item[data-cat="endo"] { --c: var(--endo); }
 .disease-item .dot { background: var(--c); }
-.disease-item.active { border-left-color: var(--c); color: var(--c); background: rgba(255,255,255,0.03); }
+.disease-item.active { border-left-color: var(--c); color: var(--c); background: rgba(0,0,0,0.03); }
 
 /* ── CONTENT PANEL ── */
 .content-panel { flex: 1; overflow-y: auto; padding: 24px 28px; }
@@ -91,7 +91,7 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 .welcome h2 { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text); margin-bottom: 12px; font-weight: 400; }
 .welcome p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 24px; }
 .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; }
-.welcome-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 12px; }
+.welcome-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
 .welcome-tile .wt-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 4px; text-transform: uppercase; }
 .welcome-tile .wt-val { color: var(--text); font-size: 13px; }
 
@@ -104,35 +104,35 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 
 /* Section grid */
 .sections-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.section-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.section-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
 .section-block.full { grid-column: 1 / -1; }
-.section-block.hy { background: #1a1800; border-color: #3d3500; grid-column: 1 / -1; }
-.section-block.trap { background: #1a0d0d; border-color: #3d1a1a; grid-column: 1 / -1; }
+.section-block.hy { background: #fffbeb; border-color: #fcd34d; grid-column: 1 / -1; }
+.section-block.trap { background: #fff5f5; border-color: #fca5a5; grid-column: 1 / -1; }
 .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
-.sec-label.moa { color: var(--accent); }
-.sec-label.presentation { color: var(--green); }
-.sec-label.pathophys { color: var(--purple); }
-.sec-label.histo { color: #e879f9; }
-.sec-label.buzzwords { color: var(--amber); }
-.sec-label.treatment { color: var(--green); }
-.sec-label.hy { color: #fde047; }
-.sec-label.trap { color: var(--red); }
+.sec-label.moa { color: #1d4ed8; }
+.sec-label.presentation { color: #15803d; }
+.sec-label.pathophys { color: #6d28d9; }
+.sec-label.histo { color: #be185d; }
+.sec-label.buzzwords { color: #b45309; }
+.sec-label.treatment { color: #15803d; }
+.sec-label.hy { color: #92400e; }
+.sec-label.trap { color: #991b1b; }
 .sec-label.differentials { color: var(--muted); }
-.sec-label.ecg { color: #38bdf8; }
+.sec-label.ecg { color: #0369a1; }
 .sec-content { font-size: 13px; color: var(--text); line-height: 1.65; }
 .sec-content .item { display: flex; align-items: flex-start; gap: 7px; margin-bottom: 5px; }
 .sec-content .item::before { content: '→'; color: var(--muted); flex-shrink: 0; margin-top: 1px; }
-.sec-content strong { color: var(--amber); font-weight: 600; }
-.sec-content .star { color: #fde047; }
-.buzz-pill { display: inline-block; background: rgba(249,168,79,0.12); border: 1px solid rgba(249,168,79,0.25); color: var(--amber); padding: 2px 9px; border-radius: 4px; font-size: 11px; font-weight: 500; margin: 2px 2px 2px 0; font-family: 'JetBrains Mono', monospace; }
-.hy-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 7px; font-size: 13px; }
-.hy-item::before { content: '★'; color: #fde047; flex-shrink: 0; }
-.trap-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 7px; font-size: 13px; color: #fca5a5; }
-.trap-item::before { content: '⚠'; color: var(--red); flex-shrink: 0; }
+.sec-content strong { color: #1e3a5f; font-weight: 600; }
+.sec-content .star { color: #d97706; }
+.buzz-pill { display: inline-block; background: rgba(180,83,9,0.08); border: 1px solid rgba(180,83,9,0.2); color: #92400e; padding: 2px 9px; border-radius: 4px; font-size: 11px; font-weight: 500; margin: 2px 2px 2px 0; font-family: 'JetBrains Mono', monospace; }
+.hy-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 7px; font-size: 13px; color: #78350f; }
+.hy-item::before { content: '★'; color: #d97706; flex-shrink: 0; }
+.trap-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 7px; font-size: 13px; color: #991b1b; }
+.trap-item::before { content: '⚠'; color: #dc2626; flex-shrink: 0; }
 
 /* ── AI PANEL ── */
-.ai-section { margin-top: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-.ai-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.ai-section { margin-top: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.ai-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; background: #f0f7ff; }
 .ai-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
 .ai-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 500; letter-spacing: 0.04em; }
 .ai-input-row { display: flex; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--border); }
@@ -141,16 +141,16 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 .ai-btn { padding: 10px 18px; background: var(--accent); color: white; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
 .ai-btn:hover { opacity: 0.85; }
 .ai-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.quick-prompts { padding: 10px 16px; display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
-.qp-btn { padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 11px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
-.qp-btn:hover { border-color: var(--accent); color: var(--accent); }
+.quick-prompts { padding: 10px 16px; display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--border); background: #fafcff; }
+.qp-btn { padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-size: 11px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
+.qp-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(37,99,235,0.04); }
 .ai-response { padding: 16px; min-height: 60px; font-size: 13px; line-height: 1.7; color: var(--text); }
 .ai-response.loading { color: var(--muted); font-style: italic; }
 .ai-response.empty { color: var(--muted); font-size: 12px; }
 
 /* ── COMPARISON TABLE ── */
 .comp-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12.5px; }
-.comp-table th { background: var(--surface2); padding: 8px 12px; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); }
+.comp-table th { background: #f0f4f8; padding: 8px 12px; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); }
 .comp-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
 .comp-table tr:last-child td { border-bottom: none; }
 .comp-table td:first-child { font-weight: 600; color: var(--text); width: 130px; }
@@ -162,10 +162,50 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 /* ── HIDDEN ── */
 .hidden { display: none !important; }
 
+/* ── MODE TABS ── */
+.mode-tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 28px; gap: 0; }
+.mode-tab { padding: 13px 22px; font-size: 13px; font-weight: 600; color: var(--muted); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 7px; }
+.mode-tab:hover { color: var(--text); }
+.mode-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.mode-tab .tab-icon { font-size: 15px; }
+
+/* ── KEYWORD SEARCH PANEL ── */
+.kw-panel { display: flex; flex: 1; overflow: hidden; }
+.kw-results-sidebar { width: 280px; flex-shrink: 0; border-right: 1px solid var(--border); overflow-y: auto; background: #f7fafd; display: flex; flex-direction: column; }
+.kw-search-wrap { padding: 14px 16px; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 2; }
+.kw-input-row { position: relative; }
+.kw-input { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px 10px 36px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 13px; outline: none; transition: border-color 0.2s; }
+.kw-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+.kw-input-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; color: var(--muted); }
+.kw-hint { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+.kw-results-count { padding: 8px 16px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; border-bottom: 1px solid var(--border); background: var(--surface); }
+.kw-result-item { padding: 11px 16px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.1s; display: flex; flex-direction: column; gap: 4px; }
+.kw-result-item:hover { background: var(--surface2); }
+.kw-result-item.active { background: #eff6ff; border-left: 3px solid var(--accent); padding-left: 13px; }
+.kw-result-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.kw-result-cat { font-size: 10px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; }
+.kw-result-matches { font-size: 11px; color: var(--muted); line-height: 1.6; margin-top: 2px; }
+.kw-result-matches mark { background: #fef9c3; color: #78350f; border-radius: 2px; padding: 0 2px; font-weight: 600; font-style: normal; }
+.kw-no-results { padding: 28px 16px; text-align: center; color: var(--muted); font-size: 13px; }
+.kw-suggestions { padding: 14px 16px; }
+.kw-suggestions-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+.kw-tag-cloud { display: flex; flex-wrap: wrap; gap: 5px; }
+.kw-tag { padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-size: 11px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
+.kw-tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(37,99,235,0.05); }
+.kw-content-panel { flex: 1; overflow-y: auto; padding: 24px 28px; }
+.kw-welcome { max-width: 560px; margin: 50px auto; text-align: center; }
+.kw-welcome h3 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); margin-bottom: 10px; font-weight: 400; }
+.kw-welcome p { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.kw-example-grid { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.kw-ex-tag { padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-size: 12px; cursor: pointer; transition: all 0.12s; }
+.kw-ex-tag:hover { border-color: var(--accent); color: var(--accent); }
+
 @media (max-width: 768px) {
   .main { flex-direction: column; }
   .disease-list { width: 100%; height: 180px; border-right: none; border-bottom: 1px solid var(--border); }
   .sections-grid { grid-template-columns: 1fr; }
+  .kw-panel { flex-direction: column; }
+  .kw-results-sidebar { width: 100%; height: 240px; border-right: none; border-bottom: 1px solid var(--border); }
 }
 </style>
 </head>
@@ -179,43 +219,78 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
   <span class="header-badge">AI-Powered · Claude Sonnet</span>
 </header>
 
-<div class="search-section">
-  <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input class="search-input" id="searchInput" type="text" placeholder="Search diseases… (e.g. HCM, Tamponade, TOF, Kawasaki)">
-  </div>
-  <div class="search-hint">Click a disease from the list, or search above. Then ask the AI any follow-up question.</div>
+<!-- ── MODE TABS ── -->
+<div class="mode-tabs">
+  <button class="mode-tab active" id="tabBrowse" onclick="switchMode('browse')">
+    <span class="tab-icon">🗂</span> Browse Diseases
+  </button>
+  <button class="mode-tab" id="tabKeyword" onclick="switchMode('keyword')">
+    <span class="tab-icon">🔑</span> Keyword / Finding Search
+  </button>
 </div>
 
-<div class="cat-bar">
-  <button class="cat-pill active" data-cat="all">All</button>
-  <button class="cat-pill" data-cat="chd">Congenital HD</button>
-  <button class="cat-pill" data-cat="isch">Ischemia / MI</button>
-  <button class="cat-pill" data-cat="cm">Cardiomyopathy</button>
-  <button class="cat-pill" data-cat="hf">Heart Failure</button>
-  <button class="cat-pill" data-cat="valve">Valvular</button>
-  <button class="cat-pill" data-cat="peri">Pericardial</button>
-  <button class="cat-pill" data-cat="vasc">Vascular / Vasculitis</button>
-  <button class="cat-pill" data-cat="endo">Endocarditis</button>
-</div>
-
-<div class="main">
-  <!-- Disease list -->
-  <div class="disease-list" id="diseaseList"></div>
-
-  <!-- Content panel -->
-  <div class="content-panel" id="contentPanel">
-    <div class="welcome" id="welcomeScreen">
-      <h2>Your Cardio Path One-Stop Shop</h2>
-      <p>Select any disease from the left panel to see a complete structured card with MOA, presentation, histology, HY facts, traps, and differentials — all pulled from your course materials.<br><br>Then use the AI below each card to ask follow-up questions.</p>
-      <div class="welcome-grid">
-        <div class="welcome-tile"><div class="wt-label">Diseases covered</div><div class="wt-val">35+ across 8 categories</div></div>
-        <div class="welcome-tile"><div class="wt-label">HY facts per card</div><div class="wt-val">Curated from your files</div></div>
-        <div class="welcome-tile"><div class="wt-label">AI assistant</div><div class="wt-val">Ask anything, get instant answers</div></div>
-        <div class="welcome-tile"><div class="wt-label">Source files</div><div class="wt-val">Path-1R through 5R + cardio-path</div></div>
-      </div>
+<!-- ══════════ BROWSE MODE ══════════ -->
+<div id="browseMode" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+  <div class="search-section">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search diseases… (e.g. HCM, Tamponade, TOF, Kawasaki)">
     </div>
-    <div id="diseaseContent" class="hidden"></div>
+    <div class="search-hint">Click a disease from the list, or search by name above.</div>
+  </div>
+  <div class="cat-bar">
+    <button class="cat-pill active" data-cat="all">All</button>
+    <button class="cat-pill" data-cat="chd">Congenital HD</button>
+    <button class="cat-pill" data-cat="isch">Ischemia / MI</button>
+    <button class="cat-pill" data-cat="cm">Cardiomyopathy</button>
+    <button class="cat-pill" data-cat="hf">Heart Failure</button>
+    <button class="cat-pill" data-cat="valve">Valvular</button>
+    <button class="cat-pill" data-cat="peri">Pericardial</button>
+    <button class="cat-pill" data-cat="vasc">Vascular / Vasculitis</button>
+    <button class="cat-pill" data-cat="endo">Endocarditis</button>
+  </div>
+  <div class="main">
+    <div class="disease-list" id="diseaseList"></div>
+    <div class="content-panel" id="contentPanel">
+      <div class="welcome" id="welcomeScreen">
+        <h2>Your Cardio Path One-Stop Shop</h2>
+        <p>Select any disease from the left panel to see a complete structured card with MOA, presentation, histology, HY facts, traps, and differentials — all pulled from your course materials.<br><br>Then use the AI below each card to ask follow-up questions.</p>
+        <div class="welcome-grid">
+          <div class="welcome-tile"><div class="wt-label">Diseases covered</div><div class="wt-val">35+ across 8 categories</div></div>
+          <div class="welcome-tile"><div class="wt-label">HY facts per card</div><div class="wt-val">Curated from your files</div></div>
+          <div class="welcome-tile"><div class="wt-label">AI assistant</div><div class="wt-val">Ask anything, get instant answers</div></div>
+          <div class="welcome-tile"><div class="wt-label">Keyword search</div><div class="wt-val">Find diseases by finding/symptom</div></div>
+        </div>
+      </div>
+      <div id="diseaseContent" class="hidden"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ KEYWORD MODE ══════════ -->
+<div id="keywordMode" style="display:none;flex:1;overflow:hidden;flex-direction:column;">
+  <div class="kw-panel">
+    <!-- Left: search + results list -->
+    <div class="kw-results-sidebar">
+      <div class="kw-search-wrap">
+        <div class="kw-input-row">
+          <span class="kw-input-icon">🔑</span>
+          <input class="kw-input" id="kwInput" type="text" placeholder="e.g. S3 gallop, saddle nose, PR depression…" oninput="kwSearch(this.value)">
+        </div>
+        <div class="kw-hint">Type any finding, symptom, sign, or buzzword to see all matching diseases.</div>
+      </div>
+      <div id="kwResultsCount" class="kw-results-count hidden"></div>
+      <div id="kwResultsList"></div>
+    </div>
+    <!-- Right: disease card or welcome -->
+    <div class="kw-content-panel" id="kwContentPanel">
+      <div class="kw-welcome" id="kwWelcome">
+        <h3>🔑 Keyword / Finding Search</h3>
+        <p>Search by any clinical finding, physical exam sign, ECG change, pathology term, buzzword, or lab value — and instantly see every disease it maps to.</p>
+        <div class="kw-example-grid" id="kwExamples"></div>
+      </div>
+      <div id="kwDiseaseContent" class="hidden"></div>
+    </div>
   </div>
 </div>
 
@@ -809,15 +884,165 @@ function selectDisease(d) {
   renderCard(d);
 }
 
-function renderCard(d) {
-  document.getElementById('welcomeScreen').classList.add('hidden');
-  const panel = document.getElementById('diseaseContent');
-  panel.classList.remove('hidden');
-  const color = CAT_COLORS[d.cat];
+// ══════════════════════════════════════════════════════════════════════════════
+// KEYWORD INDEX — maps clinical findings/signs to diseases
+// Each disease gets a rich keyword list built from all its fields
+// ══════════════════════════════════════════════════════════════════════════════
+function buildKeywordIndex() {
+  const index = {};
+  DISEASES.forEach(d => {
+    // Collect all searchable text from every field of the disease
+    const allText = [
+      d.moa, d.presentation, d.pathophys, d.histo,
+      d.buzzwords.join(' '),
+      d.treatment, d.ecg, d.differentials,
+      d.hy.join(' '), d.traps.join(' '),
+      d.full, d.subtitle
+    ].join(' ').toLowerCase();
+    index[d.id] = allText;
+  });
+  return index;
+}
+const KW_INDEX = buildKeywordIndex();
 
+// Curated high-yield keyword suggestions shown on the welcome screen
+const KW_SUGGESTIONS = [
+  'S3 gallop', 'S4 gallop', 'fixed split S2', 'opening snap', 'PR depression',
+  'electrical alternans', 'pulsus paradoxus', 'Beck\'s triad', 'Kussmaul sign',
+  'myofiber disarray', 'Congo red', 'apple-green birefringence', 'epsilon wave',
+  'Valsalva louder', 'squatting', 'machine murmur', 'holosystolic', 'wide pulse pressure',
+  'bounding pulse', 'troponin', 'CK-MB', 'macrophages', '3-7 days',
+  'jaw claudication', 'CRASH', 'coronary aneurysm', 'saddle nose', 'c-ANCA',
+  'Janeway', 'Osler nodes', 'Roth spots', 'S. bovis', 'Eisenmenger',
+  'myofiber disarray', 'ninja star nuclei', 'wavy fibers', 'coagulative necrosis',
+  'GDMT', 'LVOTO', 'apical ballooning', 'pericardiocentesis', 'pericardiectomy',
+  'indomethacin', 'PGE1', 'protamine', 'idarucizumab', 'labetalol',
+  'malar flush', 'rib notching', 'boot-shaped heart', 'egg-on-string',
+  'granular sparkling', 'tree bark aorta', 'string of beads', 'tet spells',
+  'failure to thrive', 'cyanosis', 'dyspnea', 'orthopnea', 'crackles',
+  'JVD', 'hepatomegaly', 'lower extremity edema', 'pulsus tardus', 'friction rub'
+];
+
+// ── Keyword search engine ──────────────────────────────────────────────────
+function kwSearch(query) {
+  const q = query.trim().toLowerCase();
+  const resultsList = document.getElementById('kwResultsList');
+  const countEl = document.getElementById('kwResultsCount');
+
+  if (q.length < 2) {
+    resultsList.innerHTML = '';
+    countEl.classList.add('hidden');
+    document.getElementById('kwWelcome').classList.remove('hidden');
+    document.getElementById('kwDiseaseContent').classList.add('hidden');
+    return;
+  }
+
+  // Score each disease: count how many times the query appears in their text
+  const results = DISEASES.map(d => {
+    const text = KW_INDEX[d.id];
+    // Find all distinct fields that contain the keyword
+    const matchingFields = [];
+    const fieldMap = [
+      { label: 'Presentation', val: d.presentation },
+      { label: 'Buzzwords', val: d.buzzwords.join(', ') },
+      { label: 'MOA', val: d.moa },
+      { label: 'Histology', val: d.histo },
+      { label: 'HY Facts', val: d.hy.join(' | ') },
+      { label: 'Traps', val: d.traps.join(' | ') },
+      { label: 'Treatment', val: d.treatment },
+      { label: 'ECG', val: d.ecg },
+      { label: 'Differentials', val: d.differentials },
+    ];
+    fieldMap.forEach(f => {
+      if (f.val.toLowerCase().includes(q)) matchingFields.push({ label: f.label, val: f.val });
+    });
+    return { d, matchingFields, score: matchingFields.length };
+  }).filter(r => r.score > 0).sort((a, b) => b.score - a.score);
+
+  countEl.classList.remove('hidden');
+  countEl.textContent = results.length === 0
+    ? 'No matches found'
+    : `${results.length} disease${results.length > 1 ? 's' : ''} match "${query}"`;
+
+  if (results.length === 0) {
+    resultsList.innerHTML = `<div class="kw-no-results">No diseases found for "<strong>${query}</strong>".<br><br>Try a different term or check the suggestions below.</div>`;
+    return;
+  }
+
+  resultsList.innerHTML = results.map(r => {
+    const color = CAT_COLORS[r.d.cat];
+    // Build snippet: show the first matching field's relevant excerpt
+    const snippet = r.matchingFields.slice(0, 2).map(f => {
+      const raw = f.val;
+      const idx = raw.toLowerCase().indexOf(q);
+      const start = Math.max(0, idx - 30);
+      const end = Math.min(raw.length, idx + q.length + 50);
+      let excerpt = (start > 0 ? '…' : '') + raw.slice(start, end) + (end < raw.length ? '…' : '');
+      // Highlight the match
+      const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      excerpt = excerpt.replace(re, m => `<mark>${m}</mark>`);
+      return `<span style="color:var(--muted);font-weight:600">${f.label}:</span> ${excerpt}`;
+    }).join('<br>');
+
+    return `<div class="kw-result-item" onclick="kwSelectDisease('${r.d.id}')" data-kid="${r.d.id}">
+      <div class="kw-result-name">${r.d.name}</div>
+      <div class="kw-result-cat" style="color:${color}">${CAT_NAMES[r.d.cat]}</div>
+      <div class="kw-result-matches">${snippet}</div>
+    </div>`;
+  }).join('');
+
+  // Auto-select first result
+  if (results.length > 0) kwSelectDisease(results[0].d.id);
+}
+
+let kwCurrentId = null;
+function kwSelectDisease(id) {
+  kwCurrentId = id;
+  const d = DISEASES.find(x => x.id === id);
+  if (!d) return;
+  // Highlight in list
+  document.querySelectorAll('.kw-result-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.kid === id);
+  });
+  // Hide welcome, show content
+  document.getElementById('kwWelcome').classList.add('hidden');
+  const panel = document.getElementById('kwDiseaseContent');
+  panel.classList.remove('hidden');
+  // Reuse the same renderCard logic but target kwDiseaseContent
+  currentDisease = d;
+  aiHistory = [];
+  renderCardInto(d, 'kwDiseaseContent');
+}
+
+// ── Mode switching ─────────────────────────────────────────────────────────
+function switchMode(mode) {
+  const browse = document.getElementById('browseMode');
+  const keyword = document.getElementById('keywordMode');
+  const tabBrowse = document.getElementById('tabBrowse');
+  const tabKeyword = document.getElementById('tabKeyword');
+  if (mode === 'browse') {
+    browse.style.display = 'flex';
+    keyword.style.display = 'none';
+    tabBrowse.classList.add('active');
+    tabKeyword.classList.remove('active');
+  } else {
+    browse.style.display = 'none';
+    keyword.style.display = 'flex';
+    tabBrowse.classList.remove('active');
+    tabKeyword.classList.add('active');
+    // Focus keyword input
+    setTimeout(() => document.getElementById('kwInput').focus(), 50);
+  }
+}
+
+// ── Render card into a target element (shared by both modes) ───────────────
+function renderCardInto(d, targetId) {
+  const panel = document.getElementById(targetId);
+  const color = CAT_COLORS[d.cat];
   const buzzHTML = d.buzzwords.map(b => `<span class="buzz-pill">${b}</span>`).join('');
   const hyHTML = d.hy.map(f => `<div class="hy-item">${f}</div>`).join('');
   const trapHTML = d.traps.map(t => `<div class="trap-item">${t}</div>`).join('');
+  const uniqueAiId = targetId === 'kwDiseaseContent' ? 'kw' : '';
 
   panel.innerHTML = `
     <div class="disease-card">
@@ -826,9 +1051,8 @@ function renderCard(d) {
           <div class="card-title" style="color:${color}">${d.full}</div>
           <div class="card-subtitle">${d.subtitle}</div>
         </div>
-        <span class="card-category" style="background:rgba(255,255,255,0.06);color:${color};border:1px solid ${color}30">${CAT_NAMES[d.cat]}</span>
+        <span class="card-category" style="background:${color}18;color:${color};border:1px solid ${color}30">${CAT_NAMES[d.cat]}</span>
       </div>
-
       <div class="sections-grid">
         <div class="section-block">
           <div class="sec-label moa">⚙ Mechanism (MOA)</div>
@@ -862,7 +1086,6 @@ function renderCard(d) {
           <div class="sec-label differentials">⚖ Differentials</div>
           <div class="sec-content">${d.differentials}</div>
         </div>
-
         <div class="section-block hy">
           <div class="sec-label hy">★ High-Yield Testable Facts</div>
           <div class="sec-content">${hyHTML}</div>
@@ -872,46 +1095,44 @@ function renderCard(d) {
           <div class="sec-content">${trapHTML}</div>
         </div>
       </div>
-
       <div class="ai-section">
         <div class="ai-header">
           <div class="ai-dot"></div>
           <div class="ai-title">AI TUTOR — Ask anything about ${d.name}</div>
         </div>
         <div class="quick-prompts">
-          <button class="qp-btn" onclick="askQuick('What vignette patterns should I know for ${d.name}?')">Vignette patterns</button>
-          <button class="qp-btn" onclick="askQuick('What are the classic exam traps for ${d.name}?')">Exam traps</button>
-          <button class="qp-btn" onclick="askQuick('How do I differentiate ${d.name} from similar conditions?')">Differentials</button>
-          <button class="qp-btn" onclick="askQuick('Explain the pathophysiology of ${d.name} step by step.')">Pathophys explained</button>
-          <button class="qp-btn" onclick="askQuick('What does the ECG show in ${d.name}?')">ECG details</button>
+          <button class="qp-btn" onclick="askQuickIn('What vignette patterns should I know for ${d.name}?','${uniqueAiId}')">Vignette patterns</button>
+          <button class="qp-btn" onclick="askQuickIn('What are the classic exam traps for ${d.name}?','${uniqueAiId}')">Exam traps</button>
+          <button class="qp-btn" onclick="askQuickIn('How do I differentiate ${d.name} from similar conditions?','${uniqueAiId}')">Differentials</button>
+          <button class="qp-btn" onclick="askQuickIn('Explain the pathophysiology of ${d.name} step by step.','${uniqueAiId}')">Pathophys</button>
+          <button class="qp-btn" onclick="askQuickIn('What does the ECG show in ${d.name}?','${uniqueAiId}')">ECG details</button>
         </div>
         <div class="ai-input-row">
-          <input class="ai-input" id="aiInput" type="text" placeholder="Ask any question about ${d.name}..." onkeydown="if(event.key==='Enter')sendAI()">
-          <button class="ai-btn" id="aiBtn" onclick="sendAI()">Ask AI ↵</button>
+          <input class="ai-input" id="aiInput${uniqueAiId}" type="text" placeholder="Ask any question about ${d.name}..." onkeydown="if(event.key==='Enter')sendAIIn('${uniqueAiId}')">
+          <button class="ai-btn" id="aiBtn${uniqueAiId}" onclick="sendAIIn('${uniqueAiId}')">Ask AI ↵</button>
         </div>
-        <div class="ai-response empty" id="aiResponse">Ask a question above or click a quick prompt to get an instant explanation.</div>
+        <div class="ai-response empty" id="aiResponse${uniqueAiId}">Ask a question above or click a quick prompt to get an instant explanation.</div>
       </div>
     </div>
   `;
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// AI INTEGRATION
+// AI INTEGRATION (updated to support both panels)
 // ══════════════════════════════════════════════════════════════════════════════
-async function sendAI() {
-  const input = document.getElementById('aiInput');
-  const btn = document.getElementById('aiBtn');
-  const resp = document.getElementById('aiResponse');
-  const question = input.value.trim();
+async function sendAIIn(suffix) {
+  const inputEl = document.getElementById('aiInput' + suffix);
+  const btnEl = document.getElementById('aiBtn' + suffix);
+  const respEl = document.getElementById('aiResponse' + suffix);
+  const question = inputEl.value.trim();
   if (!question || !currentDisease) return;
 
-  input.value = '';
-  btn.disabled = true;
-  resp.className = 'ai-response loading';
-  resp.innerHTML = '<span class="spinner"></span>Thinking...';
+  inputEl.value = '';
+  btnEl.disabled = true;
+  respEl.className = 'ai-response loading';
+  respEl.innerHTML = '<span class="spinner"></span>Thinking...';
 
   const diseaseContext = `Currently viewing: ${currentDisease.full} (${CAT_NAMES[currentDisease.cat]})\n\nDisease card data: MOA: ${currentDisease.moa} | Presentation: ${currentDisease.presentation} | HY Facts: ${currentDisease.hy.join('; ')} | Traps: ${currentDisease.traps.join('; ')}`;
-
   aiHistory.push({ role: 'user', content: `[Context: ${diseaseContext}]\n\nStudent question: ${question}` });
 
   try {
@@ -928,26 +1149,29 @@ async function sendAI() {
     const data = await res.json();
     const text = data.content?.[0]?.text || 'No response received.';
     aiHistory.push({ role: 'assistant', content: text });
-
-    resp.className = 'ai-response';
-    resp.innerHTML = formatAIResponse(text);
+    respEl.className = 'ai-response';
+    respEl.innerHTML = formatAIResponse(text);
   } catch (e) {
-    resp.className = 'ai-response';
-    resp.innerHTML = `<span style="color:var(--red)">Error: ${e.message}</span>`;
+    respEl.className = 'ai-response';
+    respEl.innerHTML = `<span style="color:#dc2626">Error: ${e.message}</span>`;
   }
-  btn.disabled = false;
+  btnEl.disabled = false;
 }
 
-function askQuick(q) {
-  const input = document.getElementById('aiInput');
-  if (input) { input.value = q; sendAI(); }
+function sendAI() { sendAIIn(''); }
+
+function askQuickIn(q, suffix) {
+  const inputEl = document.getElementById('aiInput' + suffix);
+  if (inputEl) { inputEl.value = q; sendAIIn(suffix); }
 }
+
+function askQuick(q) { askQuickIn(q, ''); }
 
 function formatAIResponse(text) {
   return text
     .replace(/★/g, '<span class="star">★</span>')
-    .replace(/⚠/g, '<span style="color:var(--red)">⚠</span>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/⚠/g, '<span style="color:#dc2626">⚠</span>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong style="color:#1e3a5f">$1</strong>')
     .replace(/\n\n/g, '<br><br>')
     .replace(/\n- /g, '<br>• ')
     .replace(/\n• /g, '<br>• ')
@@ -955,12 +1179,11 @@ function formatAIResponse(text) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SEARCH + FILTER
+// BROWSE MODE: SEARCH + FILTER + SIDEBAR
 // ══════════════════════════════════════════════════════════════════════════════
 document.getElementById('searchInput').addEventListener('input', (e) => {
   const val = e.target.value.trim();
   buildSidebar(currentFilter, val);
-  // Auto-select if exact match
   if (val.length > 2) {
     const match = DISEASES.find(d => d.name.toLowerCase().includes(val.toLowerCase()) || d.full.toLowerCase().includes(val.toLowerCase()));
     if (match) selectDisease(match);
@@ -976,10 +1199,33 @@ document.querySelectorAll('.cat-pill').forEach(btn => {
   });
 });
 
+// Override renderCard to use shared renderCardInto
+function renderCard(d) {
+  document.getElementById('welcomeScreen').classList.add('hidden');
+  const panel = document.getElementById('diseaseContent');
+  panel.classList.remove('hidden');
+  renderCardInto(d, 'diseaseContent');
+}
+
 // ══════════════════════════════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════════════════════════════
 buildSidebar();
+
+// Populate keyword suggestion tags on welcome screen
+(function populateKwSuggestions() {
+  const container = document.getElementById('kwExamples');
+  KW_SUGGESTIONS.forEach(kw => {
+    const btn = document.createElement('button');
+    btn.className = 'kw-ex-tag';
+    btn.textContent = kw;
+    btn.onclick = () => {
+      document.getElementById('kwInput').value = kw;
+      kwSearch(kw);
+    };
+    container.appendChild(btn);
+  });
+})();
 </script>
 </body>
 </html>
