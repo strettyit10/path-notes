@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardio Path — Visual Comparisons II</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c10;--surface:#13161e;--surface2:#1a1e28;--border:#252a38;
+  --text:#e8eaf0;--muted:#6b7588;
+  --cm:#3dd68c;    /* cardiomyopathy = green */
+  --ix:#f96060;    /* ischemia = red */
+  --chd:#4f9cf9;   /* congenital = blue */
+  --val:#a78bfa;   /* valvular = purple */
+  --amber:#f9a84f;
+  --green:#3dd68c;
+  --red:#f96060;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh}
+
+header{padding:24px 36px 18px;border-bottom:1px solid var(--border)}
+header h1{font-size:20px;font-weight:700}
+header p{color:var(--muted);font-size:13px;margin-top:4px}
+
+.tabs{display:flex;border-bottom:1px solid var(--border);padding:0 36px;overflow-x:auto;gap:2px}
+.tab{padding:13px 22px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;
+  background:none;border-left:none;border-right:none;border-top:none;white-space:nowrap;
+  font-family:'Space Grotesk',sans-serif}
+
+.content{padding:32px 36px;max-width:1080px;margin:0 auto}
+
+/* ── SHARED ─────────────────────────────────────────── */
+.sec-label{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;padding-bottom:8px;border-bottom:2px solid;margin-bottom:16px}
+.callout{border-radius:8px;padding:12px 16px;margin-bottom:22px;font-size:13px;line-height:1.6}
+.callout strong{font-weight:700}
+
+.vtable{width:100%;border-collapse:collapse;margin-bottom:26px;font-size:12.5px}
+.vtable th{padding:9px 13px;text-align:left;font-family:'Space Mono',monospace;font-size:10px;
+  font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  background:var(--surface2);border-bottom:2px solid var(--border)}
+.vtable td{padding:9px 13px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.vtable tr:last-child td{border-bottom:none}
+.vtable tr:hover td{background:rgba(255,255,255,.02)}
+.vtable td:first-child{font-weight:600;color:var(--text)}
+
+.badge{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;
+  letter-spacing:.04em;font-family:'Space Mono',monospace;white-space:nowrap}
+.b-red{background:rgba(249,96,96,.15);color:var(--red)}
+.b-green{background:rgba(61,214,140,.15);color:var(--green)}
+.b-blue{background:rgba(79,156,249,.15);color:#4f9cf9}
+.b-amber{background:rgba(249,168,79,.15);color:var(--amber)}
+.b-purple{background:rgba(167,139,250,.15);color:#a78bfa}
+.b-muted{background:rgba(107,117,136,.15);color:var(--muted)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:22px}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:22px}
+@media(max-width:760px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+
+.vcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative;overflow:hidden}
+.vcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.vcard h3{font-size:14px;font-weight:700;margin-bottom:10px}
+.vcard h4{font-size:13px;font-weight:700;margin-bottom:8px}
+.vcard-row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;
+  border-bottom:1px solid var(--border);font-size:12px;gap:8px}
+.vcard-row:last-child{border-bottom:none}
+.vcard-lbl{color:var(--muted);font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;min-width:72px;flex-shrink:0}
+.vcard-val{text-align:right;font-weight:500;line-height:1.4;font-size:12px}
+.dot-item{display:flex;gap:8px;margin-bottom:7px;font-size:12px;line-height:1.4;align-items:flex-start}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:4px;flex-shrink:0}
+
+/* timeline */
+.timeline{position:relative;padding-left:20px;margin-bottom:24px}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;border-radius:2px}
+.tl-item{position:relative;margin-bottom:16px;padding-left:18px}
+.tl-dot{position:absolute;left:-25px;top:6px;width:10px;height:10px;border-radius:50%;border:2px solid var(--bg)}
+.tl-time{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;margin-bottom:3px}
+.tl-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.tl-sub{font-size:12px;color:var(--muted);line-height:1.4}
+
+/* angina comparison */
+.angina-track{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.angina-row{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:14px 16px;display:grid;grid-template-columns:160px 1fr 1fr 1fr 1fr;gap:12px;font-size:12px;align-items:center}
+.angina-row.header{background:var(--surface2);font-family:'Space Mono',monospace;font-size:10px;
+  font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:760px){.angina-row{grid-template-columns:1fr 1fr;gap:8px}}
+.angina-name{font-weight:700;font-size:13px}
+
+/* shunt flow diagram */
+.shunt-diagram{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:22px}
+.shunt-diagram h4{font-size:13px;font-weight:700;margin-bottom:14px;color:var(--muted)}
+.chambers{display:flex;align-items:center;justify-content:center;gap:0;margin:12px 0}
+.chamber{background:var(--surface2);border:2px solid var(--border);border-radius:8px;
+  padding:12px 16px;text-align:center;font-size:11px;font-weight:600;min-width:70px}
+.chamber.la{border-color:var(--ix)}
+.chamber.ra{border-color:var(--chd)}
+.chamber.lv{border-color:var(--ix)}
+.chamber.rv{border-color:var(--chd)}
+.arrow-wrap{display:flex;flex-direction:column;align-items:center;padding:0 6px}
+.arrow-label{font-size:10px;color:var(--muted);text-align:center;margin-bottom:2px;white-space:nowrap}
+.arrow{font-size:18px;line-height:1}
+
+/* maneuver bars */
+.maneuver-section{margin-bottom:22px}
+.maneuver-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:10px}
+.maneuver-card h4{font-size:13px;font-weight:700;margin-bottom:4px}
+.maneuver-card .mech{font-size:12px;color:var(--muted);margin-bottom:12px}
+.maneuver-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.m-result{background:var(--surface2);border-radius:6px;padding:8px 10px;font-size:12px;display:flex;justify-content:space-between;align-items:center}
+.m-result .valve{font-weight:600}
+.up{color:var(--green);font-weight:700}
+.down{color:var(--red);font-weight:600}
+.neutral{color:var(--muted)}
+
+/* ECG strip visual */
+.ecg-panels{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+@media(max-width:700px){.ecg-panels{grid-template-columns:1fr}}
+.ecg-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
+.ecg-card h4{font-size:13px;font-weight:700;margin-bottom:12px}
+.ecg-svg{width:100%;height:70px;margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Cardio Path — Visual Comparisons II</h1>
+  <p>Cardiomyopathy · Ischemic/CAD · Congenital HD · Valvular Disease</p>
+</header>
+
+<div class="tabs" id="tabs">
+  <button class="tab" id="tab-cm" onclick="setTab('cm')">💚 Cardiomyopathy</button>
+  <button class="tab" id="tab-ix" onclick="setTab('ix')">❤️ Ischemic / CAD</button>
+  <button class="tab" id="tab-chd" onclick="setTab('chd')">💙 Congenital HD</button>
+  <button class="tab" id="tab-val" onclick="setTab('val')">💜 Valvular Disease</button>
+</div>
+
+<div class="content">
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- CARDIOMYOPATHY                                        -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="panel-cm" style="display:none">
+
+  <div class="sec-label" style="color:var(--cm);border-color:var(--cm)">DCM vs HCM vs RCM — Core Comparison</div>
+  <div class="grid3">
+    <div class="vcard" style="border-color:rgba(249,96,96,.35)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--ix)"></div>
+      <h3 style="color:var(--ix)">Dilated (DCM)</h3>
+      <div class="vcard-row"><span class="vcard-lbl">EF</span><span class="vcard-val"><span class="badge b-red">≤ 40% — systolic</span></span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Gross</span><span class="vcard-val">4-chamber dilation; "flabby heart" &gt;500g</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Histology</span><span class="vcard-val">Myocyte hypertrophy; interstitial fibrosis; "ninja star" nuclei (TTN)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Gene</span><span class="vcard-val">TTN (titin) — most common genetic</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Causes</span><span class="vcard-val">Alcohol, Coxsackie B, doxorubicin, peripartum, Chagas</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Gallop</span><span class="vcard-val">S3 — dilated LV, early diastole</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Valsalva</span><span class="vcard-val">Murmur softer (less flow)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Treatment</span><span class="vcard-val">GDMT: BB + ARNI + MRA + SGLT2i</span></div>
+    </div>
+    <div class="vcard" style="border-color:rgba(61,214,140,.35)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--cm)"></div>
+      <h3 style="color:var(--cm)">Hypertrophic (HCM)</h3>
+      <div class="vcard-row"><span class="vcard-lbl">EF</span><span class="vcard-val"><span class="badge b-green">Normal/HIGH — diastolic</span></span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Gross</span><span class="vcard-val">Asymmetric septal hypertrophy; "banana" LV; LVOTO</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Histology</span><span class="vcard-val">Myofiber disarray + interstitial fibrosis ★</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Gene</span><span class="vcard-val">β-myosin heavy chain (MYH7) / MYBPC3</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Scenario</span><span class="vcard-val">Young athlete + SCD + syncopal murmur</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Gallop</span><span class="vcard-val">S4 — stiff LV, late diastole</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Valsalva</span><span class="vcard-val"><strong style="color:var(--cm)">LOUDER</strong> — only murmur that does this</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Avoid</span><span class="vcard-val">Nitrates, diuretics, vasodilators (↓ preload → ↑ LVOTO)</span></div>
+    </div>
+    <div class="vcard" style="border-color:rgba(79,156,249,.35)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--chd)"></div>
+      <h3 style="color:var(--chd)">Restrictive (RCM)</h3>
+      <div class="vcard-row"><span class="vcard-lbl">EF</span><span class="vcard-val"><span class="badge b-green">Normal ≥ 50% — compliance ↓</span></span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Gross</span><span class="vcard-val">Normal wall thickness; biatrial dilation</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Histology</span><span class="vcard-val">Congo red → apple-green birefringence (amyloid) ★</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Gene</span><span class="vcard-val">TTR (transthyretin) amyloid</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Causes</span><span class="vcard-val">Amyloid, sarcoid, hemochromatosis, radiation</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Echo clue</span><span class="vcard-val">"Granular sparkling" myocardium (amyloid)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Stains</span><span class="vcard-val">Congo red=amyloid · Prussian blue=iron · PAS=glycogen</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Vs const.</span><span class="vcard-val">Normal pericardium on CT (vs constrictive = thickened)</span></div>
+    </div>
+  </div>
+
+  <div class="callout" style="background:rgba(249,168,79,.07);border-left:3px solid var(--amber)">
+    ⚠️ <strong style="color:var(--amber)">KEY TRAP:</strong> HCM murmur LOUDER with Valsalva/standing (↓ preload → ↑ LVOTO). All other murmurs get softer. Also avoid nitrates/diuretics in HCM — they worsen obstruction. Low EF rules out HCM.
+  </div>
+
+  <div class="sec-label" style="color:var(--cm);border-color:var(--cm)">Special Cardiomyopathies</div>
+  <div class="grid4">
+    <div class="vcard">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber)"></div>
+      <h4 style="color:var(--amber)">Takotsubo</h4>
+      <div class="dot-item"><div class="dot" style="background:var(--amber)"></div><div>Catecholamine surge → apical LV ballooning</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--amber)"></div><div>"Broken heart" / stress CMP</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--amber)"></div><div>"Octopus pot" shape on echo</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--cm)"></div><div>Usually <strong>fully reversible</strong></div></div>
+    </div>
+    <div class="vcard">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--val)"></div>
+      <h4 style="color:var(--val)">ARVC</h4>
+      <div class="dot-item"><div class="dot" style="background:var(--val)"></div><div>Desmosomal protein mutation</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--val)"></div><div>RV wall → fat + fibrous replacement</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--val)"></div><div>Epsilon wave on ECG ★</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--ix)"></div><div>SCD risk in young athletes</div></div>
+    </div>
+    <div class="vcard">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--chd)"></div>
+      <h4 style="color:var(--chd)">Peripartum CMP</h4>
+      <div class="dot-item"><div class="dot" style="background:var(--chd)"></div><div>Last month of pregnancy → 5 months postpartum</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--chd)"></div><div>Low EF; clean coronaries</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--chd)"></div><div>No prior cardiac history</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--cm)"></div><div>Treat as HFrEF (GDMT)</div></div>
+    </div>
+    <div class="vcard">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--ix)"></div>
+      <h4 style="color:var(--ix)">Cardiac Amyloidosis</h4>
+      <div class="dot-item"><div class="dot" style="background:var(--ix)"></div><div>Multiple myeloma → AL type</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--ix)"></div><div>"Granular sparkling" echo</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--ix)"></div><div>Congo red → apple-green</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--ix)"></div><div>Biatrial dilation; ↑ BNP</div></div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="color:var(--cm);border-color:var(--cm)">DCM Cause Breakdown</div>
+  <table class="vtable">
+    <thead><tr><th>Cause</th><th>Mechanism</th><th>Key Detail / Pearl</th></tr></thead>
+    <tbody>
+      <tr><td>Alcohol</td><td>Acetaldehyde direct myocyte toxicity</td><td>Reversible if alcohol stopped early enough</td></tr>
+      <tr><td>Doxorubicin</td><td>Free radical damage to myocardial mitochondria</td><td>Dose-dependent; anthracycline cardiotoxicity</td></tr>
+      <tr><td>Coxsackie B</td><td>Viral myocarditis → post-inflammatory DCM</td><td>Most common infectious cause</td></tr>
+      <tr><td>Peripartum</td><td>Multifactorial — volume overload, autoimmune, hormonal</td><td>Window: last month of pregnancy → 5 months postpartum</td></tr>
+      <tr><td>Chagas (T. cruzi)</td><td>Parasite → myocarditis → chronic DCM 10–20 years later</td><td>South/Central America; megaesophagus/megacolon also</td></tr>
+      <tr><td>TTN mutation</td><td>Titin (sarcomere scaffold) defect → mechanical failure</td><td>Most common genetic cause of DCM</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- ISCHEMIC / CAD                                        -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="panel-ix" style="display:none">
+
+  <div class="sec-label" style="color:var(--ix);border-color:var(--ix)">Angina Spectrum — Stable → STEMI</div>
+  <div class="angina-track">
+    <div class="angina-row header">
+      <div>Condition</div><div>Trigger</div><div>Troponin</div><div>ECG</div><div>Mechanism</div>
+    </div>
+    <div class="angina-row" style="border-color:rgba(61,214,140,.3)">
+      <div class="angina-name" style="color:var(--cm)">Stable Angina</div>
+      <div>Exertion only; predictable</div>
+      <div><span class="badge b-green">Normal</span></div>
+      <div>ST depression with pain; resolves</div>
+      <div>Fixed plaque &gt;70% → demand ischemia; no rupture</div>
+    </div>
+    <div class="angina-row" style="border-color:rgba(249,168,79,.3)">
+      <div class="angina-name" style="color:var(--amber)">Unstable Angina</div>
+      <div>Rest; increasing frequency/severity</div>
+      <div><span class="badge b-green">Normal</span></div>
+      <div>Variable; may have ST changes</div>
+      <div>Plaque rupture + non-occlusive thrombus; no necrosis</div>
+    </div>
+    <div class="angina-row" style="border-color:rgba(249,168,79,.5)">
+      <div class="angina-name" style="color:var(--amber)">Prinzmetal Angina</div>
+      <div>Rest; often nocturnal</div>
+      <div><span class="badge b-green">Usually normal</span></div>
+      <div>Transient ST elevation → resolves</div>
+      <div>Coronary vasospasm; normal coronaries on cath. Treat: CCB + nitrates</div>
+    </div>
+    <div class="angina-row" style="border-color:rgba(249,96,96,.4)">
+      <div class="angina-name" style="color:var(--ix)">NSTEMI</div>
+      <div>Rest</div>
+      <div><span class="badge b-red">↑ Elevated</span></div>
+      <div>ST depression / T-wave changes</div>
+      <div>Partial/non-occlusive thrombus → subendocardial infarct</div>
+    </div>
+    <div class="angina-row" style="border-color:rgba(249,96,96,.7);background:rgba(249,96,96,.05)">
+      <div class="angina-name" style="color:var(--ix)">STEMI</div>
+      <div>Rest</div>
+      <div><span class="badge b-red">↑ Elevated</span></div>
+      <div><strong style="color:var(--ix)">ST elevation + reciprocal depression</strong></div>
+      <div>Complete occlusion → transmural infarct. Needs urgent PCI or thrombolytics</div>
+    </div>
+  </div>
+
+  <div class="callout" style="background:rgba(249,96,96,.07);border-left:3px solid var(--ix)">
+    ⚠️ <strong style="color:var(--ix)">KEY RULE:</strong> Troponin = infarction. No troponin = ischemia only (stable or unstable angina). ST depression = NSTEMI (subendocardial). ST elevation = STEMI (transmural). Prinzmetal = transient ST elevation with normal coronaries on cath.
+  </div>
+
+  <div class="sec-label" style="color:var(--ix);border-color:var(--ix)">Coronary Artery Territories & ECG Localization</div>
+  <div class="grid3">
+    <div class="vcard" style="border-color:rgba(249,96,96,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--ix)"></div>
+      <h3 style="color:var(--ix)">LAD — "Widow-Maker"</h3>
+      <div class="vcard-row"><span class="vcard-lbl">ECG leads</span><span class="vcard-val">V1 – V4 (anterior)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Territory</span><span class="vcard-val">Anterior wall + anterior septum + apex</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Risks</span><span class="vcard-val">LBBB; LV systolic failure; largest territory</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Pearl</span><span class="vcard-val">Most common culprit artery in MI</span></div>
+    </div>
+    <div class="vcard" style="border-color:rgba(61,214,140,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--cm)"></div>
+      <h3 style="color:var(--cm)">RCA</h3>
+      <div class="vcard-row"><span class="vcard-lbl">ECG leads</span><span class="vcard-val">II, III, aVF (inferior)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Territory</span><span class="vcard-val">Inferior wall + RV (in 85%)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Risks</span><span class="vcard-val">AV node supply → AV block; RV infarct</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Pearl</span><span class="vcard-val">Inferior MI → always check for RV infarct (JVD + hypotension + clear lungs)</span></div>
+    </div>
+    <div class="vcard" style="border-color:rgba(79,156,249,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--chd)"></div>
+      <h3 style="color:var(--chd)">LCx</h3>
+      <div class="vcard-row"><span class="vcard-lbl">ECG leads</span><span class="vcard-val">I, aVL (lateral)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Territory</span><span class="vcard-val">Lateral wall of LV</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Risks</span><span class="vcard-val">Can be "electrically silent" — subtle ECG changes</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Pearl</span><span class="vcard-val">Lateral MI may be missed on ECG alone</span></div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="color:var(--ix);border-color:var(--ix)">Biomarkers — Timing & Use</div>
+  <div class="grid3">
+    <div class="vcard" style="border-color:rgba(249,168,79,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber)"></div>
+      <h3 style="color:var(--amber)">Troponin I / T</h3>
+      <div class="vcard-row"><span class="vcard-lbl">Rise</span><span class="vcard-val">3 – 4 hours</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Peak</span><span class="vcard-val">24 – 48 hours</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Duration</span><span class="vcard-val">7 – 10 days elevated</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Use</span><span class="vcard-val"><span class="badge b-green">Best for ACUTE MI</span> — most specific</span></div>
+    </div>
+    <div class="vcard" style="border-color:rgba(79,156,249,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--chd)"></div>
+      <h3 style="color:var(--chd)">CK-MB</h3>
+      <div class="vcard-row"><span class="vcard-lbl">Rise</span><span class="vcard-val">4 – 6 hours</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Peak</span><span class="vcard-val">~24 hours</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Duration</span><span class="vcard-val">~2 days (returns to baseline)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Use</span><span class="vcard-val"><span class="badge b-blue">Best for RE-infarction</span> — short window</span></div>
+    </div>
+    <div class="vcard">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--muted)"></div>
+      <h3 style="color:var(--muted)">Myoglobin</h3>
+      <div class="vcard-row"><span class="vcard-lbl">Rise</span><span class="vcard-val">1 – 2 hours (earliest)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Peak</span><span class="vcard-val">4 – 8 hours</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Duration</span><span class="vcard-val">~24 hours</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Use</span><span class="vcard-val"><span class="badge b-muted">Early but NOT cardiac-specific</span></span></div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="color:var(--ix);border-color:var(--ix)">MI Histology Timeline</div>
+  <div class="timeline" style="--tl-color:var(--ix)" >
+    <div style="position:absolute;left:0;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--muted),var(--amber),var(--ix),var(--cm));border-radius:2px"></div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--muted)"></div>
+      <div class="tl-time" style="color:var(--muted)">0 – 4 hours</div>
+      <div class="tl-title">No gross/light microscopic change</div>
+      <div class="tl-sub">Wavy fibers on EM · Troponin begins rising at ~3–4h</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--amber)"></div>
+      <div class="tl-time" style="color:var(--amber)">4 – 24 hours</div>
+      <div class="tl-title">Coagulative necrosis begins · Dark mottling</div>
+      <div class="tl-sub"><span class="badge b-red">V-fib risk — EARLY = ELECTRICAL</span> · Most common early cause of death</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--amber)"></div>
+      <div class="tl-time" style="color:var(--amber)">1 – 3 days</div>
+      <div class="tl-title">NEUTROPHILS dominate</div>
+      <div class="tl-sub">Yellow-tan center forming · Hyperemic border · Fibrinous pericarditis possible</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--ix)"></div>
+      <div class="tl-time" style="color:var(--ix)">3 – 7 days ★ MOST TESTED</div>
+      <div class="tl-title">MACROPHAGES dominate · Soft yellow-tan + bright red border</div>
+      <div class="tl-sub"><span class="badge b-red">MAX RUPTURE RISK</span> — free wall / papillary muscle / septal rupture</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--chd)"></div>
+      <div class="tl-time" style="color:var(--chd)">7 – 14 days</div>
+      <div class="tl-title">Granulation tissue · Neovascularization</div>
+      <div class="tl-sub">Red-gray depressed borders · Healing phase</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--cm)"></div>
+      <div class="tl-time" style="color:var(--cm)">2+ weeks</div>
+      <div class="tl-title">Dense collagenous scar — gray-white firm scar</div>
+      <div class="tl-sub">Ventricular aneurysm risk · Persistent ST elevation · Mural thrombus → embolic stroke</div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="color:var(--ix);border-color:var(--ix);margin-top:8px">Post-MI Complications — Timing is Everything</div>
+  <table class="vtable">
+    <thead><tr><th>Complication</th><th>Timing</th><th>Key Clue</th><th>Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td>Arrhythmia (V-fib)</td><td><span class="badge b-amber">&lt;24 h</span></td><td>Most common early death — EARLY = ELECTRICAL</td><td>Ischemia → electrical instability</td></tr>
+      <tr><td>Fibrinous pericarditis</td><td><span class="badge b-amber">1–3 days</span></td><td>Pleuritic chest pain + friction rub (transmural only)</td><td>Necrosis → pericardial inflammation</td></tr>
+      <tr style="background:rgba(249,96,96,.05)"><td><strong>Free wall rupture</strong></td><td><span class="badge b-red">3–7 days ★</span></td><td>Beck's triad; sudden collapse; hemopericardium</td><td>Macrophages digest wall pre-scar</td></tr>
+      <tr style="background:rgba(249,96,96,.05)"><td><strong>Papillary muscle rupture</strong></td><td><span class="badge b-red">3–7 days ★</span></td><td>Acute MR; murmur at <strong>apex → axilla</strong></td><td>Macrophage degradation</td></tr>
+      <tr style="background:rgba(249,96,96,.05)"><td><strong>Septal rupture (VSD)</strong></td><td><span class="badge b-red">3–7 days ★</span></td><td>New holosystolic murmur at <strong>LLSB</strong></td><td>IVS necrosis → L→R shunt</td></tr>
+      <tr><td>Dressler syndrome</td><td><span class="badge b-green">2–10 weeks</span></td><td>Fever + pericarditis + <strong>negative troponin</strong></td><td>Anti-heart antibodies (autoimmune)</td></tr>
+      <tr><td>Ventricular aneurysm</td><td><span class="badge b-green">Weeks–months</span></td><td>Persistent ST elevation; dyskinetic wall</td><td>Fibrotic scar → non-contractile</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="background:rgba(249,96,96,.07);border-left:3px solid var(--ix)">
+    ⚠️ <strong style="color:var(--ix)">TRAP — Papillary vs Septal Rupture:</strong> Both are holosystolic murmurs 3–7 days post-MI. Location differentiates: <strong>LLSB = septal rupture (VSD)</strong>. <strong>Apex → axilla = papillary rupture (MR)</strong>.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- CONGENITAL HD                                         -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="panel-chd" style="display:none">
+
+  <div class="sec-label" style="color:var(--chd);border-color:var(--chd)">L→R vs R→L Shunts — The Core Framework</div>
+  <div class="grid2">
+    <div class="vcard" style="border-color:rgba(79,156,249,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--chd)"></div>
+      <h3 style="color:var(--chd)">Left → Right Shunts <span class="badge b-green">Acyanotic</span></h3>
+      <div class="dot-item"><div class="dot" style="background:var(--chd)"></div><div>Blood flows from high-pressure left side to right</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--chd)"></div><div>↑ Pulmonary blood flow → RV volume overload</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--chd)"></div><div>Acyanotic initially — oxygenated blood enters right heart</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--amber)"></div><div>Can cause Eisenmenger syndrome (late cyanosis) if untreated</div></div>
+      <div style="margin-top:12px;font-size:12px;color:var(--muted)">Examples: <strong style="color:var(--text)">VSD, ASD, PDA</strong></div>
+    </div>
+    <div class="vcard" style="border-color:rgba(249,96,96,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--ix)"></div>
+      <h3 style="color:var(--ix)">Right → Left Shunts <span class="badge b-red">Cyanotic</span></h3>
+      <div class="dot-item"><div class="dot" style="background:var(--ix)"></div><div>Deoxygenated blood enters systemic circulation</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--ix)"></div><div>Cyanosis from birth or early infancy</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--ix)"></div><div>O₂ supplementation does NOT correct cyanosis</div></div>
+      <div class="dot-item"><div class="dot" style="background:var(--amber)"></div><div>Risk of brain abscess from paradoxical emboli (bypass lung filter)</div></div>
+      <div style="margin-top:12px;font-size:12px;color:var(--muted)">Examples: <strong style="color:var(--text)">TOF, TGA, truncus arteriosus, TAPVR</strong></div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="color:var(--chd);border-color:var(--chd)">Defect-by-Defect Comparison</div>
+  <table class="vtable">
+    <thead><tr><th>Defect</th><th>Shunt/Cyanosis</th><th>Hallmark Finding</th><th>Key Association / Trap</th></tr></thead>
+    <tbody>
+      <tr><td>VSD</td><td><span class="badge b-blue">L→R · Acyanotic</span> (late Eisenmenger)</td><td>Holosystolic at LLSB; thrill; small = louder; most common CHD (~20%)</td><td>Murmur is NOT from the defect itself. Muscular VSDs close spontaneously via fibroblasts</td></tr>
+      <tr><td>ASD</td><td><span class="badge b-blue">L→R · Acyanotic</span></td><td><strong>Wide, FIXED split S2</strong> + SEM at LUSB (from pulm valve flow, not defect)</td><td>ASD itself is SILENT — the murmur is downstream. Fixed split doesn't vary with respiration</td></tr>
+      <tr><td>PDA</td><td><span class="badge b-blue">L→R · Acyanotic</span></td><td>Continuous "machine-like" murmur; bounding pulses; wide pulse pressure</td><td>Close with indomethacin (NSAIDs ↓ PGE). Keep open with PGE1 (TGA, critical coarctation)</td></tr>
+      <tr style="background:rgba(249,96,96,.05)"><td>TOF</td><td><span class="badge b-red">R→L · Cyanotic</span></td><td>Squatting relieves tet spells (↑ SVR → ↑ pulm flow). PROVe mnemonic</td><td>Severity = degree of PS. DiGeorge association (22q11). Bootshaped heart on CXR</td></tr>
+      <tr style="background:rgba(249,96,96,.05)"><td>TGA</td><td><span class="badge b-red">R→L · Immediate cyanosis</span></td><td>Immediate cyanosis at birth; often no major murmur; O₂ doesn't help</td><td>Parallel circuits (Aorta from RV, PA from LV). Needs mixing. PGE1 → keep PDA open. Maternal DM</td></tr>
+      <tr><td>Coarctation</td><td>No shunt · <span class="badge b-amber">Pressure problem</span></td><td>Upper extremity HTN + weak femoral pulses; rib notching (intercostal collaterals)</td><td>Turner syndrome + bicuspid AV + Berry aneurysms. Arm-leg BP differential on exam</td></tr>
+      <tr style="background:rgba(249,96,96,.05)"><td>TAPVR</td><td><span class="badge b-red">R→L · Cyanosis day 1</span></td><td>All pulm veins → RA; small LA; needs PFO/ASD for survival; "snowman" CXR</td><td>Oxygenated blood returns to right side. Mixing needed for survival</td></tr>
+      <tr><td>Truncus arteriosus</td><td><span class="badge b-red">R→L · Cyanotic</span></td><td>Single great vessel; early HF; DiGeorge (22q11) association</td><td>Failure of outflow tract septation. One vessel = truncus</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-label" style="color:var(--chd);border-color:var(--chd)">Eisenmenger Syndrome — The Shunt Reversal</div>
+  <div class="vcard" style="border-color:rgba(249,96,96,.4);margin-bottom:22px">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--chd),var(--ix))"></div>
+    <h3 style="margin-bottom:14px">Long-standing L→R shunt → Pulmonary HTN → Shunt reversal → Late cyanosis</h3>
+    <div class="grid2" style="margin:0">
+      <div>
+        <div class="dot-item"><div class="dot" style="background:var(--chd)"></div><div>Untreated L→R shunt → ↑ pulmonary blood flow</div></div>
+        <div class="dot-item"><div class="dot" style="background:var(--amber)"></div><div>→ Pulmonary HTN develops over years</div></div>
+        <div class="dot-item"><div class="dot" style="background:var(--ix)"></div><div>→ RV pressure rises until it equals LV pressure</div></div>
+        <div class="dot-item"><div class="dot" style="background:var(--ix)"></div><div>→ Shunt reverses to R→L → late-onset cyanosis + clubbing</div></div>
+      </div>
+      <div>
+        <div class="callout" style="background:rgba(249,96,96,.1);border-left:3px solid var(--ix);margin:0">
+          <strong style="color:var(--ix)">Surgical closure is CONTRAINDICATED once Eisenmenger is established.</strong> The VSD/ASD/PDA is now acting as a "pop-off valve" — closing it leaves the RV with no escape from high pressure → acute RV failure and death.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="color:var(--chd);border-color:var(--chd)">Genetic Syndrome → Cardiac Defect</div>
+  <table class="vtable">
+    <thead><tr><th>Syndrome</th><th>Genetic Defect</th><th>Cardiac Lesion</th><th>Other Key Features</th></tr></thead>
+    <tbody>
+      <tr><td>Down (Trisomy 21)</td><td>Trisomy 21</td><td>Endocardial cushion defect (AV canal = inlet VSD + ASD)</td><td>Brachycephaly, simian crease, hypotonia</td></tr>
+      <tr><td>Turner (45,X)</td><td>Monosomy X</td><td>Coarctation of aorta + bicuspid aortic valve</td><td>Short female, webbed neck, infertility, lymphedema</td></tr>
+      <tr><td>DiGeorge (22q11)</td><td>22q11 deletion</td><td>Conotruncal: TOF, truncus arteriosus, interrupted aortic arch</td><td>CATCH-22: Thymic aplasia (T-cell def) + Hypocalcemia + Cleft palate</td></tr>
+      <tr><td>Williams (7q11)</td><td>Elastin gene deletion</td><td>Supravalvular aortic + pulmonary stenosis (supravalvular)</td><td>"Elfin facies"; hypercalcemia; intellectual disability; "cocktail party" personality</td></tr>
+      <tr><td>Marfan (FBN1)</td><td>Fibrillin-1 mutation</td><td>MVP + aortic root dilation → AR; dissection risk</td><td>Tall, long limbs, upward lens subluxation; arachnodactyly</td></tr>
+      <tr><td>Noonan (PTPN11)</td><td>PTPN11 mutation (RAS pathway)</td><td>Pulmonary valve stenosis + HCM</td><td>"Male Turner phenotype" — short stature, webbed neck, but normal karyotype</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="background:rgba(79,156,249,.07);border-left:3px solid var(--chd)">
+    ⚠️ <strong style="color:var(--chd)">PGE1 vs Indomethacin:</strong> PGE1 <strong>OPENS</strong> the PDA (keeps it patent — for ductus-dependent lesions like TGA, critical coarctation). Indomethacin (NSAID) <strong>CLOSES</strong> the PDA (for symptomatic PDA in premature infants). These are classic reverse-logic traps.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- VALVULAR DISEASE                                      -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="panel-val" style="display:none">
+
+  <div class="sec-label" style="color:var(--val);border-color:var(--val)">Murmur Master Table</div>
+  <table class="vtable">
+    <thead><tr><th>Lesion</th><th>Timing</th><th>Best Location</th><th>Radiation</th><th>LV Response</th><th>Key Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Aortic Stenosis (AS)</td><td><span class="badge b-amber">Systolic</span> cresc-decresc</td><td>RUSB (R 2nd ICS)</td><td><strong>Carotids ★</strong></td><td>Concentric LVH (pressure overload)</td><td>SAD triad; pulsus parvus et tardus; calcific fibrosa layer</td></tr>
+      <tr><td>Aortic Regurgitation (AR)</td><td><span class="badge b-purple">Early diastolic</span> decresc</td><td>LSB (lean forward)</td><td>None</td><td>Eccentric LVH (volume overload)</td><td>Wide pulse pressure; water-hammer pulse; de Musset sign</td></tr>
+      <tr><td>Mitral Regurgitation (MR)</td><td><span class="badge b-amber">Holosystolic</span></td><td>Apex</td><td><strong>Axilla ★</strong></td><td>Eccentric LVH (volume overload)</td><td>↑ with handgrip/squatting; causes: MVP, rheumatic, papillary rupture</td></tr>
+      <tr><td>Mitral Stenosis (MS)</td><td><span class="badge b-purple">Diastolic rumble</span> + OS</td><td>Apex (bell)</td><td>None</td><td><strong>NO LVH</strong> — LA enlarges</td><td>OS closer to S2 = MORE severe; LA dilation → AFib → pulm HTN → RHF</td></tr>
+      <tr><td>MVP</td><td>Mid-systolic click + late systolic</td><td>Apex</td><td>None</td><td>Normal</td><td>Myxomatous degen; Valsalva → click EARLIER; young female</td></tr>
+      <tr><td>HCM</td><td><span class="badge b-amber">Systolic</span> ejection</td><td>LUSB / LLSB</td><td>None</td><td>Asymmetric septal hypertrophy</td><td><strong>LOUDER with Valsalva</strong> — only murmur that does this</td></tr>
+      <tr><td>ASD flow murmur</td><td><span class="badge b-amber">Systolic</span> ejection</td><td>LUSB</td><td>None</td><td>RV enlargement</td><td>Wide <strong>FIXED</strong> split S2; murmur is from pulm valve flow not defect</td></tr>
+      <tr><td>VSD</td><td><span class="badge b-amber">Holosystolic</span></td><td>LLSB</td><td>None</td><td>Eccentric LVH (if large)</td><td>Harsh + thrill; no axillary radiation (distinguish from MR)</td></tr>
+      <tr><td>PDA</td><td><span class="badge b-green">Continuous</span> "machine"</td><td>L infraclavicular</td><td>None</td><td>LV dilation (if large)</td><td>Bounding pulses; wide pulse pressure</td></tr>
+      <tr><td>Tricuspid Regurgitation</td><td><span class="badge b-amber">Holosystolic</span></td><td>LLSB</td><td>None</td><td>RV enlargement</td><td>↑ with inspiration (Carvallo sign); IV drug use</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-label" style="color:var(--val);border-color:var(--val)">Dynamic Maneuvers</div>
+  <div class="maneuver-section">
+    <div class="grid2">
+      <div class="maneuver-card">
+        <h4>Valsalva (strain) / Standing — ↓ Preload</h4>
+        <div class="mech">↓ LV volume → smaller cavity → LVOTO worsens in HCM; leaflets prolapse sooner in MVP</div>
+        <div class="maneuver-results">
+          <div class="m-result"><span class="valve">HCM</span><span class="up">↑ LOUDER ★</span></div>
+          <div class="m-result"><span class="valve">MVP click</span><span class="up">EARLIER</span></div>
+          <div class="m-result"><span class="valve">Aortic Stenosis</span><span class="down">↓ Softer</span></div>
+          <div class="m-result"><span class="valve">Mitral Regurg.</span><span class="down">↓ Softer</span></div>
+          <div class="m-result"><span class="valve">VSD</span><span class="down">↓ Softer</span></div>
+          <div class="m-result"><span class="valve">All others</span><span class="down">↓ Softer</span></div>
+        </div>
+      </div>
+      <div class="maneuver-card">
+        <h4>Squatting / Handgrip — ↑ Preload + Afterload</h4>
+        <div class="mech">↑ LV volume → less LVOTO in HCM; fuller LV delays MVP prolapse; ↑ SVR increases regurgitant gradients</div>
+        <div class="maneuver-results">
+          <div class="m-result"><span class="valve">HCM</span><span class="down">↓ Softer</span></div>
+          <div class="m-result"><span class="valve">MVP click</span><span class="neutral">LATER</span></div>
+          <div class="m-result"><span class="valve">Aortic Stenosis</span><span class="up">↑ Louder</span></div>
+          <div class="m-result"><span class="valve">Mitral Regurg.</span><span class="up">↑ Louder</span></div>
+          <div class="m-result"><span class="valve">Aortic Regurg.</span><span class="up">↑ Louder</span></div>
+          <div class="m-result"><span class="valve">VSD</span><span class="up">↑ Louder</span></div>
+        </div>
+      </div>
+      <div class="maneuver-card">
+        <h4>Inspiration — ↑ Right Heart Return</h4>
+        <div class="mech">↑ Venous return to RV → right-sided valves receive more volume → louder murmurs</div>
+        <div class="maneuver-results">
+          <div class="m-result"><span class="valve">Tricuspid Regurg.</span><span class="up">↑ LOUDER (Carvallo)</span></div>
+          <div class="m-result"><span class="valve">Pulm. Stenosis</span><span class="up">↑ Louder</span></div>
+          <div class="m-result"><span class="valve">Tricuspid Stenosis</span><span class="up">↑ Louder</span></div>
+          <div class="m-result"><span class="valve">Left-sided murmurs</span><span class="neutral">No change</span></div>
+        </div>
+      </div>
+      <div class="maneuver-card">
+        <h4>LV Response to Hemodynamic Load</h4>
+        <div class="mech">Pressure overload → concentric LVH. Volume overload → eccentric LVH (dilation). Underfilled LV → no LVH.</div>
+        <div class="maneuver-results">
+          <div class="m-result"><span class="valve">AS / HTN</span><span style="color:var(--amber)">Concentric LVH</span></div>
+          <div class="m-result"><span class="valve">AR / MR</span><span style="color:var(--chd)">Eccentric LVH</span></div>
+          <div class="m-result"><span class="valve">Mitral Stenosis</span><span class="neutral">NO LVH — LA dilates</span></div>
+          <div class="m-result"><span class="valve">Pulm. HTN</span><span style="color:var(--val)">RV hypertrophy</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="color:var(--val);border-color:var(--val)">Valve-by-Valve Deep Dive</div>
+  <div class="grid2">
+    <div class="vcard" style="border-color:rgba(167,139,250,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--val)"></div>
+      <h3 style="color:var(--val)">Aortic Stenosis (AS)</h3>
+      <div class="vcard-row"><span class="vcard-lbl">SAD triad</span><span class="vcard-val">Syncope (~3yr) → Angina (~5yr) → Dyspnea/HF (~1–2yr)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Causes</span><span class="vcard-val">Bicuspid AV (young); senile calcification of fibrosa layer (elderly)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Pulse</span><span class="vcard-val">Pulsus parvus et tardus (weak + delayed carotid upstroke)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">LV</span><span class="vcard-val">Concentric LVH (pressure overload)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Pathology</span><span class="vcard-val">Calcification starts in fibrosa layer (dense collagen, outflow side)</span></div>
+    </div>
+    <div class="vcard" style="border-color:rgba(167,139,250,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--val)"></div>
+      <h3 style="color:var(--val)">Aortic Regurgitation (AR)</h3>
+      <div class="vcard-row"><span class="vcard-lbl">Signs</span><span class="vcard-val">Water-hammer pulse; de Musset (head bob); Quincke (nail pulsations); Hill sign</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Pulse pressure</span><span class="vcard-val">Wide (↑ SBP from ↑ SV; ↓ DBP from regurgitation)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">LV</span><span class="vcard-val">Eccentric LVH (volume overload)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Causes</span><span class="vcard-val">Marfan, aortic root dilation, bicuspid AV, endocarditis, syphilitic aortitis</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Acute AR</span><span class="vcard-val">Surgical emergency — no time for eccentric remodeling</span></div>
+    </div>
+    <div class="vcard" style="border-color:rgba(167,139,250,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--val)"></div>
+      <h3 style="color:var(--val)">Mitral Stenosis (MS)</h3>
+      <div class="vcard-row"><span class="vcard-lbl">Opening snap</span><span class="vcard-val">OS closer to S2 = MORE severe (higher LA pressure opens valve sooner)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">LV</span><span class="vcard-val">NO LVH — LV is underfilled. LA enlarges instead → AFib</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Cascade</span><span class="vcard-val">MS → ↑ LA pressure → LA dilation → AFib → pulm HTN → RHF</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Cause</span><span class="vcard-val">Rheumatic fever → commissural fusion → "fish-mouth" valve</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Pathology</span><span class="vcard-val">Only significant valve lesion that does NOT cause LVH</span></div>
+    </div>
+    <div class="vcard" style="border-color:rgba(167,139,250,.4)">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--val)"></div>
+      <h3 style="color:var(--val)">MVP (Mitral Valve Prolapse)</h3>
+      <div class="vcard-row"><span class="vcard-lbl">Click timing</span><span class="vcard-val">Valsalva/Standing → click EARLIER (↓ LV vol → prolapse sooner)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Squatting</span><span class="vcard-val">Click moves LATER (↑ LV volume → prolapse delayed)</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Pathology</span><span class="vcard-val">Myxomatous degen → spongiosa EXPANDS → fibrosa THINS → floppy leaflets</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Associations</span><span class="vcard-val">Young female; Marfan; most common valve abnormality overall</span></div>
+      <div class="vcard-row"><span class="vcard-lbl">Progression</span><span class="vcard-val">Can progress to MR if chordae rupture</span></div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="color:var(--val);border-color:var(--val)">Endocarditis — Vegetation Comparison</div>
+  <table class="vtable">
+    <thead><tr><th>Type</th><th>Organism / Cause</th><th>Vegetation</th><th>Location on Valve</th><th>Key Feature</th></tr></thead>
+    <tbody>
+      <tr><td>Acute IE (S. aureus)</td><td>Staph aureus — IV drug use</td><td>Large, destructive, bulky</td><td>Any valve; tricuspid (IVDU)</td><td>Rapid destruction; septic pulm emboli (tricuspid) → cavitary lung nodules</td></tr>
+      <tr><td>Subacute IE (S. viridans)</td><td>Strep viridans — dental procedure</td><td>Smaller, less destructive</td><td>Previously damaged valves</td><td>Slower course; targets rheumatic/MVP valves; ASO titer is for rheumatic fever NOT endocarditis</td></tr>
+      <tr><td>NBTE (Marantic)</td><td>Malignancy, DIC, hypercoagulable</td><td>Small, sterile, loosely adherent</td><td>Lines of valve closure (one side)</td><td>High embolic risk; sterile; afebrile; negative cultures</td></tr>
+      <tr><td>Libman-Sacks</td><td>SLE — immune complex</td><td>Flat, small, reddish</td><td><strong>BOTH sides of valve (unique!)</strong></td><td>Only endocarditis affecting both surfaces; sterile; afebrile; SLE features</td></tr>
+      <tr><td>Rheumatic fever</td><td>GAS → anti-M protein cross-reactivity</td><td>Small, warty, on line of closure</td><td>Mitral &gt; Aortic (left-sided)</td><td>Aschoff bodies; Anitschkow cells; leads to MS years later</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="background:rgba(167,139,250,.07);border-left:3px solid var(--val)">
+    ⚠️ <strong style="color:var(--val)">Classic Traps:</strong> Libman-Sacks is the ONLY endocarditis on BOTH sides of the valve. ASO titer ↑ = prior GAS infection / rheumatic fever — NOT infective endocarditis. S. bovis (gallolyticus) endocarditis = always screen for colorectal cancer.
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+const TABS=['cm','ix','chd','val'];
+const COLORS={cm:'var(--cm)',ix:'var(--ix)',chd:'var(--chd)',val:'var(--val)'};
+const LABELS={cm:'💚 Cardiomyopathy',ix:'❤️ Ischemic / CAD',chd:'💙 Congenital HD',val:'💜 Valvular Disease'};
+
+function setTab(t){
+  TABS.forEach(id=>{
+    const btn=document.getElementById('tab-'+id);
+    btn.style.color='';btn.style.borderBottomColor='transparent';btn.style.borderBottom='2px solid transparent';
+    document.getElementById('panel-'+id).style.display='none';
+  });
+  const active=document.getElementById('tab-'+t);
+  active.style.color=COLORS[t];
+  active.style.borderBottom=`2px solid ${COLORS[t]}`;
+  document.getElementById('panel-'+t).style.display='block';
+}
+
+// init
+setTab('cm');
+</script>
+</body>
+</html>
